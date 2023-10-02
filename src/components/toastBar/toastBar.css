@@ -1,0 +1,26 @@
+
+.translateFromAxis {
+  animation: animateTranslateY 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-delay: 0s;
+}
+
+.translateFromAxisReverse {
+  animation: animateReverseTranslateY 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-delay: 3s;
+}
+
+@keyframes animateTranslateY {
+  0%    { 
+    opacity: 0;
+    transform: translateY(720px);
+  }
+  100%  { opacity: 1; }
+}
+
+@keyframes animateReverseTranslateY {
+  0%  { opacity: 1; }
+  100%    { 
+    opacity: 0;
+    transform: translateX(720px);
+  }
+}

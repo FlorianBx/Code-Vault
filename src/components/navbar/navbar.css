@@ -1,0 +1,15 @@
+.modal {
+  animation-duration: 0.2s;
+  animation-name: animate-fade;
+  animation-delay: 0s;
+  animation-fill-mode: backwards;
+}
+
+@keyframes animate-fade {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 0;
+    }
+}
