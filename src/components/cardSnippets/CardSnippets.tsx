@@ -4,26 +4,27 @@ import { PiPushPinLight } from 'react-icons/pi';
 import { AiTwotonePushpin } from 'react-icons/ai';
 import { RiDeleteBin4Line } from 'react-icons/ri';
 
-interface SnippetProps {
+interface Snippet {
   id: string;
   title: string;
   tag: string;
   description: string;
   createdDate: string;
-  pinned: boolean;
+  isPinned: boolean;
   code: string;
 }
 
+interface SnippetProps {
+  snippet: Snippet,
+  handleDelete: (id: string) => void,
+}
+
 export default function CardSnippets({
-  id,
-  title,
-  tag,
-  description,
-  createdDate,
-  pinned,
-  code,
+  snippet,
+  handleDelete
 }: SnippetProps): React.JSX.Element {
-  const [isPinned, setIsPinned] = useState(pinned);
+  const [isPinned, setIsPinned] = useState(snippet.isPinned);
+  const { code, title, description, tag, id, createdDate } = snippet;
   const navigate = useNavigate();
 
   const redirectToView = (): void => {
@@ -75,6 +76,7 @@ export default function CardSnippets({
             <button
               data-testid="delete-btn-test"
               type="button"
+              onClick={() => handleDelete(snippet.id)}
               className=" flex h-10 w-10 transform items-center justify-center rounded-lg border-2 border-danger p-1 transition-transform active:scale-x-75"
             >
               <RiDeleteBin4Line className="text-danger" />

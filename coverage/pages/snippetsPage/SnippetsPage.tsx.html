@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">24.24% </span>
+                <span class="strong">23.18% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/66</span>
+                <span class='fraction'>16/69</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">24.24% </span>
+                <span class="strong">23.18% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/66</span>
+                <span class='fraction'>16/69</span>
             </div>
         
             
@@ -129,7 +129,10 @@
 <a name='L64'></a><a href='#L64'>64</a>
 <a name='L65'></a><a href='#L65'>65</a>
 <a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -145,6 +148,9 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -196,8 +202,8 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../services/firebase';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { db } from '../../services/firebase.ts';
 import ToastBar from '../../components/toastBar/ToastBar.tsx';
 import CardSnippets from '../../components/cardSnippets/CardSnippets.tsx';
 &nbsp;
@@ -214,6 +220,15 @@ interface Snippet {
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >export default function SnippetsPage(): React.JSX.Element {</span></span>
 <span class="cstat-no" title="statement not covered" >  const [snippets, setSnippets] = useState&lt;Snippet[]&gt;([]);</span>
 <span class="cstat-no" title="statement not covered" >  const [hasFetchedSnippets, setHasFetchedSnippets] = useState(false);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  const deleteSnippet = async (id: string): Promise&lt;void&gt; =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >      await deleteDoc(doc(db, 'snippets', id));</span>
+<span class="cstat-no" title="statement not covered" >      setSnippets(snippets.filter((snippet) =&gt; snippet.id !== id));</span>
+<span class="cstat-no" title="statement not covered" >    } catch (e) {</span>
+<span class="cstat-no" title="statement not covered" >      console.error('Error removing document: ', e);</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  useEffect(() =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    if (!hasFetchedSnippets) {</span>
@@ -240,21 +255,15 @@ interface Snippet {
 <span class="cstat-no" title="statement not covered" >  }, [hasFetchedSnippets, snippets]);</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;div&gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;div className='p-4'&gt;</span>
 <span class="cstat-no" title="statement not covered" >      &lt;div className="w-100 sticky right-0 top-0 z-10 flex justify-center p-0"&gt;</span>
 <span class="cstat-no" title="statement not covered" >        &lt;ToastBar state="success" message="Snippet copied to clipboard" /&gt;</span>
 <span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >      &lt;section className="flex h-screen flex-wrap justify-center gap-4"&gt;</span>
 <span class="cstat-no" title="statement not covered" >        {snippets.map((snippet) =&gt; (</span>
 <span class="cstat-no" title="statement not covered" >          &lt;CardSnippets</span>
-<span class="cstat-no" title="statement not covered" >            key={snippet.id}</span>
-<span class="cstat-no" title="statement not covered" >            id={snippet.id}</span>
-<span class="cstat-no" title="statement not covered" >            title={snippet.title}</span>
-<span class="cstat-no" title="statement not covered" >            tag={snippet.tag}</span>
-<span class="cstat-no" title="statement not covered" >            description={snippet.description}</span>
-<span class="cstat-no" title="statement not covered" >            createdDate={snippet.createdDate}</span>
-<span class="cstat-no" title="statement not covered" >            pinned={snippet.isPinned}</span>
-<span class="cstat-no" title="statement not covered" >            code={snippet.code}</span>
+<span class="cstat-no" title="statement not covered" >            snippet={snippet}</span>
+<span class="cstat-no" title="statement not covered" >            handleDelete={deleteSnippet}</span>
 <span class="cstat-no" title="statement not covered" >          /&gt;</span>
 <span class="cstat-no" title="statement not covered" >        ))}</span>
 <span class="cstat-no" title="statement not covered" >      &lt;/section&gt;</span>
@@ -268,7 +277,7 @@ interface Snippet {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-10-02T16:43:35.665Z
+                at 2023-10-03T15:21:52.039Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

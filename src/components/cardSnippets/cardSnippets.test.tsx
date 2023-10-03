@@ -6,110 +6,55 @@ import CardSnippets from './CardSnippets.tsx'
 import '@testing-library/jest-dom'
 
 describe('CardSnippets', () => {
-  test('renders CardSnippets component', () => {
+  const mockSnippet = {
+    id: '1',
+    tag: 'java',
+    title: 'hello',
+    description: 'test 123 123 123',
+    createdDate: '12/03/2023',
+    isPinned: false,
+    code: 'test code'
+  }
+
+  const mockDeleteSnippet = vi.fn()
+
+  beforeEach(() => {
     render(
       <Router>
         <CardSnippets
-          id='1'
-          tag='java'
-          title='hello'
-          description='test 123 123 123'
-          createdDate='12/03/2023'
-          pinned={false}
-          code='test code'
+          snippet={mockSnippet}
+          handleDelete={mockDeleteSnippet}
         />
       </Router>
     )
+  })
+
+  test('renders CardSnippets component', () => {
     const cardSnippets = screen.getByTestId('card-test')
     expect(cardSnippets).toBeInTheDocument()
   })
 
   test('it should have title', () => {
-    render(
-      <Router>
-        <CardSnippets
-          id='1'
-          tag='java'
-          title='hello'
-          description='test 123 123 123'
-          createdDate='12/03/2023'
-          pinned={false}
-          code='test code'
-        />
-      </Router>
-    )
     const title = screen.getByTestId('title-test')
     expect(title).toBeInTheDocument()
   })
 
   test('it should have description', () => {
-    render(
-      <Router>
-        <CardSnippets
-          id='1'
-          tag='java'
-          title='hello'
-          description='test 123 123 123'
-          createdDate='12/03/2023'
-          pinned={false}
-          code='test code'
-        />
-      </Router>
-    )
     const desc = screen.getByTestId('desc-test')
     expect(desc).toBeInTheDocument()
   })
 
   test('it should have copy button', () => {
-    render(
-      <Router>
-        <CardSnippets
-          id='1'
-          tag='java'
-          title='hello'
-          description='test 123 123 123'
-          createdDate='12/03/2023'
-          pinned={false}
-          code='test code'
-        />
-      </Router>
-    )
     const copyButton = screen.getByText('Copy')
     expect(copyButton).toBeInTheDocument()
   })
 
   test('it should have view button', () => {
-    render(
-      <Router>
-        <CardSnippets
-          id='1'
-          tag='java'
-          title='hello'
-          description='test 123 123 123'
-          createdDate='12/03/2023'
-          pinned={false}
-          code='test code'
-        />
-      </Router>
-    )
     const viewButton = screen.getByText('View')
     expect(viewButton).toBeInTheDocument()
   })
 
   test('it should have pin button', () => {
-    render(
-      <Router>
-        <CardSnippets
-          id='1'
-          tag='java'
-          title='hello'
-          description='test 123 123 123'
-          createdDate='12/03/2023'
-          pinned={false}
-          code='test code'
-        />
-      </Router>
-    )
     const pinButton = screen.getByTestId('pin-button-test')
     expect(pinButton).toBeInTheDocument()
   })
@@ -154,19 +99,6 @@ describe('CardSnippets', () => {
   // });
 
   test('it should have delete button', () => {
-    render(
-      <Router>
-        <CardSnippets
-          id='1'
-          tag='java'
-          title='hello'
-          description='test 123 123 123'
-          createdDate='12/03/2023'
-          pinned={false}
-          code='test code'
-        />
-      </Router>
-    )
     const deleteButton = screen.getByTestId('delete-btn-test')
     expect(deleteButton).toBeInTheDocument()
   })

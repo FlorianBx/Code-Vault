@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../services/firebase';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { db } from '../../services/firebase.ts';
 import ToastBar from '../../components/toastBar/ToastBar.tsx';
 import CardSnippets from '../../components/cardSnippets/CardSnippets.tsx';
 
@@ -17,6 +17,15 @@ interface Snippet {
 export default function SnippetsPage(): React.JSX.Element {
   const [snippets, setSnippets] = useState<Snippet[]>([]);
   const [hasFetchedSnippets, setHasFetchedSnippets] = useState(false);
+
+  const deleteSnippet = async (id: string): Promise<void> => {
+    try {
+      await deleteDoc(doc(db, 'snippets', id));
+      setSnippets(snippets.filter((snippet) => snippet.id !== id));
+    } catch (e) {
+      console.error('Error removing document: ', e);
+    }
+  }
 
   useEffect(() => {
     if (!hasFetchedSnippets) {
@@ -43,21 +52,15 @@ export default function SnippetsPage(): React.JSX.Element {
   }, [hasFetchedSnippets, snippets]);
 
   return (
-    <div>
+    <div className='p-4'>
       <div className="w-100 sticky right-0 top-0 z-10 flex justify-center p-0">
         <ToastBar state="success" message="Snippet copied to clipboard" />
       </div>
       <section className="flex h-screen flex-wrap justify-center gap-4">
         {snippets.map((snippet) => (
           <CardSnippets
-            key={snippet.id}
-            id={snippet.id}
-            title={snippet.title}
-            tag={snippet.tag}
-            description={snippet.description}
-            createdDate={snippet.createdDate}
-            pinned={snippet.isPinned}
-            code={snippet.code}
+            snippet={snippet}
+            handleDelete={deleteSnippet}
           />
         ))}
       </section>

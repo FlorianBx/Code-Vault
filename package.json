@@ -34,6 +34,7 @@
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "husky": "^8.0.3",
     "jest-dom": "link:@types/testing-library/jest-dom",
     "jsdom": "^22.1.0",
     "postcss": "^8.4.31",
