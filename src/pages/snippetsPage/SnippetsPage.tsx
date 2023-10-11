@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../services/firebase.ts';
 import ToastBar from '../../components/toastBar/ToastBar.tsx';
@@ -59,8 +59,9 @@ export default function SnippetsPage(): React.JSX.Element {
       <section className="flex h-screen flex-wrap justify-center gap-4">
         {snippets.map((snippet) => (
           <CardSnippets
+            key={snippet.id}
             snippet={snippet}
-            handleDelete={deleteSnippet}
+            handleDelete={(id) => { void deleteSnippet(id) }}
           />
         ))}
       </section>

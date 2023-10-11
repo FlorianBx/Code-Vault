@@ -1,31 +1,32 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { PiPushPinLight } from 'react-icons/pi';
-import { AiTwotonePushpin } from 'react-icons/ai';
-import { RiDeleteBin4Line } from 'react-icons/ri';
+import type React from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { PiPushPinLight } from 'react-icons/pi'
+import { AiTwotonePushpin } from 'react-icons/ai'
+import { RiDeleteBin4Line } from 'react-icons/ri'
 
 interface Snippet {
-  id: string;
-  title: string;
-  tag: string;
-  description: string;
-  createdDate: string;
-  isPinned: boolean;
-  code: string;
+  id: string
+  title: string
+  tag: string
+  description: string
+  createdDate: string
+  isPinned: boolean
+  code: string
 }
 
 interface SnippetProps {
-  snippet: Snippet,
-  handleDelete: (id: string) => void,
+  snippet: Snippet
+  handleDelete: (id: string) => void
 }
 
 export default function CardSnippets({
   snippet,
   handleDelete
 }: SnippetProps): React.JSX.Element {
-  const [isPinned, setIsPinned] = useState(snippet.isPinned);
-  const { code, title, description, tag, id, createdDate } = snippet;
-  const navigate = useNavigate();
+  const [isPinned, setIsPinned] = useState(snippet.isPinned)
+  const { code, title, description, tag, id, createdDate } = snippet
+  const navigate = useNavigate()
 
   const redirectToView = (): void => {
     navigate(`/snippet/${id}`, {
@@ -33,14 +34,14 @@ export default function CardSnippets({
         code,
         title,
         description,
-        tag,
-      },
-    });
-  };
+        tag
+      }
+    })
+  }
 
   const handlePin = (): void => {
-    setIsPinned((prevIsPinned) => !prevIsPinned);
-  };
+    setIsPinned((prevIsPinned) => !prevIsPinned)
+  }
 
   return (
     <section className="flex select-none flex-col justify-center">
@@ -76,7 +77,9 @@ export default function CardSnippets({
             <button
               data-testid="delete-btn-test"
               type="button"
-              onClick={() => handleDelete(snippet.id)}
+              onClick={() => {
+                handleDelete(snippet.id)
+              }}
               className=" flex h-10 w-10 transform items-center justify-center rounded-lg border-2 border-danger p-1 transition-transform active:scale-x-75"
             >
               <RiDeleteBin4Line className="text-danger" />
@@ -100,5 +103,5 @@ export default function CardSnippets({
         </section>
       </div>
     </section>
-  );
+  )
 }
