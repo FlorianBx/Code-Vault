@@ -1,36 +1,31 @@
 import { createContext, useState } from 'react';
-import { ContextChildrenProp } from '../utils/types';
-import { as } from 'vitest/dist/reporters-5f784f42.js';
+import { ContextChildrenProp } from '../models/types';
+import { Snippet } from '../models/snippet';
 
-interface SnippetProp {
-  id: string
-  title: string
-  tag: string
-  description: string
-  createdDate: string
-  isPinned: boolean
-  code: string
+interface SnippetContextType {
+  snippet: Snippet | null;
+  setSnippet: (snippet: Snippet) => void;
 }
 
-const AppContext = createContext<SnippetProp>({
-  id: '',
-  title: '',
-  tag: '',
-  description: '',
-  createdDate: '',
-  isPinned: false,
-  code: '',
-});
+const initialContext: SnippetContextType = {
+  snippet: null,
+  setSnippet: () => {},
+};
 
-const AppProvider = ({ children }: ContextChildrenProp) => {
-  const [snippet, setSnippet] = useState({} as SnippetProp);
-  const value = { snippet, setSnippet };
+const SnippetContext = createContext<SnippetContextType | undefined>(undefined);
+
+type SnippetProviderProps = {
+  children: React.ReactNode;
+}
+
+const SnippetProvider: React.FC<SnippetProviderProps> = ({ children }: JSX.Element) => {
+  const [snippet, setSnippet] = useState<SnippetProp | null>(null);
 
   return (
-    <AppContext.Provider value={ value }>
+    <SnippetContext.Provider value={{ snippet, setSnippet }}>
       {children}
-    </AppContext.Provider>
+    </SnippetContext.Provider>
   );
 };
 
-export { AppContext, AppProvider };
+export { SnippetProvider, SnippetContext };

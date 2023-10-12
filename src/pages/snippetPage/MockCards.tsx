@@ -1,12 +1,4 @@
-interface Snippet {
-  id: string
-  title: string
-  tag: string
-  description: string
-  createdDate: string
-  isPinned: boolean
-  code: string
-}
+import type { Snippet } from '../../models/snippet'
 
 const MockCards = (snippet: Snippet): JSX.Element => {
   const { title, description, tag, createdDate } = snippet

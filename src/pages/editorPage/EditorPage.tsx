@@ -2,15 +2,9 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../../services/firebase.ts'
+import type { Snippet } from '../../models/snippet'
 
-interface Snippet {
-  title: string
-  description: string
-  code: string
-  tag?: string
-}
-
-const defaultSnippet: Snippet = {
+const defaultSnippet: Partial<Snippet> = {
   title: '',
   description: '',
   code: '',
@@ -18,7 +12,8 @@ const defaultSnippet: Snippet = {
 }
 
 export default function EditorPage(): React.JSX.Element {
-  const [snippet, setSnippet] = React.useState<Snippet>(defaultSnippet)
+  const [snippet, setSnippet] =
+    React.useState<Partial<Snippet>>(defaultSnippet)
   const navigate = useNavigate()
 
   const handleSubmit = async (e: React.SyntheticEvent): Promise<void> => {
