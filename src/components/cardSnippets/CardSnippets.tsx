@@ -1,19 +1,11 @@
 import type React from 'react'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PiPushPinLight } from 'react-icons/pi'
 import { AiTwotonePushpin } from 'react-icons/ai'
 import { RiDeleteBin4Line } from 'react-icons/ri'
-
-interface Snippet {
-  id: string
-  title: string
-  tag: string
-  description: string
-  createdDate: string
-  isPinned: boolean
-  code: string
-}
+import { Snippet } from '../../models/snippet'
+import { SnippetContext } from '../../context/AppContext'
 
 interface SnippetProps {
   snippet: Snippet
@@ -25,18 +17,13 @@ export default function CardSnippets({
   handleDelete
 }: SnippetProps): React.JSX.Element {
   const [isPinned, setIsPinned] = useState(snippet.isPinned)
-  const { code, title, description, tag, id, createdDate } = snippet
+  const { setSnippet } = useContext(SnippetContext)
+
   const navigate = useNavigate()
 
   const redirectToView = (): void => {
-    navigate(`/snippet/${id}`, {
-      state: {
-        code,
-        title,
-        description,
-        tag
-      }
-    })
+    setSnippet(snippet)
+    navigate(`/snippet/${snippet.id}`)
   }
 
   const handlePin = (): void => {
@@ -50,7 +37,7 @@ export default function CardSnippets({
         className="relative flex h-96 w-72 flex-col rounded-md bg-gray-800 p-4 shadow-lg transition-all ease-out"
       >
         <div className="flex justify-between">
-          <h1 data-testid="title-test">{title}</h1>
+          <h1 data-testid="title-test">{snippet.title}</h1>
           <button
             data-testid="pin-button-test"
             type="button"
@@ -62,15 +49,15 @@ export default function CardSnippets({
         </div>
         <div className="flex h-10 w-auto items-center gap-3 pt-4">
           <p className="flex h-8 transform cursor-pointer items-center rounded-lg bg-secondary p-2 text-sm transition-transform active:scale-y-75">
-            {tag}
+            {snippet.tag}
           </p>
         </div>
         <hr className="mt-4 h-0.5 opacity-70" />
         <p data-testid="desc-test" className="basis-3/4 pt-4">
-          {description}
+          {snippet.description}
         </p>
         <p className="pb-4 pr-1 pt-4 text-right text-sm italic opacity-20">
-          {createdDate}
+          {snippet.createdDate}
         </p>
         <section className="flex">
           <div className="flex-1">

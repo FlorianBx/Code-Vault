@@ -1,28 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useContext } from 'react'
 import { RiDeleteBin4Line, RiEdit2Line, RiSave2Line } from 'react-icons/ri'
-import { useParams, useLocation, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore'
 import { db } from '../../services/firebase.ts'
-
-interface LocationState {
-  title?: string
-  description?: string
-  tag?: string
-  code?: string
-}
+import { SnippetContext } from '../../context/AppContext'
 
 export default function SnippetPage(): React.JSX.Element {
   const { id } = useParams<{ id: string }>()
-  const location = useLocation()
-  const state = location.state as LocationState
+  const { snippet, setSnippet } = useContext(SnippetContext)
   const navigate = useNavigate()
   const [isEditing, setIsEditing] = React.useState<boolean>(false)
-  const [snippetInfo, setSnippetInfo] = React.useState<LocationState>({
-    title: state.title,
-    description: state.description,
-    tag: state.tag,
-    code: state.code
-  })
 
   if (id === undefined) throw new Error('id is undefined')
 
@@ -36,19 +23,13 @@ export default function SnippetPage(): React.JSX.Element {
   }
 
   const handleUpdate = async (): Promise<void> => {
-    if (isEditing) {
+    if (isEditing && snippet) {
       try {
         await updateDoc(doc(db, 'snippets', id), {
-          name: snippetInfo.title,
-          description: snippetInfo.description,
-          tag: snippetInfo.tag,
-          code: snippetInfo.code
-        })
-        setSnippetInfo({
-          title: snippetInfo.title,
-          description: snippetInfo.description,
-          tag: snippetInfo.tag,
-          code: snippetInfo.code
+          name: snippet.title,
+          description: snippet.description,
+          tag: snippet.tag,
+          code: snippet.code
         })
         setIsEditing(false)
       } catch (e) {
@@ -59,7 +40,7 @@ export default function SnippetPage(): React.JSX.Element {
     }
   }
 
-  useEffect(() => {}, [snippetInfo])
+  if (snippet === null) return <div>Snippet is null</div>
 
   return (
     <div className="flex h-screen w-full flex-col items-center">
@@ -86,15 +67,13 @@ export default function SnippetPage(): React.JSX.Element {
             <input
               data-testid="input-title-test"
               className="bg-gray-700 shadow-lg h-3 w-64 text-start p-4 text-xs"
-              defaultValue={snippetInfo.title ?? state?.title}
+              defaultValue={snippet.title}
               onChange={(e) => {
-                setSnippetInfo({ ...snippetInfo, title: e.target.value })
+                setSnippet({ ...snippet, title: e.target.value })
               }}
             />
           ) : (
-            <span className="text-green-300 text-start">
-              {snippetInfo.title ?? state?.title}
-            </span>
+            <span className="text-green-300 text-start">{snippet.title}</span>
           )}
         </section>
         <section className="flex gap-2">
@@ -103,14 +82,14 @@ export default function SnippetPage(): React.JSX.Element {
             <input
               data-testid="input-title-description"
               className="bg-gray-700 shadow-lg h-3 w-64 text-start p-4 text-xs"
-              defaultValue={snippetInfo.description ?? state?.description}
+              defaultValue={snippet.description}
               onChange={(e) => {
-                setSnippetInfo({ ...snippetInfo, description: e.target.value })
+                setSnippet({ ...snippet, description: e.target.value })
               }}
             />
           ) : (
             <span className="text-green-300 text-start">
-              {snippetInfo.description ?? state?.description}
+              {snippet.description}
             </span>
           )}
         </section>
@@ -120,15 +99,13 @@ export default function SnippetPage(): React.JSX.Element {
             <input
               data-testid="input-tag-test"
               className="bg-gray-700 shadow-lg h-3 w-64 text-start p-4 text-xs"
-              defaultValue={state?.tag ?? 'State error'}
+              defaultValue={snippet.tag}
               onChange={(e) => {
-                setSnippetInfo({ ...snippetInfo, tag: e.target.value })
+                setSnippet({ ...snippet, tag: e.target.value })
               }}
             />
           ) : (
-            <span className="text-green-300 text-start">
-              {snippetInfo.tag ?? state?.tag}
-            </span>
+            <span className="text-green-300 text-start">{snippet.tag}</span>
           )}
         </section>
         <section>
@@ -137,14 +114,14 @@ export default function SnippetPage(): React.JSX.Element {
             <textarea
               data-testid="input-code-test"
               className="bg-gray-700 shadow-lg h-48 w-96 text-start p-4 text-xs"
-              defaultValue={state?.code ?? 'State error'}
+              defaultValue={snippet.code}
               onChange={(e) => {
-                setSnippetInfo({ ...snippetInfo, code: e.target.value })
+                setSnippet({ ...snippet, code: e.target.value })
               }}
             />
           ) : (
             <div className="bg-gray-700 shadow-lg h-48 w-96 text-start p-4 text-xs">
-              <code>{snippetInfo.code ?? state?.code}</code>
+              <code>{snippet.code}</code>
             </div>
           )}
         </section>

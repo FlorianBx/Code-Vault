@@ -1,11 +1,11 @@
-import { Route, Routes } from 'react-router-dom';
-import Layout from './pages/layout/Layout.tsx';
-import SnippetPage from './pages/snippetPage/SnippetPage.tsx';
-import SnippetsPage from './pages/snippetsPage/SnippetsPage.tsx';
-import EditorPage from './pages/editorPage/EditorPage.tsx';
-import PageNotFound from './pages/pageNotFound/PageNotFound.tsx';
+import { Route, Routes } from 'react-router-dom'
+import Layout from './pages/layout/Layout.tsx'
+import SnippetPage from './pages/snippetPage/SnippetPage.tsx'
+import SnippetsPage from './pages/snippetsPage/SnippetsPage.tsx'
+import EditorPage from './pages/editorPage/EditorPage.tsx'
+import PageNotFound from './pages/pageNotFound/PageNotFound.tsx'
 
-import './App.css';
+import './App.css'
 
 function App(): React.JSX.Element {
   return (
@@ -19,7 +19,7 @@ function App(): React.JSX.Element {
         </Routes>
       </Layout>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
