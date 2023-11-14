@@ -4,11 +4,11 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
 
 const menuItems = reactive([
-  { name: "Home", link: "#home", current: true },
-  { name: "Portfolio", link: "#portfolio", current: false },
-  { name: "About", link: "#about", current: false },
-  { name: "Blog", link: "#blog", current: false },
-  { name: "Contact", link: "#home", current: false },
+  { name: "Snippets", link: "#snippets", current: true },
+  { name: "Create", link: "#create", current: false },
+  // { name: "About", link: "#about", current: false },
+  // { name: "Blog", link: "#blog", current: false },
+  // { name: "Contact", link: "#home", current: false },
 ]);
 
 const updateCurrentItem = (itemName: string): void => {
