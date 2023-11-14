@@ -5,15 +5,13 @@ import FooterComponent from "./components/FooterBar/FooterComponent.vue";
 </script>
 
 <template>
-  <div class="w-full h-screen overflow-hidden bg-background">
-    <div class="mx-auto max-w-full sm:px-6 lg:px-8 h-screen">
+  <div class="w-full min-h-screen bg-background">
+    <div class="mx-auto max-w-full sm:px-6 lg:px-8 min-h-screen">
       <NavBar />
       <main>
         <HomePage />
       </main>
-      <div class="fixed bottom-0 right-0">
-        <FooterComponent />
-      </div>
+      <FooterComponent />
     </div>
   </div>
 </template>
