@@ -1,68 +1,40 @@
-# Florian Beaumont's Portfolio
-[Visit the Portfolio](https://florianbeaumont.netlify.app)
-## Introduction
-This repository contains the source code for my Vue.js portfolio. The website serves to showcase my skills, experience, and projects in web development.
+# Developer's Code Snippets Vault
 
-![Portfolio Preview](https://github.com/BFlorian91/Portfolio-V2/blob/main/src/assets/preview.png?raw=true)
+![Under Construction](https://img.shields.io/badge/Under%20Construction-Yes-orange)
+![Not Usable](https://img.shields.io/badge/Usable-No-red)
 
-## Technologies Used
 
-![](https://img.shields.io/badge/Vue%20js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D)
-![](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)
-![](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![](https://img.shields.io/badge/pnpm-yellow?style=for-the-badge&logo=pnpm&logoColor=white)
+
+Welcome to the **Developer's Code Snippets Vault** – your ultimate tool to boost your development productivity! 🚀
+
+## About
+
+The **Developer's Code Snippets Vault** is designed to make your development journey smoother and more efficient. It's the perfect companion for developers who want to avoid reinventing the wheel, save your most-used code pieces, access them easily, and even enhance them with AI-powered suggestions.
+
+- **Add Snippets**: Store your favorite code snippets for easy access whenever you need them.
+- **AI-Powered Enhancement**: Leverage artificial intelligence to improve your code snippets and make them even more effective.
 
 ## Features
 
-- Personal and professional introduction
-- Skills section
-- Project gallery
-- Technical blog (coming soon)
-- Contact
+-[ ] **Snippet Management**: Organize and manage your code snippets effortlessly.
+-[ ] **Search and Filter**: Quickly find the snippet you need with powerful search and filtering options.
+-[ ] **AI Suggestions**: Get AI-driven suggestions to enhance your code snippets.
+-[ ] **Version History**: Keep track of changes and revisions.
+-[ ] **Collaboration**: Collaborate with your team on shared code snippets.
+-[ ] **Syntax Highlighting**: Enjoy syntax highlighting for various programming languages.
 
-## Local Installation and Running
+## Project Status
 
-To install and run this project locally, follow these steps:
+🚧 **Work in Progress** 🚧
 
-1. Clone the repository:
+Our journey began on September 20, 2023, and we're actively building the **Developer's Code Snippets Vault** with passion and dedication. The project is developed using React and TypeScript, following a Test-Driven Development (TDD) approach. We use pnpm as our package manager.
 
-   ```bash
-   git clone git@github.com:BFlorian91/Portfolio-V2.git
-   ```
+## Getting Started
 
-2. Install the dependencies:
+To get started with the **Developer's Code Snippets Vault**, follow these steps:
 
-   ```bash
-   cd Portfolio-V2
-   pnpm install
-   ```
+1. Clone the repository to your local machine.
+2. Install the required dependencies using `pnpm install`.
+3. Run the development server with `pnpm start`.
 
-3. Run the project:
-
-   ```bash
-   pnpm run serve
-   ```
-
-You can now access the application at `http://localhost:5173`.
-
-## Tests
-
-To run unit tests:
-
-```bash
-pnpm run test
-```
-
-## Deployment
-
-The site is currently deployed via Netlify.
-
-## Author
-
-- Florian Beaumont - Web Developer specialized in Vue.js and other front-end technologies.
-
----
-
-
-
+Feel free to explore the codebase, contribute, and help us shape the future of developer productivity!
