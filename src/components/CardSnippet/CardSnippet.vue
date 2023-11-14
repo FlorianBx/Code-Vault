@@ -21,15 +21,15 @@ defineProps({
 
 <template>
   <div>
-    <div class="relative">
-      <div class="relative h-72 w-full overflow-hidden rounded-lg">
+    <div class="relative w-64">
+      <div class="relative h-72 overflow-hidden rounded-lg p-4">
         <div>
           <div class="h-full w-full text-sm">
             <pre><code>{{ code }}</code></pre>
           </div>
         </div>
         <div class="relative mt-4">
-          <h3 class="text-sm font-medium text-gray-900">
+          <h3 class="text-sm font-bold text-gray-300">
             {{ name }}
           </h3>
         </div>
@@ -45,7 +45,7 @@ defineProps({
           </p>
         </div>
       </div>
-      <div class="mt-6">
+      <div class="mt-3">
         <a
           :href="href"
           class="relative flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-8 py-2 font-medium text-gray-900 hover:bg-gray-200"
