@@ -1,7 +1,7 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div class="w-full px-8">
-    <slot></slot>
+  <div class="mx-auto px-8">
+    <div class="flex flex-wrap justify-center gap-4">
+      <slot></slot>
+    </div>
   </div>
 </template>

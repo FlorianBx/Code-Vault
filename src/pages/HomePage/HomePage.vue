@@ -10,11 +10,13 @@ const { filteredSnippets } = useFilter(ref(datas));
 </script>
 
 <template>
-  <div class="mt-32 max-w-full sm:mt-10">
-    <LayoutSlot>
+  <div class="mt-10 w-full">
+    <div class="flex justify-center">
       <SearchBar />
+    </div>
+    <LayoutSlot>
       <section
-        class="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
+        class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
       >
         <div v-for="snippet in filteredSnippets" :key="snippet.code">
           <CardSnippet
