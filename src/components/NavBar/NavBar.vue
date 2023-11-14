@@ -37,7 +37,10 @@ const handleEnterKeyPress = (link: string): void => {
 </script>
 
 <template>
-  <div class="hidden md:block fixed right-4 top-4 p-4">
+  <div class="hidden md:block fixed right-4 top-4 p-4 z-50">
+    <div
+      class="fixed top-0 right-0 left-0 h-20 w-full bg-background opacity-80 backdrop-blur-sm"
+    ></div>
     <!-- lg menu  -->
     <ul class="flex gap-4 font-bold text-lg">
       <li
@@ -45,8 +48,8 @@ const handleEnterKeyPress = (link: string): void => {
         :key="item.name"
         :class="[
           item.current
-            ? 'text-secondary font-bold cursor-pointer font-body hover:text-hover'
-            : 'cursor-pointer font-body hover:text-hover',
+            ? 'text-secondary font-bold cursor-pointer font-body hover:text-hover z-50'
+            : 'cursor-pointer font-body hover:text-hover z-50',
         ]"
       >
         <a
