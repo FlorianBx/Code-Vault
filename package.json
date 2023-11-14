@@ -1,0 +1,50 @@
+{
+  "name": "starter_vue",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest --environment jsdom --root src/",
+    "test:coverage": "vitest --environment jsdom --root src/ --coverage",
+    "test:coverage++": "vitest --environment jsdom --root src/ --coverage --coverage.lines=80",
+    "test:ui": "vitest --environment jsdom --root src/ --coverage.enabled=true --ui",
+    "prepare": "husky install",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "format": "prettier .  --write"
+  },
+  "dependencies": {
+    "@headlessui/vue": "^1.7.16",
+    "@heroicons/vue": "^2.0.18",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@testing-library/vue": "^7.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.8.0",
+    "@typescript-eslint/parser": "^6.8.0",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "@vitest/coverage-v8": "^0.34.6",
+    "@vitest/ui": "^0.34.6",
+    "@vue/eslint-config-typescript": "^12.0.0",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-vue": "^9.17.0",
+    "husky": "^8.0.3",
+    "jsdom": "^22.1.0",
+    "postcss": "^8.4.31",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.6",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5",
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-pwa": "^0.16.6",
+    "vitest": "^0.34.6",
+    "vue-eslint-parser": "^9.3.2",
+    "vue-tsc": "^1.8.5"
+  }
+}
