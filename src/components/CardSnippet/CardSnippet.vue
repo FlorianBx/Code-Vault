@@ -33,7 +33,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <div class="relative w-64 rounded-lg">
+    <div class="relative w-64 rounded-lg animate-fadeIn">
       <div
         class="relative h-96 overflow-hidden rounded-lg p-4 shadow-neumorphic"
       >
@@ -67,7 +67,7 @@ onMounted(() => {
         <div class="absolute bottom-0 right-0 left-0 p-4">
           <a
             :href="href"
-            class="relative font-semibold text-sm transition-color duration-300 bg-background hover:bg-primary hover:text-darktext text-center block w-full rounded-md border-0 shadow-light-inner-neumorphic py-3 text-primary sm:leading-6"
+            class="relative font-semibold text-sm transition-color duration-300 bg-background hover:bg-secondary hover:text-darktext text-center block w-full rounded-md border-0 shadow-light-inner-neumorphic py-3 text-primary sm:leading-6"
             >show<span class="sr-only">, {{ name }}</span></a
           >
         </div>

@@ -7,7 +7,7 @@ export default {
     extend: {
       colors: {
         primary: "white",
-        secondary: "#58D5BA",
+        secondary: "#81A1C1",
         hover: "#003A38",
         ring: "#277F70",
         button: "#24292F]",
@@ -18,7 +18,7 @@ export default {
       },
       borderColor: {
         primary: "#ADF0D4",
-        secondary: "#1FD8A4",
+        secondary: "#81A1C1",
         danger: "#e3342f",
       },
       boxShadow: {
