@@ -3,14 +3,14 @@ import { searchQuery } from "../../composables/useFilter.ts";
 </script>
 
 <template>
-  <div class="mb-5 w-full lg:max-w-3xl md:max-w-lg px-8">
+  <div class="mb-4 w-64 sm:w-full lg:max-w-3xl sm:max-w-xl sm:px-8">
     <label
       for="search"
       class="block text-sm font-medium leading-6 ml-1 text-white"
       >Search</label
     >
     <div class="mt-2">
-      <div class="flex rounded-md bg-white/5 ring-0">
+      <div class="flex rounded-md bg-transparent ring-0">
         <input
           id="search"
           v-model="searchQuery"
