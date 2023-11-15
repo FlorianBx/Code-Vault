@@ -16,41 +16,53 @@ defineProps({
     type: String,
     default: "",
   },
+  tag: {
+    type: String,
+    default: "",
+  },
 });
 </script>
 
 <template>
   <div>
-    <div class="relative w-64">
-      <div class="relative h-72 overflow-hidden rounded-lg p-4">
+    <div class="relative w-64 rounded-lg">
+      <div
+        class="relative h-96 overflow-hidden rounded-lg p-4 shadow-neumorphic"
+      >
         <div>
-          <div class="h-full w-full text-sm">
-            <pre><code>{{ code }}</code></pre>
+          <div
+            class="h-52 w-full text-sm shadow-light-inner-neumorphic py-4 rounded-lg"
+          >
+            <pre
+              class="p-2 text-xs overflow-hidden"
+            ><code>{{ code }}</code></pre>
           </div>
         </div>
         <div class="relative mt-4">
           <h3 class="text-sm font-bold text-gray-300">
-            {{ name }}
+            {{ tag }}
           </h3>
         </div>
         <div
-          class="absolute inset-x-0 top-0 flex h-72 items-end justify-end overflow-hidden rounded-lg p-4"
+          class="absolute inset-x-0 top-0 flex h-96 items-end justify-end overflow-hidden rounded-lg p-4"
         >
           <div
             aria-hidden="true"
-            class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black opacity-50"
+            class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-background opacity-50"
           />
-          <p class="relative text-lg font-semibold text-white">
-            {{ description }}
+          <p
+            class="absolute text-lg left-2 bottom-20 px-2 font-semibold text-white"
+          >
+            {{ name }}
           </p>
         </div>
-      </div>
-      <div class="mt-3">
-        <a
-          :href="href"
-          class="relative flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-8 py-2 font-medium text-gray-900 hover:bg-gray-200"
-          >show<span class="sr-only">, {{ name }}</span></a
-        >
+        <div class="absolute bottom-0 right-0 left-0 p-4">
+          <a
+            :href="href"
+            class="relative font-semibold text-sm transition-color duration-300 bg-background hover:bg-primary hover:text-darktext text-center block w-full rounded-md border-0 shadow-light-inner-neumorphic py-3 text-primary sm:leading-6"
+            >show<span class="sr-only">, {{ name }}</span></a
+          >
+        </div>
       </div>
     </div>
   </div>
