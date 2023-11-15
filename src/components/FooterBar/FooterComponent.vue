@@ -4,7 +4,7 @@ import { useSocialIcons } from "../../composables/useSocialIcons";
 
 const { GithubIcon, LinkedinIcon, InstagramIcon } = useSocialIcons();
 
-const secondary = ref("#1FD8A4");
+const secondary = ref("#81A1C1");
 </script>
 
 <template>
