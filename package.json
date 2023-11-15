@@ -18,12 +18,14 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.16",
     "@heroicons/vue": "^2.0.18",
+    "prismjs": "^1.29.0",
     "vue": "^3.3.4",
     "vue-router": "4"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",
     "@testing-library/vue": "^7.0.0",
+    "@types/prismjs": "^1.26.3",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "@typescript-eslint/parser": "^6.8.0",
     "@vitejs/plugin-vue": "^4.2.3",
