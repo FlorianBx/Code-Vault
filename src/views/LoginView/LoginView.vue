@@ -20,11 +20,11 @@ import GithubButtonForSignIn from "../../components/GithubButtonForSignIn/Github
         </div>
         <form class="space-y-6" action="#" method="POST">
           <div>
-            <InputForLoginAndRegister label="Email address" required="true" />
+            <InputForLoginAndRegister label="Email address" :required="true" />
           </div>
 
           <div>
-            <InputForLoginAndRegister label="Password" required="true" />
+            <InputForLoginAndRegister label="Password" :required="true" />
           </div>
 
           <div class="flex items-center justify-between">
