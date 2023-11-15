@@ -24,6 +24,7 @@ const { filteredSnippets } = useFilter(ref(datas));
             :name="snippet.name"
             :description="snippet.description"
             :href="snippet.href"
+            :tag="snippet.tag"
           />
         </div>
       </section>

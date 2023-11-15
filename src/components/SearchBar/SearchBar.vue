@@ -3,7 +3,7 @@ import { searchQuery } from "../../composables/useFilter.ts";
 </script>
 
 <template>
-  <div class="mb-10 w-full lg:max-w-2xl md:max-w-lg px-8">
+  <div class="mb-5 w-full lg:max-w-3xl md:max-w-lg px-8">
     <label
       for="search"
       class="block text-sm font-medium leading-6 ml-1 text-white"
@@ -18,7 +18,7 @@ import { searchQuery } from "../../composables/useFilter.ts";
           name="search"
           autocomplete="search"
           data-testid="input-data-testid"
-          class="flex-1 bg-transparent py-2.5 pl-3 focus:ring-2 focus:ring-inset focus:outline-none focus:ring-emerald-500 text-white sm:text-md sm:leading-6"
+          class="flex-1 bg-transparent block w-full rounded-md border-0 shadow-inner-neumorphic py-3 text-primary ring-0 focus:ring-0 focus:ring-inset focus:ring-ring sm:text-sm sm:leading-6"
         />
       </div>
     </div>
