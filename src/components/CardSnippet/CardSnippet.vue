@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import Prism from "prismjs";
+import "../../assets/highlight-syntax.css";
+import { onMounted } from "vue";
+
 defineProps({
   href: {
     type: String,
@@ -21,6 +25,10 @@ defineProps({
     default: "",
   },
 });
+
+onMounted(() => {
+  Prism.highlightAll();
+});
 </script>
 
 <template>
@@ -35,7 +43,7 @@ defineProps({
           >
             <pre
               class="p-2 text-xs overflow-hidden"
-            ><code>{{ code }}</code></pre>
+            ><code class="language-javascript">{{ code }}</code></pre>
           </div>
         </div>
         <div class="relative mt-4">

@@ -16,7 +16,7 @@ const { filteredSnippets } = useFilter(ref(datas));
         <SearchBar />
       </div>
       <section
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 gap-y-4"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-8"
       >
         <div v-for="snippet in filteredSnippets" :key="snippet.code">
           <CardSnippet
