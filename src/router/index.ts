@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/HomeView/HomeView.vue";
-import Login from "../views/LoginView/LoginView.vue";
-import Register from "../views/RegisterView/RegisterView.vue";
-import ShowSnippet from "../views/SnippetView/SnippetView.vue";
-import CreateSnippet from "../views/CreateSnippetView/CreateSnippetView.vue";
+import Home from "../views/HomeView.vue";
+import Login from "../views/LoginView.vue";
+import Register from "../views/RegisterView.vue";
+import ShowSnippet from "../views/SnippetView.vue";
+import CreateSnippet from "../views/CreateSnippetView.vue";
 
 const routes = [
   { path: "/", component: Home },
