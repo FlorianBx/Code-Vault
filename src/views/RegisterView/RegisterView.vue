@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import InputForLoginAndRegister from "../../components/InputForLoginAndRegister/InputForLoginAndRegister.vue";
+import InputForText from "../../components/InputForText/InputForText.vue";
 import GithubButtonForSignIn from "../../components/GithubButtonForSignIn/GithubButtonForSignIn.vue";
 </script>
 
@@ -20,17 +20,14 @@ import GithubButtonForSignIn from "../../components/GithubButtonForSignIn/Github
         </div>
         <form class="space-y-6" action="#" method="POST">
           <div>
-            <InputForLoginAndRegister label="Email address" :required="true" />
+            <InputForText label="Email address" required />
           </div>
 
           <div>
-            <InputForLoginAndRegister label="Password" :required="true" />
+            <InputForText label="Password" type="password" required />
           </div>
           <div>
-            <InputForLoginAndRegister
-              label="Confirm password"
-              :required="true"
-            />
+            <InputForText label="Confirm password" type="password" required />
           </div>
 
           <div class="flex items-center justify-between">

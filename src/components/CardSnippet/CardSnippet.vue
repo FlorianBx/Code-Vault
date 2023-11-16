@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import { RouterLink } from "vue-router";
 import Prism from "prismjs";
 import "../../assets/highlight-syntax.css";
 import { onMounted } from "vue";
 
 defineProps({
-  href: {
+  id: {
     type: String,
     default: "",
   },
@@ -65,11 +66,13 @@ onMounted(() => {
           </p>
         </div>
         <div class="absolute bottom-0 right-0 left-0 p-4">
-          <a
-            :href="href"
+          <router-link
+            :to="`/snippet/${id}`"
             class="relative font-semibold text-sm transition-color duration-300 bg-background hover:bg-secondary hover:text-darktext text-center block w-full rounded-md border-0 shadow-light-inner-neumorphic py-3 text-primary sm:leading-6"
-            >show<span class="sr-only">, {{ name }}</span></a
           >
+            show
+            <span class="sr-only">, {{ name }}</span>
+          </router-link>
         </div>
       </div>
     </div>

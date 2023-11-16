@@ -12,7 +12,19 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  data: {
+    type: String,
+    default: "",
+  },
 });
+const emit = defineEmits(["update:data"]);
+
+function handleInput(event: Event): void {
+  const target = event.target as HTMLInputElement;
+  if (target) {
+    emit("update:data", target.value);
+  }
+}
 </script>
 
 <template>
@@ -23,12 +35,15 @@ defineProps({
       >{{ label }}</label
     >
     <div class="mt-2">
-      <input
+      <textarea
         :id="label.toLocaleLowerCase()"
+        rows="6"
         :name="label.toLocaleLowerCase()"
         :type="type"
         :required="required"
         class="block w-full bg-transparent focus:shadow-inner-neumorphic shadow-light-inner-neumorphic rounded-md border-0 py-3 text-primary ring-0 focus:ring-0 focus:ring-inset focus:ring-ring sm:text-sm sm:leading-6"
+        :value="data"
+        @input="handleInput"
       />
     </div>
   </div>

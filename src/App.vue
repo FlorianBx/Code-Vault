@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import NavBar from "./components/NavBar/NavBar.vue";
+import LayoutSlot from "./components/LayoutSlot/LayoutSlot.vue";
 import FooterComponent from "./components/FooterBar/FooterComponent.vue";
 </script>
 
@@ -8,7 +9,9 @@ import FooterComponent from "./components/FooterBar/FooterComponent.vue";
     <div class="mx-auto max-w-full sm:px-6 lg:px-8 min-h-screen pt-14">
       <NavBar />
       <main>
-        <router-view></router-view>
+        <LayoutSlot>
+          <router-view></router-view>
+        </LayoutSlot>
       </main>
       <FooterComponent />
     </div>

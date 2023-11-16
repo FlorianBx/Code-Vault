@@ -2,13 +2,13 @@ import { ref, Ref, computed } from "vue";
 import datas from "../fakeDatas/data.json";
 
 interface DataItem {
+  id: string;
   name: string;
   code: string;
   createdAt: string;
   lastUpdate: string;
   tag: string;
   like: number;
-  href: string;
   description: string;
 }
 
