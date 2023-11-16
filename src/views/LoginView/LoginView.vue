@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import InputForLoginAndRegister from "../../components/InputForLoginAndRegister/InputForLoginAndRegister.vue";
+import InputForText from "../../components/InputForText/InputForText.vue";
 import GithubButtonForSignIn from "../../components/GithubButtonForSignIn/GithubButtonForSignIn.vue";
 </script>
 
 <template>
   <div
-    class="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8"
+    class="flex min-h-full flex-1 flex-col justify-center sm:py-12 sm:px-6 lg:px-8"
   >
     <div class="mt-10 px-4 sm:px-0 sm:mx-auto sm:w-full sm:max-w-[480px]">
       <div
@@ -20,11 +20,11 @@ import GithubButtonForSignIn from "../../components/GithubButtonForSignIn/Github
         </div>
         <form class="space-y-6" action="#" method="POST">
           <div>
-            <InputForLoginAndRegister label="Email address" :required="true" />
+            <InputForText label="Email address" :required="true" />
           </div>
 
           <div>
-            <InputForLoginAndRegister label="Password" :required="true" />
+            <InputForText label="Password" type="password" :required="true" />
           </div>
 
           <div class="flex items-center justify-between">

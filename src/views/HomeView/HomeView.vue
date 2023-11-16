@@ -10,9 +10,9 @@ const { filteredSnippets } = useFilter(ref(datas));
 </script>
 
 <template>
-  <div class="sm:mt-10 w-full">
+  <div class="w-full">
     <LayoutSlot>
-      <div class="flex justify-center w-full">
+      <div class="flex justify-center w-full pb-6">
         <SearchBar />
       </div>
       <section
@@ -20,10 +20,10 @@ const { filteredSnippets } = useFilter(ref(datas));
       >
         <div v-for="snippet in filteredSnippets" :key="snippet.code">
           <CardSnippet
+            :id="snippet.id"
             :code="snippet.code"
             :name="snippet.name"
             :description="snippet.description"
-            :href="snippet.href"
             :tag="snippet.tag"
           />
         </div>

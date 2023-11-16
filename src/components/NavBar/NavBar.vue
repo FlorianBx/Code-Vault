@@ -1,19 +1,13 @@
 <script setup lang="ts">
-import { reactive, computed, ref } from "vue";
+import { reactive, computed } from "vue";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
 import { RouterLink } from "vue-router";
 
-const selectedSnippetId = ref("1");
-
 const menuItems = reactive([
   { name: "Home", link: "/" },
-  {
-    name: "Snippet",
-    link: computed(() => `/snippet/${selectedSnippetId.value}`),
-  },
   { name: "Create", link: "/create-snippet" },
-  { name: "Login", link: "/login" },
+  { name: "Sign In", link: "/login" },
 ]);
 
 const emailLink =
