@@ -1,6 +1,25 @@
 <script setup lang="ts">
+import { reactive } from "vue";
+import { useFormData } from "../composables/useFormData.ts";
 import InputForText from "../components/InputForText.vue";
 import GithubButtonForSignIn from "../components/GithubButtonForSignIn.vue";
+
+const registerDatas = reactive({
+  email: "",
+  password: "",
+  confirmPassword: "",
+});
+
+const { formData, handleUpdateData } = useFormData(registerDatas);
+
+// watch(formData, () => {
+//   console.log(
+//     "Formdata: ",
+//     formData.email,
+//     formData.password,
+//     formData.confirmPassword,
+//   );
+// });
 </script>
 
 <template>
@@ -20,14 +39,35 @@ import GithubButtonForSignIn from "../components/GithubButtonForSignIn.vue";
         </div>
         <form class="space-y-6" action="#" method="POST">
           <div>
-            <InputForText label="Email address" required />
+            <InputForText
+              label="Email address"
+              :data="formData.email"
+              required
+              @update:data="(value: string) => handleUpdateData(value, 'email')"
+            />
           </div>
 
           <div>
-            <InputForText label="Password" type="password" required />
+            <InputForText
+              label="Password"
+              type="password"
+              :data="formData.password"
+              required
+              @update:data="
+                (value: string) => handleUpdateData(value, 'password')
+              "
+            />
           </div>
           <div>
-            <InputForText label="Confirm password" type="password" required />
+            <InputForText
+              label="Confirm password"
+              type="password"
+              :data="formData.confirmPassword"
+              required
+              @update:data="
+                (value: string) => handleUpdateData(value, 'confirmPassword')
+              "
+            />
           </div>
 
           <div class="flex items-center justify-between">
