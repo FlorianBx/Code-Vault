@@ -11,7 +11,7 @@ vi.mock("prismjs", () => {
 });
 
 describe("CardSnippet", () => {
-  it("doit être rendu correctement", async () => {
+  it("should be render", async () => {
     const CardSnippet = (await import("@/components/CardSnippet.vue")).default;
 
     const router = createRouter({
@@ -22,8 +22,8 @@ describe("CardSnippet", () => {
     const wrapper = mount(CardSnippet, {
       props: {
         id: "123",
-        description: "Une description",
-        name: "MonNom",
+        description: "a description",
+        name: "name",
         code: 'console.log("Hello, world!");',
         tag: "JavaScript",
       },
@@ -34,7 +34,7 @@ describe("CardSnippet", () => {
 
     expect(wrapper.exists()).toBe(true);
 
-    expect(wrapper.text()).toContain("MonNom");
+    expect(wrapper.text()).toContain("name");
     expect(wrapper.text()).toContain("JavaScript");
     expect(wrapper.text()).toContain('console.log("Hello, world!");');
   });
