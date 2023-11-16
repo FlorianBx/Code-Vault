@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import InputForText from "../../components/InputForText/InputForText.vue";
-import GithubButtonForSignIn from "../../components/GithubButtonForSignIn/GithubButtonForSignIn.vue";
+import InputForText from "../components/InputForText.vue";
+import GithubButtonForSignIn from "../components/GithubButtonForSignIn.vue";
 </script>
 
 <template>

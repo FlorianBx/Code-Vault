@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
 import Prism from "prismjs";
-import "../../assets/highlight-syntax.css";
+import "../assets/highlight-syntax.css";
 import { onMounted } from "vue";
 
 defineProps({

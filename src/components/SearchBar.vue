@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { searchQuery } from "../../composables/useFilter.ts";
+import { searchQuery } from "../composables/useFilter.ts";
 </script>
 
 <template>

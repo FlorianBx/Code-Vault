@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { reactive } from "vue";
-import InputForText from "../../components/InputForText/InputForText.vue";
-import InputForRichText from "../../components/InputForRichText/InputForRichText.vue";
-import { useFormData } from "../../composables/useFormData";
+import InputForText from "../components/InputForText.vue";
+import InputForRichText from "../components/InputForRichText.vue";
+import { useFormData } from "../composables/useFormData.ts";
 
 const snippetData = reactive({
   name: "",
