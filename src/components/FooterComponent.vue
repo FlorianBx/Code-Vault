@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useSocialIcons } from "../../composables/useSocialIcons";
+import { useSocialIcons } from "../composables/useSocialIcons";
 
 const { GithubIcon, LinkedinIcon, InstagramIcon } = useSocialIcons();
 

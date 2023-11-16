@@ -1,7 +1,7 @@
 import { describe, test, expect, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import { ref } from "vue";
-import SearchBar from "./SearchBar.vue";
+import SearchBar from "../SearchBar.vue";
 
 vi.mock("../../composables/useFilterSnippet", () => {
   return {

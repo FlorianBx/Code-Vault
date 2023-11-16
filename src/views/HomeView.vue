@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import CardSnippet from "../../components/CardSnippet/CardSnippet.vue";
-import SearchBar from "../../components/SearchBar/SearchBar.vue";
-import LayoutSlot from "../../components/LayoutSlot/LayoutSlot.vue";
-import datas from "../../fakeDatas/data.json";
-import useFilter from "../../composables/useFilter.js";
+import CardSnippet from "../components/CardSnippet.vue";
+import SearchBar from "../components/SearchBar.vue";
+import LayoutSlot from "../components/LayoutSlot.vue";
+import datas from "../fakeDatas/data.json";
+import useFilter from "../composables/useFilter";
 
 const { filteredSnippets } = useFilter(ref(datas));
 </script>
