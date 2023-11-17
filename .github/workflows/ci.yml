@@ -22,17 +22,12 @@ jobs:
       - name: Run Tests
         run: npm run test
 
-    #   - name: Upload Code Coverage Results
-    #     uses: github/codeql-action/upload-sarif@v2
-    #     with:
-    #       sarif_file: ./coverage/coverage-final.json
-
       - name: Create Dynamic Pull Request
         id: create_pr
         run: |
-          commit_msg=$(git log --format=%B -n 1 $GITHUB_SHA)
+          commit_msg=$(echo ${{ github.event.head_commit.message }})
           title="Automated PR: $commit_msg"
-          body="This PR was created automatically when tests passed. Commit message: $commit_msg"
+          body="Tests passed. Commit message: $commit_msg"
           gh pr create --title "$title" --body "$body" --base main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
