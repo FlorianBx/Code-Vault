@@ -8,7 +8,7 @@ export default {
       colors: {
         primary: "white",
         secondary: "#81A1C1",
-        hover: "#003A38",
+        hover: "#58D5BA",
         ring: "#277F70",
         button: "#24292F]",
         danger: "#e3342f",
