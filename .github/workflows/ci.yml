@@ -35,4 +35,4 @@ jobs:
           body="This PR was created automatically when tests passed. Commit message: $commit_msg"
           gh pr create --title "$title" --body "$body" --base main
         env:
-          GITHUB_TOKEN: ${{ secrets.SECRET_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
