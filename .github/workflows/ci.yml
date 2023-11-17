@@ -12,8 +12,8 @@ jobs:
       with:
         node-version: '14'
     - name: Install Dependencies
-      run: pnpm install
+      run: npm install
     - name: Run Linter
-      run: pnpm run lint
+      run: npm run lint
     - name: Run Tests
-      run: pnpm run test
+      run: npm run test
