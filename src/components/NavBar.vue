@@ -17,13 +17,6 @@ const emailLink =
 const filteredMenuItems = computed(() => {
   return menuItems.filter((item) => item.name !== "Contact");
 });
-
-// const handleEnterKeyPress = (link: string): void => {
-//   const element = document.querySelector(link);
-//   if (element) {
-//     element.scrollIntoView({ behavior: "smooth" });
-//   }
-// };
 </script>
 
 <template>
