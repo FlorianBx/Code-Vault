@@ -34,7 +34,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <div class="relative w-64 rounded-lg animate-fadeIn">
+    <div class="relative w-64 rounded-lg">
       <div
         class="relative h-96 overflow-hidden rounded-lg p-4 shadow-neumorphic"
       >

@@ -1,5 +1,4 @@
 import { ref, Ref, computed } from "vue";
-import datas from "../fakeDatas/data.json";
 
 interface DataItem {
   id: string;
@@ -17,12 +16,12 @@ export const searchQuery = ref("");
 export default function useFilter(data: Ref<DataItem[]>) {
   const filteredSnippets = computed(() => {
     if (!searchQuery.value) {
-      return datas;
+      return data.value;
     }
     return data.value.filter((item: DataItem) => {
       return (
         item.tag.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-        item.description.toLowerCase().includes(searchQuery.value.toLowerCase())
+        item.name.toLowerCase().includes(searchQuery.value.toLowerCase())
       );
     });
   });
