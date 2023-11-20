@@ -3,9 +3,9 @@ import { auth } from "../services/firebase/firebase.config";
 import { useAuthStore } from "../store/authStore";
 import {
   UserCredential,
-  signInWithEmailAndPassword,
-  signInWithPopup,
+  createUserWithEmailAndPassword,
   GithubAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 
 interface EmailAndPasswordUser {
@@ -13,17 +13,15 @@ interface EmailAndPasswordUser {
   password: string;
 }
 
-export function useLogin() {
+export function useRegister() {
   const authStore = useAuthStore();
   const error = ref<string | null>(null);
 
-  const loginWithEmailAndPassword = async (
+  const registerWithEmailAndPassword = async (
     user: EmailAndPasswordUser,
   ): Promise<UserCredential | null> => {
-    console.log("user : ", user);
-
     try {
-      const userCredential = await signInWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         user.email,
         user.password,
@@ -31,12 +29,12 @@ export function useLogin() {
       error.value = null;
 
       const idToken = await userCredential.user.getIdToken();
-      authStore.login(idToken);
+      authStore.login(idToken); // ou une autre action appropriée pour un nouvel utilisateur
       return userCredential;
     } catch (err: unknown) {
       error.value =
         err instanceof Error ? err.message : "Oops ! something went wrong";
-      console.warn("err : ", err);
+      console.warn("Subscribe Error : ", err);
       return null;
     }
   };
@@ -57,22 +55,9 @@ export function useLogin() {
     }
   };
 
-  const logout = async (): Promise<void> => {
-    try {
-      await auth.signOut();
-      authStore.logout();
-      error.value = null;
-    } catch (err: unknown) {
-      error.value =
-        err instanceof Error ? err.message : "Oops ! something went wrong";
-      console.warn("err : ", err);
-    }
-  };
-
   return {
     error,
-    loginWithEmailAndPassword,
     loginWithGitHub,
-    logout,
+    registerWithEmailAndPassword,
   };
 }
