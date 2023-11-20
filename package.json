@@ -16,8 +16,12 @@
     "format": "prettier .  --write"
   },
   "dependencies": {
+    "@firebase/app": "^0.9.23",
+    "@firebase/auth": "^1.4.0",
     "@headlessui/vue": "^1.7.16",
     "@heroicons/vue": "^2.0.18",
+    "firebase": "^10.6.0",
+    "pinia": "^2.1.7",
     "prismjs": "^1.29.0",
     "vue": "^3.3.4",
     "vue-router": "4"
