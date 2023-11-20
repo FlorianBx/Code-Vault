@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 import { useFormData } from "../composables/useFormData.ts";
+import { useLogin } from "../composables/useLogin.ts";
+import { useAuthStore } from "../store/authStore";
+import { useRouter } from "vue-router";
 import InputForText from "../components/InputForText.vue";
 import GithubButtonForSignIn from "../components/GithubButtonForSignIn.vue";
 
@@ -10,10 +13,24 @@ const loginDatas = reactive({
 });
 
 const { formData, handleUpdateData } = useFormData(loginDatas);
+const { loginWithEmailAndPassword, loginWithGitHub } = useLogin();
+const authStore = useAuthStore();
+const router = useRouter();
 
-// watch(formData, () => {
-//   console.log("Formdata: ", formData.email, formData.password);
-// });
+const handleLogin = async (event: Event) => {
+  event.preventDefault();
+  await loginWithEmailAndPassword({
+    email: formData.email,
+    password: formData.password,
+  });
+  if (authStore.isLoggedIn) {
+    router.push("/");
+  }
+};
+
+const handleGitHubLogin = async () => {
+  await loginWithGitHub();
+};
 </script>
 
 <template>
@@ -31,7 +48,7 @@ const { formData, handleUpdateData } = useFormData(loginDatas);
             Sign in
           </h3>
         </div>
-        <form class="space-y-6" action="#" method="POST">
+        <form class="space-y-6">
           <div>
             <InputForText
               label="Email address"
@@ -79,6 +96,7 @@ const { formData, handleUpdateData } = useFormData(loginDatas);
             <button
               type="submit"
               class="flex w-full justify-center text-base rounded-md shadow-neumorphic bg-button px-3 py-3 font-semibold leading-6 text-white hover:text-hover hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+              @click="handleLogin"
             >
               Sign in
             </button>
@@ -100,7 +118,7 @@ const { formData, handleUpdateData } = useFormData(loginDatas);
           </div>
 
           <div class="mt-6">
-            <GithubButtonForSignIn />
+            <GithubButtonForSignIn @click="handleGitHubLogin" />
           </div>
         </div>
       </div>
