@@ -1,11 +1,18 @@
 import { createApp } from "vue";
-import { scrollTo } from "./directives/ScrollTo";
+import { createPinia } from "pinia";
+import { useAuthStore } from "./store/authStore";
+
+const pinia = createPinia();
 import router from "./router";
 import "./style.css";
 import App from "./App.vue";
 
 const app = createApp(App);
 app.use(router);
-app.directive("scroll-to", scrollTo);
+app.use(pinia);
+
+const authStore = useAuthStore();
+authStore.initializeAuth();
 app.mount("#app");
-// createApp(App).directive('scroll-to', scrollTo).mount('#app')
+
+authStore.listenToAuthChanges();
