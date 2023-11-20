@@ -5,6 +5,7 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
+    "types": ["vitest/globals"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -25,7 +26,16 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "./vue-shims.d.ts"
+    "./vue-shims.d.ts",
+    "./vitest-mocks.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/**/*.spec.ts",
+    "src/**/*.spec.tsx"
   ]
   // "references": [{ "path": "./tsconfig.node.json" }]
 }

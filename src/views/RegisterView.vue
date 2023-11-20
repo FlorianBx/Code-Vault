@@ -3,23 +3,34 @@ import { reactive } from "vue";
 import { useFormData } from "../composables/useFormData.ts";
 import InputForText from "../components/InputForText.vue";
 import GithubButtonForSignIn from "../components/GithubButtonForSignIn.vue";
+import { useRegister } from "../composables/useRegister.ts";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "../store/authStore";
 
 const registerDatas = reactive({
   email: "",
   password: "",
   confirmPassword: "",
 });
-
+const router = useRouter();
 const { formData, handleUpdateData } = useFormData(registerDatas);
+const { registerWithEmailAndPassword, loginWithGitHub } = useRegister();
+const authStore = useAuthStore();
 
-// watch(formData, () => {
-//   console.log(
-//     "Formdata: ",
-//     formData.email,
-//     formData.password,
-//     formData.confirmPassword,
-//   );
-// });
+const handleRegister = async (event: Event) => {
+  event.preventDefault();
+  await registerWithEmailAndPassword({
+    email: formData.email,
+    password: formData.password,
+  });
+  if (authStore.isLoggedIn) {
+    router.push("/");
+  }
+};
+
+const handleGitHubLogin = async () => {
+  await loginWithGitHub();
+};
 </script>
 
 <template>
@@ -90,6 +101,7 @@ const { formData, handleUpdateData } = useFormData(registerDatas);
             <button
               type="submit"
               class="flex w-full justify-center text-base rounded-md shadow-neumorphic bg-button px-3 py-3 font-semibold leading-6 text-white hover:text-hover hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+              @click="handleRegister"
             >
               Sign up
             </button>
@@ -111,7 +123,7 @@ const { formData, handleUpdateData } = useFormData(registerDatas);
           </div>
 
           <div class="mt-6">
-            <GithubButtonForSignIn />
+            <GithubButtonForSignIn @click="handleGitHubLogin" />
           </div>
         </div>
       </div>
