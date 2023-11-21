@@ -30,6 +30,9 @@ const handleRegister = async (event: Event) => {
 
 const handleGitHubLogin = async () => {
   await loginWithGitHub();
+  if (authStore.isLoggedIn) {
+    router.push("/");
+  }
 };
 </script>
 
