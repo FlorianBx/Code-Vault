@@ -18,7 +18,7 @@ const datasMock = [
     visibility: true,
   },
   {
-    id: "1",
+    id: "2",
     title: "Component 2",
     description: "A Angular component",
     code: "code 2",
