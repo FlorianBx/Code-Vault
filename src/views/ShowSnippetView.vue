@@ -7,13 +7,14 @@ import { useGetSnippets } from "../composables/useGetSnippets";
 import { useClipboard } from "@vueuse/core";
 import PencilIcon from "../assets/icons/PencilIcon.vue";
 import CopyIcon from "../assets/icons/CopyIcon.vue";
+import LoadingCircle from "../components/LoadingCircle.vue";
 import "../assets/highlight-syntax.css";
 
 const authStore = useAuthStore();
 const router = useRouter();
 const date = new Date();
 const id = router.currentRoute.value.params.id;
-const { snippet, fetchSnippetById } = useGetSnippets();
+const { isLoading, snippet, fetchSnippetById } = useGetSnippets();
 
 const snippetData = reactive({
   id: id as string,
@@ -78,6 +79,11 @@ onMounted(async () => {
             Snippet: {{ snippetData.title }}
           </h3>
         </div>
+        <Teleport to="#modal-and-loader">
+          <div v-show="isLoading" class="flex justify-center w-full">
+            <LoadingCircle />
+          </div>
+        </Teleport>
         <form class="space-y-6">
           <div>
             <h3>{{ snippetData.title }}</h3>

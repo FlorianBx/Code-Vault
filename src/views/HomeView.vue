@@ -22,9 +22,11 @@ onMounted(() => {
       <div class="flex justify-center w-full pb-6">
         <SearchBar />
       </div>
-      <div v-show="isLoading" class="flex justify-center w-full">
-        <LoadingCircle />
-      </div>
+      <Teleport to="#modal-and-loader">
+        <div v-show="isLoading" class="flex justify-center w-full">
+          <LoadingCircle />
+        </div>
+      </Teleport>
       <section
         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-8"
       >
