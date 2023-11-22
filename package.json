@@ -20,6 +20,7 @@
     "@firebase/auth": "^1.4.0",
     "@headlessui/vue": "^1.7.16",
     "@heroicons/vue": "^2.0.18",
+    "@vueuse/core": "^10.6.1",
     "firebase": "^10.6.0",
     "pinia": "^2.1.7",
     "prismjs": "^1.29.0",
