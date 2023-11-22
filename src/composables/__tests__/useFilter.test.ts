@@ -7,35 +7,40 @@ import { ref } from "vue";
 const datasMock = [
   {
     id: "1",
-    name: "Component 1",
-    code: "code 1",
-    createdAt: "2022-01-01",
-    lastUpdate: "2022-01-02",
-    like: 100,
-    tag: "Vue",
+    title: "Component 1",
     description: "A Vue component",
+    code: "code 1",
+    language: "JavaScript",
+    tags: "Vue",
+    authorId: "1",
+    createdAt: "2022-01-01",
+    updatedAt: "2022-01-02",
+    visibility: true,
   },
   {
-    id: "2",
-    name: "Component 2",
-    code: "code 2",
-    createdAt: "2022-01-01",
-    lastUpdate: "2022-01-02",
-    like: 10,
-    tag: "Angular",
+    id: "1",
+    title: "Component 2",
     description: "A Angular component",
+    code: "code 2",
+    language: "JavaScript",
+    tags: "Angular",
+    authorId: "2",
+    createdAt: "2022-01-01",
+    updatedAt: "2022-01-02",
+    visibility: true,
   },
   {
     id: "3",
-    name: "Component 3",
-    code: "code 3",
-    createdAt: "2022-01-01",
-    lastUpdate: "2022-01-02",
-    like: 80,
-    tag: "React",
+    title: "Component 3",
     description: "A React component",
+    code: "code 3",
+    language: "JavaScript",
+    tags: "React",
+    authorId: "3",
+    createdAt: "2022-01-01",
+    updatedAt: "2022-01-02",
+    visibility: true,
   },
-  // ... similar for other objects
 ];
 
 describe("useFilter", () => {
@@ -49,7 +54,7 @@ describe("useFilter", () => {
     searchQuery.value = "Vue";
     expect(filteredSnippets.value.length).toBe(1);
     if (Array.isArray(filteredSnippets.value)) {
-      expect(filteredSnippets.value[0].tag).toBe("Vue");
+      expect(filteredSnippets.value[0].tags).toBe("Vue");
     }
   });
 
@@ -59,7 +64,7 @@ describe("useFilter", () => {
     searchQuery.value = "3";
     expect(filteredSnippets.value.length).toBe(1);
     if (Array.isArray(filteredSnippets.value)) {
-      expect(filteredSnippets.value[0].name).toBe("Component 3");
+      expect(filteredSnippets.value[0].title).toBe("Component 3");
     }
   });
 });

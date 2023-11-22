@@ -9,11 +9,11 @@ defineProps({
     type: String,
     default: "",
   },
-  description: {
+  title: {
     type: String,
     default: "",
   },
-  name: {
+  description: {
     type: String,
     default: "",
   },
@@ -22,7 +22,7 @@ defineProps({
     default: "",
   },
   tag: {
-    type: String,
+    type: Array<string>,
     default: "",
   },
 });
@@ -43,7 +43,7 @@ onMounted(() => {
             class="h-52 w-full text-sm shadow-light-inner-neumorphic py-4 rounded-lg"
           >
             <pre
-              class="p-2 text-xs overflow-hidden"
+              class="p-2 text-xs overflow-hidden h-48"
             ><code class="language-javascript">{{ code }}</code></pre>
           </div>
         </div>
@@ -62,7 +62,7 @@ onMounted(() => {
           <p
             class="absolute text-lg left-2 bottom-20 px-2 font-semibold text-white"
           >
-            {{ name }}
+            {{ title }}
           </p>
         </div>
         <div class="absolute bottom-0 right-0 left-0 p-4">
@@ -71,7 +71,7 @@ onMounted(() => {
             class="relative font-semibold text-sm transition-color duration-300 bg-background hover:bg-secondary hover:text-darktext text-center block w-full rounded-md border-0 shadow-light-inner-neumorphic py-3 text-primary sm:leading-6"
           >
             show
-            <span class="sr-only">, {{ name }}</span>
+            <span class="sr-only">, {{ title }}</span>
           </router-link>
         </div>
       </div>

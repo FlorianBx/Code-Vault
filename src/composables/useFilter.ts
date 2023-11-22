@@ -2,13 +2,15 @@ import { ref, Ref, computed } from "vue";
 
 interface DataItem {
   id: string;
-  name: string;
-  code: string;
-  createdAt: string;
-  lastUpdate: string;
-  tag: string;
-  like: number;
+  title: string;
   description: string;
+  code: string;
+  language: string;
+  tags: string;
+  authorId: string;
+  createdAt: string;
+  updatedAt: string;
+  visibility: boolean;
 }
 
 export const searchQuery = ref("");
@@ -20,8 +22,8 @@ export default function useFilter(data: Ref<DataItem[]>) {
     }
     return data.value.filter((item: DataItem) => {
       return (
-        item.tag.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-        item.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+        item.tags.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+        item.title.toLowerCase().includes(searchQuery.value.toLowerCase())
       );
     });
   });
