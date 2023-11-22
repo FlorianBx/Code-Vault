@@ -1,12 +1,17 @@
 <script setup lang="ts">
+import { onMounted } from "vue";
 import CardSnippet from "../components/CardSnippet.vue";
 import SearchBar from "../components/SearchBar.vue";
 import LayoutSlot from "../components/LayoutSlot.vue";
 import useFilter from "../composables/useFilter";
-import { useGetSnippets } from "../composables/useGetSnippet.ts";
+import { useGetSnippets } from "../composables/useGetSnippets.ts";
 
-const { snippets, isLoading, error } = useGetSnippets();
+const { snippets, fetchSnippets, isLoading, error } = useGetSnippets();
 const { filteredSnippets } = useFilter(snippets);
+
+onMounted(() => {
+  fetchSnippets();
+});
 </script>
 
 <template>
