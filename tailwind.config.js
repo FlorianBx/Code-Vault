@@ -21,6 +21,20 @@ export default {
         secondary: "#81A1C1",
         danger: "#e3342f",
       },
+      backgroundColor: {
+        javascript: "#F7DF1E",
+        typescript: "#3178C6",
+        react: "#61DBFB",
+        vue: "#41B883",
+        angular: "#DD0031",
+        php: "#777BB4",
+        docker: "#2496ED",
+        css: "#2965F1",
+        html: "#E44D26",
+        flutter: "#02569B",
+        swift: "#FFAC45",
+        java: "#007396",
+      },
       boxShadow: {
         neumorphic:
           "5px 5px 10px rgba(0, 0, 0, 0.25), -2px -2px 10px rgba(255, 255, 255, 0.05)",

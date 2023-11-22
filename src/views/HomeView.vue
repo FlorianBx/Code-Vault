@@ -5,6 +5,7 @@ import SearchBar from "../components/SearchBar.vue";
 import LayoutSlot from "../components/LayoutSlot.vue";
 import useFilter from "../composables/useFilter";
 import { useGetSnippets } from "../composables/useGetSnippets.ts";
+import LoadingCircle from "../components/LoadingCircle.vue";
 
 const { snippets, fetchSnippets, isLoading, error } = useGetSnippets();
 const { filteredSnippets } = useFilter(snippets);
@@ -15,12 +16,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-show="isLoading">Loading...</div>
   <div v-show="error" class="text-red-300">{{ error }}</div>
-  <div class="w-full">
+  <div class="w-full justify-center">
     <LayoutSlot>
       <div class="flex justify-center w-full pb-6">
         <SearchBar />
+      </div>
+      <div v-show="isLoading" class="flex justify-center w-full">
+        <LoadingCircle />
       </div>
       <section
         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-8"
