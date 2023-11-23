@@ -21,11 +21,15 @@ defineProps({
     type: String,
     default: "",
   },
-  tag: {
-    type: Array<string>,
+  tags: {
+    type: String,
     default: "",
   },
 });
+
+const splitTags = (tags: string) => {
+  return tags.split(",");
+};
 
 onMounted(() => {
   Prism.highlightAll();
@@ -49,7 +53,13 @@ onMounted(() => {
         </div>
         <div class="relative mt-4">
           <h3 class="text-sm font-bold text-gray-300">
-            {{ tag }}
+            <span
+              v-for="(tag, index) in splitTags(tags)"
+              :key="index"
+              :class="`p-1.5 py-1 mb-4 mr-1 rounded-md text-gray-800 bg-vue text-xs overflow-hidden`"
+            >
+              {{ tag }}
+            </span>
           </h3>
         </div>
         <div

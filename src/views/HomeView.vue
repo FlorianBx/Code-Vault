@@ -10,8 +10,8 @@ import LoadingCircle from "../components/LoadingCircle.vue";
 const { snippets, fetchSnippets, isLoading, error } = useGetSnippets();
 const { filteredSnippets } = useFilter(snippets);
 
-onMounted(() => {
-  fetchSnippets();
+onMounted(async () => {
+  await fetchSnippets();
 });
 </script>
 
@@ -36,7 +36,7 @@ onMounted(() => {
             :code="snippet.code"
             :title="snippet.title"
             :description="snippet.description"
-            :tag="snippet.tags"
+            :tags="snippet.tags"
           />
         </div>
       </section>

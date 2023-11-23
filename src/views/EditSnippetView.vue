@@ -5,6 +5,7 @@ import InputForRichText from "../components/InputForRichText.vue";
 import { useAuthStore } from "../store/authStore";
 import { useUpdateSnippet } from "../composables/useUpdateSnippet";
 import { useGetSnippets } from "../composables/useGetSnippets";
+import CrossIcon from "../assets/icons/CrossIcon.vue";
 import { useRouter } from "vue-router";
 
 const authStore = useAuthStore();
@@ -45,6 +46,10 @@ const handleSubmit = (event: Event) => {
   router.push(`/snippet/${id}`);
 };
 
+const pushBack = () => {
+  router.push(`/snippet/${id}`);
+};
+
 onMounted(async () => {
   if (!authStore.isLoggedIn) {
     router.push("/login");
@@ -60,8 +65,14 @@ onMounted(async () => {
   >
     <div class="px-4 max-w-full sm:px-0 sm:mx-auto sm:w-full sm:max-w-[720px]">
       <div
-        class="bg-background px-6 py-12 sm:rounded-xl sm:px-12 shadow-neumorphic"
+        class="relative bg-background px-6 py-12 sm:rounded-xl sm:px-12 shadow-neumorphic"
       >
+        <button
+          class="absolute top-6 right-6 text-danger opacity-60"
+          @click="pushBack"
+        >
+          <CrossIcon />
+        </button>
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
           <h3
             class="pb-11 text-center text-2xl font-bold leading-9 tracking-tight text-primary"

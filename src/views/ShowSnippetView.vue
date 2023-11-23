@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import Prism from "prismjs";
 import { useRouter } from "vue-router";
-import { onMounted, reactive, nextTick } from "vue";
+import { onMounted, reactive, nextTick, watch } from "vue";
 import { useAuthStore } from "../store/authStore";
 import { useGetSnippets } from "../composables/useGetSnippets";
+import { useDeleteSnippet } from "../composables/useDeleteSnippet";
 import { useClipboard } from "@vueuse/core";
+import TrashIcon from "../assets/icons/TrashIcon.vue";
 import PencilIcon from "../assets/icons/PencilIcon.vue";
 import CopyIcon from "../assets/icons/CopyIcon.vue";
 import LoadingCircle from "../components/LoadingCircle.vue";
@@ -41,6 +43,7 @@ const fillSnippetData = () => {
 };
 
 const { copy, copied } = useClipboard();
+const { isDeleting, deleteSnippet } = useDeleteSnippet();
 
 const handleEdit = () => {
   router.push(`/edit/${id}`);
@@ -56,6 +59,12 @@ onMounted(async () => {
   await nextTick();
   Prism.highlightAll();
 });
+
+watch(isDeleting, (value) => {
+  if (value) {
+    router.push("/");
+  }
+});
 </script>
 
 <template>
@@ -67,10 +76,16 @@ onMounted(async () => {
         class="relative bg-background px-6 py-12 sm:rounded-xl sm:px-12 shadow-neumorphic"
       >
         <button
-          class="absolute top-6 right-6 text-white opacity-60"
+          class="absolute top-6 right-6 text-secondary opacity-60"
           @click="handleEdit"
         >
           <PencilIcon />
+        </button>
+        <button
+          class="absolute top-6 left-6 text-danger opacity-60"
+          @click="deleteSnippet(snippetData.id)"
+        >
+          <TrashIcon />
         </button>
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
           <h3
