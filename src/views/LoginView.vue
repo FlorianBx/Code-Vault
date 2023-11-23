@@ -54,8 +54,8 @@ const handleGitHubLogin = async () => {
         <form class="space-y-6">
           <div>
             <InputForText
+              v-model="formData.email"
               label="Email address"
-              :data="formData.email"
               required
               @update:data="(value: string) => handleUpdateData(value, 'email')"
             />
@@ -63,9 +63,9 @@ const handleGitHubLogin = async () => {
 
           <div>
             <InputForText
+              v-model="formData.password"
               label="Password"
               type="password"
-              :data="formData.password"
               required
               @update:data="
                 (value: string) => handleUpdateData(value, 'password')

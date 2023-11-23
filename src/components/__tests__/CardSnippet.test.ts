@@ -12,7 +12,7 @@ vi.mock("prismjs", () => {
 
 describe("CardSnippet", () => {
   it("should be render", async () => {
-    const CardSnippet = (await import("@/components/CardSnippet.vue")).default;
+    const CardSnippet = (await import("../CardSnippet.vue")).default;
 
     const router = createRouter({
       history: createMemoryHistory(),
@@ -22,10 +22,10 @@ describe("CardSnippet", () => {
     const wrapper = mount(CardSnippet, {
       props: {
         id: "123",
-        description: "a description",
-        name: "name",
         code: 'console.log("Hello, world!");',
-        tag: "JavaScript",
+        title: "name",
+        description: "a description",
+        tags: "JavaScript",
       },
       global: {
         plugins: [router],
