@@ -11,7 +11,7 @@ export default {
         hover: "#58D5BA",
         ring: "#277F70",
         button: "#24292F]",
-        danger: "#e3342f",
+        danger: "#FF9592",
         card: "#0F1B1B",
         background: "#262a31",
         darktext: "#1d1d1d",
