@@ -2,16 +2,35 @@
 import { reactive } from "vue";
 import InputForText from "../components/InputForText.vue";
 import InputForRichText from "../components/InputForRichText.vue";
-import { useFormData } from "../composables/useFormData.ts";
+import { useAuthStore } from "../store/authStore";
+import { useCreateSnippet } from "../composables/useCreateSnippet";
+import { v4 as uuidv4 } from "uuid";
+import { useRouter } from "vue-router";
+
+const authStore = useAuthStore();
+const router = useRouter();
+const date = new Date();
 
 const snippetData = reactive({
-  name: "",
+  id: uuidv4(),
+  title: "",
   description: "",
-  tag: "",
   code: "",
+  language: "",
+  tags: "",
+  createdAt: date.toISOString(),
+  updatedAt: date.toISOString(),
+  authorId: authStore.idToken,
+  visibility: true,
 });
 
-const { formData, handleUpdateData } = useFormData(snippetData);
+const { createSnippet } = useCreateSnippet();
+
+const handleSubmit = (event: Event) => {
+  event.preventDefault();
+  createSnippet(snippetData);
+  router.push("/");
+};
 </script>
 
 <template>
@@ -27,46 +46,39 @@ const { formData, handleUpdateData } = useFormData(snippetData);
             Create Snippet
           </h3>
         </div>
-        <form class="space-y-6" action="#" method="POST">
+        <form class="space-y-6">
           <div>
-            <InputForText
-              label="Snippet Name"
-              required
-              :data="formData.name"
-              @update:data="(value: string) => handleUpdateData(value, 'name')"
-            />
+            <InputForText v-model="snippetData.title" label="Title" required />
           </div>
 
           <div>
             <InputForText
+              v-model="snippetData.description"
               label="Description"
-              :data="formData.description"
-              @update:data="
-                (value: string) => handleUpdateData(value, 'description')
-              "
             />
           </div>
           <div>
+            <InputForText v-model="snippetData.tags" label="Tag" required />
+          </div>
+          <div>
             <InputForText
-              label="Tag"
-              :data="formData.tag"
+              v-model="snippetData.language"
+              label="Language"
               required
-              @update:data="(value: string) => handleUpdateData(value, 'tag')"
             />
           </div>
           <div>
             <InputForRichText
+              v-model="snippetData.code"
               label="Code"
-              :data="formData.code"
               required
-              @update:data="(value: string) => handleUpdateData(value, 'code')"
             />
           </div>
-
           <div>
             <button
               type="submit"
               class="flex w-full justify-center text-base rounded-md shadow-neumorphic hover:shadow-inner-neumorphic bg-button px-3 py-3 font-semibold leading-6 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+              @click="handleSubmit"
             >
               Save
             </button>

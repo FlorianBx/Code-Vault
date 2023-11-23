@@ -1,23 +1,29 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useAuthStore } from "../store/authStore";
-import Home from "../views/HomeView.vue";
-import Login from "../views/LoginView.vue";
-import Register from "../views/RegisterView.vue";
-import ShowSnippet from "../views/SnippetView.vue";
-import CreateSnippet from "../views/CreateSnippetView.vue";
+import HomeView from "../views/HomeView.vue";
+import LoginView from "../views/LoginView.vue";
+import RegisterView from "../views/RegisterView.vue";
+import EditSnippetView from "../views/EditSnippetView.vue";
+import ShowSnippetView from "../views/ShowSnippetView.vue";
+import CreateSnippetView from "../views/CreateSnippetView.vue";
 
 const routes = [
-  { path: "/", component: Home },
-  { path: "/login", component: Login, meta: { requiresAuth: false } },
-  { path: "/register", component: Register, meta: { requiresAuth: false } },
+  { path: "/", component: HomeView },
+  { path: "/login", component: LoginView, meta: { requiresAuth: false } },
+  { path: "/register", component: RegisterView, meta: { requiresAuth: false } },
   {
     path: "/snippet/:id",
-    component: ShowSnippet,
+    component: ShowSnippetView,
     meta: { requiresAuth: false },
   },
   {
+    path: "/edit/:id",
+    component: EditSnippetView,
+    meta: { requiresAuth: true },
+  },
+  {
     path: "/create-snippet",
-    component: CreateSnippet,
+    component: CreateSnippetView,
     meta: { requiresAuth: true },
   },
 ];

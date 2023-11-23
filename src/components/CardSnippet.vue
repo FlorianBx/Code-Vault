@@ -9,11 +9,11 @@ defineProps({
     type: String,
     default: "",
   },
-  description: {
+  title: {
     type: String,
     default: "",
   },
-  name: {
+  description: {
     type: String,
     default: "",
   },
@@ -21,11 +21,15 @@ defineProps({
     type: String,
     default: "",
   },
-  tag: {
+  tags: {
     type: String,
     default: "",
   },
 });
+
+const splitTags = (tags: string) => {
+  return tags.split(",");
+};
 
 onMounted(() => {
   Prism.highlightAll();
@@ -43,13 +47,19 @@ onMounted(() => {
             class="h-52 w-full text-sm shadow-light-inner-neumorphic py-4 rounded-lg"
           >
             <pre
-              class="p-2 text-xs overflow-hidden"
+              class="p-2 text-xs overflow-hidden h-48"
             ><code class="language-javascript">{{ code }}</code></pre>
           </div>
         </div>
         <div class="relative mt-4">
           <h3 class="text-sm font-bold text-gray-300">
-            {{ tag }}
+            <span
+              v-for="(tag, index) in splitTags(tags)"
+              :key="index"
+              :class="`p-1.5 py-1 mb-4 mr-1 rounded-md text-gray-800 bg-vue text-xs overflow-hidden`"
+            >
+              {{ tag }}
+            </span>
           </h3>
         </div>
         <div
@@ -62,7 +72,7 @@ onMounted(() => {
           <p
             class="absolute text-lg left-2 bottom-20 px-2 font-semibold text-white"
           >
-            {{ name }}
+            {{ title }}
           </p>
         </div>
         <div class="absolute bottom-0 right-0 left-0 p-4">
@@ -71,7 +81,7 @@ onMounted(() => {
             class="relative font-semibold text-sm transition-color duration-300 bg-background hover:bg-secondary hover:text-darktext text-center block w-full rounded-md border-0 shadow-light-inner-neumorphic py-3 text-primary sm:leading-6"
           >
             show
-            <span class="sr-only">, {{ name }}</span>
+            <span class="sr-only">, {{ title }}</span>
           </router-link>
         </div>
       </div>
