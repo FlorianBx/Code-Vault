@@ -25,7 +25,7 @@ describe("CardSnippet", () => {
         code: 'console.log("Hello, world!");',
         title: "name",
         description: "a description",
-        tag: "JavaScript",
+        tags: "JavaScript",
       },
       global: {
         plugins: [router],
