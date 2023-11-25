@@ -3,20 +3,18 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Fragment Mono';
+  font-family: "Fragment Mono";
   font-weight: 400;
-  src: url('/fonts/FragmentMono.woff2') format('woff2');
+  src: url("/fonts/FragmentMono.woff2") format("woff2");
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Fragment Mono';
+  font-family: "Fragment Mono";
   font-weight: 700;
-  src: url('/fonts/FragmentMono.woff2') format('woff2');
+  src: url("/fonts/FragmentMono.woff2") format("woff2");
   font-display: swap;
 }
-
-
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -33,9 +31,11 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   user-select: none;
+  padding: 0;
+  margin: 0;
 }
 
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
   display: none;
 }
 
@@ -50,18 +50,4 @@ body::-webkit-scrollbar{
   justify-content: center;
   align-items: center;
   pointer-events: none;
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }

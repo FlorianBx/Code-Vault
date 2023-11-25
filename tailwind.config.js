@@ -9,8 +9,9 @@ export default {
         primary: "white",
         secondary: "#81A1C1",
         hover: "#58D5BA",
+        vue: "#41B883",
         ring: "#277F70",
-        button: "#24292F]",
+        btn: "#6E6E6E",
         danger: "#FF9592",
         card: "#0F1B1B",
         background: "#262a31",
@@ -20,6 +21,7 @@ export default {
         primary: "#ADF0D4",
         secondary: "#81A1C1",
         danger: "#e3342f",
+        vue: "#41B883",
       },
       backgroundColor: {
         javascript: "#F7DF1E",

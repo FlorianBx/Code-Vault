@@ -9,9 +9,7 @@ const authStore = useAuthStore();
 
 const menuItems = reactive([
   { name: "Home", link: "/" },
-  { name: "Create", link: "/create-snippet" },
   { name: "Sign In", link: "/login" },
-  { name: "Logout", link: "/" },
 ]);
 
 const filteredMenuItems = computed(() => {
