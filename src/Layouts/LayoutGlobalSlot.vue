@@ -12,7 +12,7 @@ import NotificationToast from "../components/NotificationToast.vue";
 <template>
   <div class="w-full min-h-screen bg-background">
     <div class="mx-auto flex flex-col min-h-screen">
-      <div class="w-full bg-black">
+      <div class="w-full">
         <slot name="header"></slot>
       </div>
       <Teleport to="#notification-toast">
