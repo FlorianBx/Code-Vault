@@ -2,51 +2,47 @@
 import AddIcon from "../assets/icons/AddIcon.vue";
 import HomeIcon from "../assets/icons/HomeIcon.vue";
 import GearIcon from "../assets/icons/GearIcon.vue";
+import Logo from "../assets/Code_Vault_logo.png";
 </script>
 
 <template>
-  <div>
-    <div
-      class="fixed top-0 bottom-0 w-13 flex flex-col z-50 gap-y-5 overflow-y-auto bg-background px-6 pb-4 ring-1 ring-white/10"
-    >
-      <div class="flex h-16 items-center">
-        <img
-          class="h-8 w-auto"
-          src="https://tailwindui.com/img/logos/mark.svg?color=green&shade=400"
-          alt="Your Company"
-        />
+  <div
+    class="fixed top-0 bottom-0 w-20 flex flex-col items-center z-30 gap-y-5 overflow-y-auto bg-background pb-4 ring-1 ring-white/10"
+  >
+    <router-link to="/" class="h-40">
+      <div class="flex h-40 justify-center items-center cursor-pointer">
+        <img class="pl-1 h-20" :src="Logo" alt="" />
       </div>
-      <nav class="relative flex flex-col justify-between">
-        <ul role="list" class="flex flex-1 flex-col gap-y-7">
-          <li>
-            <ul role="list" class="mt-10 space-y-10">
-              <li>
-                <router-link to="/" class="" active-class="text-vue">
-                  <HomeIcon />
-                </router-link>
-              </li>
-              <li>
-                <router-link
-                  to="/create-snippet"
-                  class=""
-                  active-class="text-vue"
-                >
-                  <AddIcon />
-                </router-link>
-              </li>
-            </ul>
-          </li>
-          <li></li>
-          <li>
-            <router-link
-              to="/settings"
-              class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
-            >
-              <GearIcon />
-            </router-link>
-          </li>
-        </ul>
-      </nav>
-    </div>
+    </router-link>
+    <nav>
+      <ul role="list" class="flex justify-center">
+        <li>
+          <ul role="list" class="mt-10 space-y-10">
+            <li>
+              <router-link to="/" class="" active-class="text-vue">
+                <HomeIcon />
+              </router-link>
+            </li>
+            <li>
+              <router-link
+                to="/create-snippet"
+                class=""
+                active-class="text-vue"
+              >
+                <AddIcon />
+              </router-link>
+            </li>
+          </ul>
+        </li>
+        <li class="fixed bottom-10 flex justify-center">
+          <router-link
+            to="/settings"
+            class="font-semibold text-gray-400 hover:text-white"
+          >
+            <GearIcon />
+          </router-link>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
