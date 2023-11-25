@@ -9,7 +9,7 @@ const secondary = ref("#81A1C1");
 
 <template>
   <footer
-    class="flex flex-col -mt-30 items-center max-w-full font-body overflow-hidden px-6 pb-20 sm:pb-8 lg:px-8"
+    class="flex w-full flex-col mx-auto -mt-30 items-center max-w-full font-body overflow-hidden px-6 pb-20 sm:pb-8 lg:px-8"
   >
     <div class="mt-20 flex justify-center gap-12 w-full">
       <a

@@ -12,7 +12,7 @@ const router = useRouter();
 const date = new Date();
 
 const snippetData = reactive({
-  id: uuidv4(),
+  id: uuidv4(), // make sens ?
   title: "",
   description: "",
   code: "",
