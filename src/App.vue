@@ -9,7 +9,9 @@ import SideBar from "./components/SideBar.vue";
 <template>
   <LayoutGlobalSlot>
     <template #header>
-      <NavBar />
+      <div class="pt-14">
+        <NavBar />
+      </div>
     </template>
     <SearchBar />
     <template #aside>
@@ -17,7 +19,9 @@ import SideBar from "./components/SideBar.vue";
     </template>
     <router-view></router-view>
     <template #footer>
-      <FooterComponent />
+      <div class="flex items-end h-96">
+        <FooterComponent />
+      </div>
     </template>
   </LayoutGlobalSlot>
 </template>
