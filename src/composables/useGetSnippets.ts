@@ -10,15 +10,33 @@ export function useGetSnippets() {
   const isLoading: Ref<boolean> = ref(false);
   const error: Ref<string | null> = ref(null);
 
+  const convertTimestampToString = (
+    timestamp: { seconds: number; nanoseconds: number } | string,
+  ): string => {
+    let date: Date;
+    if (typeof timestamp === "string") {
+      date = new Date(timestamp);
+    } else {
+      date = new Date(
+        timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000,
+      );
+    }
+    return date.toISOString();
+  };
+
   const fetchSnippets = async () => {
     isLoading.value = true;
     error.value = null;
     try {
       const querySnapshot = await getDocs(collection(db, "snippets"));
-      snippets.value = querySnapshot.docs.map((doc) => ({
-        ...(doc.data() as Snippet),
-        id: doc.id,
-      }));
+      snippets.value = querySnapshot.docs.map((doc) => {
+        const data = doc.data() as Snippet;
+        if (data.updatedAt && data.createdAt) {
+          data.createdAt = convertTimestampToString(data.createdAt);
+          data.updatedAt = convertTimestampToString(data.updatedAt);
+        }
+        return { ...data, id: doc.id };
+      });
     } catch (err) {
       error.value = (err as Error).message ?? "Could not fetch the snippets.";
     } finally {
@@ -27,7 +45,6 @@ export function useGetSnippets() {
   };
 
   const fetchSnippetById = async (id: string) => {
-    console.log(id);
     isLoading.value = true;
     error.value = null;
     try {
