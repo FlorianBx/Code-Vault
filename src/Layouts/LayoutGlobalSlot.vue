@@ -24,7 +24,7 @@ import NotificationToast from "../components/NotificationToast.vue";
             <slot name="aside"></slot>
           </div>
           <div class="w-full flex flex-col items-center justify-center px-4">
-            <main class="max-w-3xl">
+            <main class="lg:max-w-3xl w-full">
               <slot></slot>
             </main>
           </div>

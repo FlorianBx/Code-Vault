@@ -60,10 +60,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div
-    class="flex min-h-full sm:mt-20 flex-1 flex-col items-center justify-center"
-  >
-    <div class="px-4 max-w-full sm:px-0 sm:mx-auto sm:w-full sm:max-w-[720px]">
+  <div class="flex min-h-full w-full flex-col items-center justify-center">
+    <div class="max-w-full px-4 sm:w-full sm:max-w-3xl">
       <div
         class="relative bg-background px-6 py-12 sm:rounded-xl sm:px-12 shadow-neumorphic"
       >
