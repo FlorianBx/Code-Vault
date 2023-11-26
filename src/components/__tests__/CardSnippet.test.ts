@@ -12,7 +12,7 @@ vi.mock("prismjs", () => {
 
 describe("CardSnippet", () => {
   it("should be render", async () => {
-    const CardSnippet = (await import("../CardSnippet.vue")).default;
+    const CardSnippet = (await import("../CardSnippetV1.vue")).default;
 
     const router = createRouter({
       history: createMemoryHistory(),
