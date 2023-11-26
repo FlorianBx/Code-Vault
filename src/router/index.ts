@@ -40,11 +40,11 @@ const routes = [
     component: PersonnalSnippetsView,
     meta: { requiresAuth: true },
   },
-  // {
-  //   path: "/test",
-  //   component: TestLayout,
-  //   meta: { requiresAuth: true },
-  // },
+  {
+    path: "/settings",
+    component: ProfileView,
+    meta: { requiresAuth: true },
+  },
 ];
 
 const router = createRouter({
