@@ -1,10 +1,16 @@
 <script setup lang="ts">
-import { RouterLink } from "vue-router";
+import { nextTick, onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
+import { useClipboard } from "@vueuse/core";
+import { useElapsedTime } from "../composables/useElapsedTime.ts";
+import { useDeleteSnippet } from "../composables/useDeleteSnippet.ts";
+import TrashIcon from "../assets/icons/TrashIcon.vue";
+import PencilIcon from "../assets/icons/PencilIcon.vue";
+import CopyIcon from "../assets/icons/CopyIcon.vue";
 import Prism from "prismjs";
 import "../assets/highlight-syntax.css";
-import { onMounted } from "vue";
 
-defineProps({
+const props = defineProps({
   id: {
     type: String,
     default: "",
@@ -21,70 +27,164 @@ defineProps({
     type: String,
     default: "",
   },
+  language: {
+    type: String,
+    default: "",
+  },
   tags: {
+    type: String,
+    default: "",
+  },
+  createdAt: {
+    type: String,
+    default: "",
+  },
+  updatedAt: {
     type: String,
     default: "",
   },
 });
 
+const authorId = "Florian";
+const router = useRouter();
+const { copy, copied } = useClipboard();
+const { deleteSnippet } = useDeleteSnippet();
+
+const readMore = ref(false);
+
 const splitTags = (tags: string) => {
   return tags.split(",");
 };
 
-onMounted(() => {
+const handleEdit = (id: string) => {
+  router.push(`/edit/${id}`);
+};
+
+const { elapsedTime } = useElapsedTime(props.updatedAt);
+
+onMounted(async () => {
+  await nextTick();
   Prism.highlightAll();
 });
 </script>
 
 <template>
-  <div>
-    <div class="relative w-64 rounded-lg">
-      <div
-        class="relative h-96 overflow-hidden rounded-lg p-4 shadow-neumorphic"
+  <div class="flex flex-col mt-8">
+    <section class="flex flex-col gap-2">
+      <h3 class="text-2xl font-bold text-primary/90">{{ title }}</h3>
+      <p class="text-sm font-semibold italic">@{{ authorId }}</p>
+      <p
+        v-show="!readMore"
+        class="text-sm font-semibold line-clamp-3 text-primary/70"
       >
-        <div>
-          <div
-            class="h-52 w-full text-sm shadow-light-inner-neumorphic py-4 rounded-lg"
-          >
-            <pre
-              class="p-2 text-xs overflow-hidden h-48"
-            ><code class="language-javascript">{{ code }}</code></pre>
-          </div>
-        </div>
-        <div class="relative mt-4">
-          <h3 class="text-sm font-bold text-gray-300">
-            <span
-              v-for="(tag, index) in splitTags(tags)"
-              :key="index"
-              :class="`p-1.5 py-1 mb-4 mr-1 rounded-md text-gray-800 bg-vue text-xs overflow-hidden`"
-            >
-              {{ tag }}
-            </span>
-          </h3>
-        </div>
-        <div
-          class="absolute inset-x-0 top-0 flex h-96 items-end justify-end overflow-hidden rounded-lg p-4"
+        {{ description }}
+      </p>
+      <div v-show="!readMore" class="flex flex-wrap gap-1">
+        <p
+          v-for="(tag, index) in splitTags(tags)"
+          :key="index"
+          class="bg-vue py-0 px-1.5 rounded text-sm"
         >
-          <div
-            aria-hidden="true"
-            class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-background opacity-50"
-          />
-          <p
-            class="absolute text-lg left-2 bottom-20 px-2 font-semibold text-white"
-          >
-            {{ title }}
+          {{ tag }}
+        </p>
+      </div>
+      <div v-show="!readMore" class="flex justify-between gap-3 items-end pt-4">
+        <div class="flex gap-4">
+          <p class="flex gap-2 items-center text-sm">
+            <span
+              v-if="language === 'vue'"
+              class="bg-vue w-4 h-2 rounded-full"
+            ></span>
+            <span
+              v-if="language === 'react'"
+              class="bg-react w-4 h-2 rounded-full"
+            ></span>
+            <span
+              v-if="language === 'angular'"
+              class="bg-angular w-4 h-2 rounded-full"
+            ></span>
+            {{ language }}
           </p>
+          <p class="text-sm">Updated {{ elapsedTime }}</p>
         </div>
-        <div class="absolute bottom-0 right-0 left-0 p-4">
-          <router-link
-            :to="`/snippet/${id}`"
-            class="relative font-semibold text-sm transition-color duration-300 bg-background hover:bg-secondary hover:text-darktext text-center block w-full rounded-md border-0 shadow-light-inner-neumorphic py-3 text-primary sm:leading-6"
+        <button
+          class="text-center font-semibold text-sm transition-color duration-300 bg-btn hover:bg-secondary hover:text-darktext rounded py-0.5 px-4 text-primary"
+          @click="readMore = !readMore"
+        >
+          Read more...
+          <span class="sr-only">, {{ title }}</span>
+        </button>
+      </div>
+    </section>
+    <section v-show="readMore" class="flex flex-col gap-2">
+      <div>
+        <h4 class="text-sm pt-2 font-semibold text-primary/70">
+          {{ description }}
+        </h4>
+      </div>
+      <div class="flex flex-wrap gap-1">
+        <p
+          v-for="(tag, index) in splitTags(tags)"
+          :key="index"
+          class="bg-vue py-0 px-1.5 rounded text-sm"
+        >
+          {{ tag }}
+        </p>
+      </div>
+      <div class="flex justify-between gap-3 items-end pt-4">
+        <div class="flex gap-4">
+          <p class="flex gap-2 items-center text-sm">
+            <span
+              v-if="language === 'vue'"
+              class="bg-vue w-4 h-2 rounded-full"
+            ></span>
+            <span
+              v-if="language === 'react'"
+              class="bg-react w-4 h-2 rounded-full"
+            ></span>
+            <span
+              v-if="language === 'angular'"
+              class="bg-angular w-4 h-2 rounded-full"
+            ></span>
+            {{ language }}
+          </p>
+          <p class="text-sm">Updated {{ elapsedTime }}</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="text-danger opacity-100" @click="deleteSnippet(id)">
+            <TrashIcon />
+          </button>
+          <button class="text-secondary opacity-60" @click="handleEdit(id)">
+            <PencilIcon />
+          </button>
+          <button
+            class="text-center font-semibold text-sm transition-color duration-300 bg-btn hover:bg-secondary hover:text-darktext rounded py-0.5 px-4 text-primary"
+            @click="readMore = !readMore"
           >
-            show
+            Read less...
             <span class="sr-only">, {{ title }}</span>
-          </router-link>
+          </button>
         </div>
       </div>
-    </div>
+      <div class="relative">
+        <button
+          type="button"
+          class="absolute top-6 right-8 text-white opacity-60"
+          @click="copy(code)"
+        >
+          <CopyIcon />
+        </button>
+        <div
+          v-show="copied"
+          class="absolute top-16 right-6 bg-vue px-4 py-1 rounded text-sm"
+        >
+          Copied
+        </div>
+        <pre
+          class="p-4 text-sm block w-full bg-transparent focus:shadow-inner-neumorphic shadow-light-inner-neumorphic rounded-md border-0 py-3 text-primary ring-0 focus:ring-0 focus:ring-inset focus:ring-ring sm:text-sm sm:leading-6"
+        ><code class="language-javascript ">{{ code }}</code>
+            </pre>
+      </div>
+    </section>
   </div>
 </template>

@@ -2,7 +2,6 @@
 import NavBar from "./components/NavBar/NavBar.vue";
 import LayoutGlobalSlot from "./Layouts/LayoutGlobalSlot.vue";
 import FooterComponent from "./components/FooterComponent.vue";
-import SearchBar from "./components/SearchBar.vue";
 import SideBar from "./components/SideBar.vue";
 </script>
 
@@ -13,7 +12,6 @@ import SideBar from "./components/SideBar.vue";
         <NavBar />
       </div>
     </template>
-    <SearchBar />
     <template #aside>
       <SideBar />
     </template>
