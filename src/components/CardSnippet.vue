@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, onMounted, ref } from "vue";
+import { nextTick, watch, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useClipboard } from "@vueuse/core";
 import { useElapsedTime } from "../composables/useElapsedTime.ts";
@@ -66,6 +66,13 @@ onMounted(async () => {
   await nextTick();
   Prism.highlightAll();
 });
+
+watch(readMore, async (newValue) => {
+  if (newValue) {
+    await nextTick();
+    Prism.highlightAll();
+  }
+});
 </script>
 
 <template>
@@ -116,7 +123,11 @@ onMounted(async () => {
         </button>
       </div>
     </section>
-    <section v-show="readMore" class="flex flex-col gap-2">
+    <section
+      v-if="readMore"
+      class="flex flex-col gap-2 transition duration-500 ease-in-out transform translate-y-0"
+      :class="{ '-translate-y-10 opacity-0': !readMore }"
+    >
       <div>
         <h4 class="text-sm pt-2 font-semibold text-primary/70">
           {{ description }}

@@ -22,7 +22,7 @@ const authStore = useAuthStore();
   <Disclosure v-slot="{ open }" as="nav" class="sm:hidden bg-transparent">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="z-50 relative flex h-16 items-center justify-between">
-        <div class="fixed top-5 right-5 md:hidden">
+        <div class="fixed top-0 left-3.5 md:hidden">
           <!-- Mobile menu button-->
           <DisclosureButton
             class="z-50 relative inline-flex items-center justify-center rounded-md p-2 text-primary hover:bg-hover hover:text-white focus:outline-none focus:ring-0 focus:ring-inset focus:ring-white"

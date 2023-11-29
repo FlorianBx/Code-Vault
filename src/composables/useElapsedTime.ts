@@ -23,7 +23,7 @@ export function useElapsedTime(
     const secondsPast = (now.getTime() - date.getTime()) / 1000;
 
     if (secondsPast < 60) {
-      elapsedTime.value = `${Math.round(secondsPast)} secondes ago`;
+      elapsedTime.value = `${Math.round(secondsPast)} seconds ago`;
       return;
     }
     const minutesPast = secondsPast / 60;
