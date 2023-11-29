@@ -12,7 +12,7 @@ const router = useRouter();
 const date = new Date();
 
 const snippetData = reactive({
-  id: uuidv4(),
+  id: uuidv4(), // make sens ?
   title: "",
   description: "",
   code: "",
@@ -34,11 +34,9 @@ const handleSubmit = (event: Event) => {
 </script>
 
 <template>
-  <div class="flex min-h-full sm:mt-20 flex-1 flex-col justify-center">
-    <div class="px-4 sm:px-0 sm:mx-auto sm:w-full sm:max-w-[720px]">
-      <div
-        class="bg-background px-6 py-12 sm:rounded-xl sm:px-12 shadow-neumorphic"
-      >
+  <div class="flex min-h-full sm:max-w-3xl flex-col justify-center">
+    <div class="px-4 sm:px-0 sm:mx-auto sm:w-full">
+      <div class="bg-background px-6 py-12 sm:rounded-xl sm:px-12">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
           <h3
             class="pb-11 text-center text-2xl font-bold leading-9 tracking-tight text-primary"

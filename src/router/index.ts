@@ -2,10 +2,14 @@ import { createRouter, createWebHistory } from "vue-router";
 import { useAuthStore } from "../store/authStore";
 import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
+import ProfileView from "../views/ProfileView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import EditSnippetView from "../views/EditSnippetView.vue";
 import ShowSnippetView from "../views/ShowSnippetView.vue";
 import CreateSnippetView from "../views/CreateSnippetView.vue";
+import PersonnalSnippetsView from "../views/PersonalSnippetsView.vue";
+
+// import TestLayout from "../views/TestLayout.vue";
 
 const routes = [
   { path: "/", component: HomeView },
@@ -24,6 +28,21 @@ const routes = [
   {
     path: "/create-snippet",
     component: CreateSnippetView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/profile",
+    component: ProfileView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/personal-snippets",
+    component: PersonnalSnippetsView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/settings",
+    component: ProfileView,
     meta: { requiresAuth: true },
   },
 ];
