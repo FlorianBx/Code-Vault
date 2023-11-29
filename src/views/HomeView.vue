@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
-import CardSnippet from "../components/CardSnippet.vue";
-import SearchBar from "../components/SearchBar.vue";
-import LayoutSlot from "../components/LayoutSlot.vue";
-import useFilter from "../composables/useFilter";
 import { useGetSnippets } from "../composables/useGetSnippets.ts";
+import useFilter from "../composables/useFilter";
+import SearchBar from "../components/SearchBar.vue";
+import CardSnippet from "../components/CardSnippet.vue";
 import LoadingCircle from "../components/LoadingCircle.vue";
 
 const { snippets, fetchSnippets, isLoading, error } = useGetSnippets();
@@ -18,28 +17,28 @@ onMounted(async () => {
 <template>
   <div v-show="error" class="text-red-300">{{ error }}</div>
   <div class="w-full justify-center">
-    <LayoutSlot>
-      <div class="flex justify-center w-full pb-6">
-        <SearchBar />
+    <SearchBar />
+    <Teleport to="#modal-and-loader">
+      <div v-show="isLoading" class="flex justify-center w-full blur-none">
+        <LoadingCircle />
       </div>
-      <Teleport to="#modal-and-loader">
-        <div v-show="isLoading" class="flex justify-center w-full">
-          <LoadingCircle />
-        </div>
-      </Teleport>
-      <section
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-8"
-      >
-        <div v-for="snippet in filteredSnippets" :key="snippet.id">
+    </Teleport>
+
+    <section class="space-y-8 px-2 divide-y divide-btn/25">
+      <div v-for="snippet in filteredSnippets" :key="snippet.id" class="w-full">
+        <div>
           <CardSnippet
             :id="snippet.id"
-            :code="snippet.code"
             :title="snippet.title"
             :description="snippet.description"
+            :code="snippet.code"
             :tags="snippet.tags"
+            :language="snippet.language.toLocaleLowerCase()"
+            :created-at="snippet.createdAt"
+            :updated-at="snippet.updatedAt"
           />
         </div>
-      </section>
-    </LayoutSlot>
+      </div>
+    </section>
   </div>
 </template>
