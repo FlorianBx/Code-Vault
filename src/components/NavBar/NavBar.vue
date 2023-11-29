@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, computed } from "vue";
 import { useAuthStore } from "../../store/authStore.ts";
-import LargeNavBar from "./LargeNavBar.vue";
+// import LargeNavBar from "./LargeNavBar.vue";
 import MobileNavBar from "./MobileNavBar.vue";
 import BottomNavBar from "./BottomNavBar.vue";
 
@@ -10,6 +10,8 @@ const authStore = useAuthStore();
 const menuItems = reactive([
   { name: "Home", link: "/" },
   { name: "Sign In", link: "/login" },
+  { name: "Create", link: "/create-snippet" },
+  { name: "Logout", link: "/" },
 ]);
 
 const filteredMenuItems = computed(() => {
@@ -23,7 +25,9 @@ const filteredMenuItems = computed(() => {
 </script>
 
 <template>
-  <LargeNavBar :menu-items="filteredMenuItems" />
-  <MobileNavBar :menu-items="filteredMenuItems" />
-  <BottomNavBar :menu-items="filteredMenuItems" />
+  <div class="pt-14">
+    <!-- <LargeNavBar :menu-items="filteredMenuItems" /> -->
+    <MobileNavBar :menu-items="filteredMenuItems" />
+    <BottomNavBar :menu-items="filteredMenuItems" />
+  </div>
 </template>

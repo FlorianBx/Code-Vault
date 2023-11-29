@@ -8,7 +8,7 @@
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "test": "vitest run --environment jsdom --root src/",
-    "test:coverage": "vitest run --coverage",
+    "test:coverage": "vitest --coverage",
     "test:coverage++": "vitest --environment jsdom --root src/ --coverage --coverage.lines=80",
     "test:ui": "vitest --environment jsdom --root src/ --coverage.enabled=true --ui",
     "prepare": "husky install",

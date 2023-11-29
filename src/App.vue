@@ -2,15 +2,13 @@
 import NavBar from "./components/NavBar/NavBar.vue";
 import LayoutGlobalSlot from "./Layouts/LayoutGlobalSlot.vue";
 import FooterComponent from "./components/FooterComponent.vue";
-import SideBar from "./components/SideBar.vue";
+import SideBar from "./components/NavBar/SideBar.vue";
 </script>
 
 <template>
   <LayoutGlobalSlot>
     <template #header>
-      <div class="pt-14">
-        <NavBar />
-      </div>
+      <NavBar />
     </template>
     <template #aside>
       <SideBar />
