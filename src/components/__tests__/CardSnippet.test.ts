@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import CardSnippet from "../CardSnippet.vue";
-import { createRouter, createMemoryHistory } from "vue-router";
+// import { createRouter, createMemoryHistory } from "vue-router";
 
 vi.mock("prismjs", () => {
   return {
