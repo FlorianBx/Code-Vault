@@ -13,7 +13,7 @@ interface EmailAndPasswordUser {
   password: string;
 }
 
-export function useRegister() {
+export const useRegister = () => {
   const authStore = useAuthStore();
   const error = ref<string | null>(null);
 
@@ -28,8 +28,7 @@ export function useRegister() {
       );
       error.value = null;
 
-      const idToken = await userCredential.user.getIdToken();
-      authStore.login(idToken); // ou une autre action appropriée pour un nouvel utilisateur
+      authStore.login(); // ou une autre action appropriée pour un nouvel utilisateur
       return userCredential;
     } catch (err: unknown) {
       error.value =
@@ -45,8 +44,7 @@ export function useRegister() {
       const userCredential = await signInWithPopup(auth, provider);
       error.value = null;
 
-      const idToken = await userCredential.user.getIdToken();
-      authStore.login(idToken);
+      authStore.login();
       return userCredential;
     } catch (err: unknown) {
       error.value =
@@ -60,4 +58,4 @@ export function useRegister() {
     loginWithGitHub,
     registerWithEmailAndPassword,
   };
-}
+};
