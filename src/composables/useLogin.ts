@@ -13,15 +13,13 @@ interface EmailAndPasswordUser {
   password: string;
 }
 
-export function useLogin() {
+export const useLogin = () => {
   const authStore = useAuthStore();
   const error = ref<string | null>(null);
 
   const loginWithEmailAndPassword = async (
     user: EmailAndPasswordUser,
   ): Promise<UserCredential | null> => {
-    console.log("user : ", user);
-
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -29,14 +27,11 @@ export function useLogin() {
         user.password,
       );
       error.value = null;
-
-      const idToken = await userCredential.user.getIdToken();
-      authStore.login(idToken);
+      authStore.login();
       return userCredential;
     } catch (err: unknown) {
       error.value =
         err instanceof Error ? err.message : "Oops ! something went wrong";
-      console.warn("err : ", err);
       return null;
     }
   };
@@ -47,8 +42,7 @@ export function useLogin() {
       const userCredential = await signInWithPopup(auth, provider);
       error.value = null;
 
-      const idToken = await userCredential.user.getIdToken();
-      authStore.login(idToken);
+      authStore.login();
       return userCredential;
     } catch (err: unknown) {
       error.value =
@@ -57,22 +51,9 @@ export function useLogin() {
     }
   };
 
-  const logout = async (): Promise<void> => {
-    try {
-      await auth.signOut();
-      authStore.logout();
-      error.value = null;
-    } catch (err: unknown) {
-      error.value =
-        err instanceof Error ? err.message : "Oops ! something went wrong";
-      console.warn("err : ", err);
-    }
-  };
-
   return {
     error,
     loginWithEmailAndPassword,
     loginWithGitHub,
-    logout,
   };
-}
+};
