@@ -21,6 +21,10 @@ defineProps({
     type: String,
     default: "",
   },
+  preview: {
+    type: Boolean,
+    default: false,
+  },
 });
 const showPreview = ref(false);
 const emit = defineEmits(["update:modelValue"]);
@@ -52,22 +56,24 @@ watch(showPreview, async () => {
       >{{ label }}</label
     >
     <div class="relative mt-2">
-      <button
-        v-if="!showPreview"
-        type="button"
-        class="absolute right-6 top-1 p-4 z-40 text-emerald-300"
-        @click="handlePreview"
-      >
-        <EyeIcon />
-      </button>
-      <button
-        v-if="showPreview"
-        type="button"
-        class="absolute right-6 top-1 p-4 z-40 text-red-300"
-        @click="handlePreview"
-      >
-        <EyeIconClosed />
-      </button>
+      <div v-if="preview">
+        <button
+          v-if="!showPreview"
+          type="button"
+          class="absolute right-6 top-1 p-4 z-40 text-emerald-300"
+          @click="handlePreview"
+        >
+          <EyeIcon />
+        </button>
+        <button
+          v-if="showPreview"
+          type="button"
+          class="absolute right-6 top-1 p-4 z-40 text-red-300"
+          @click="handlePreview"
+        >
+          <EyeIconClosed />
+        </button>
+      </div>
       <textarea
         v-show="!showPreview"
         :id="label.toLocaleLowerCase()"

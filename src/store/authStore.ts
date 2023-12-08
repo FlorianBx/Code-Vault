@@ -10,21 +10,21 @@ export const useAuthStore = defineStore("auth", {
   actions: {
     async initializeAuth() {
       if (auth.currentUser) {
-        await this.updateLoginState();
+        await this.login();
       }
     },
 
     listenToAuthChanges() {
       onAuthStateChanged(auth, async (user) => {
         if (user) {
-          await this.updateLoginState();
+          await this.login();
         } else {
           this.logout();
         }
       });
     },
 
-    async updateLoginState() {
+    async login() {
       try {
         const idToken = await auth.currentUser?.getIdToken();
         if (idToken) {
