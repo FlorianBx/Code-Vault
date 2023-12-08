@@ -34,7 +34,6 @@ Here’s how you can jump in:
 
 ## Best Practices
 
-- Keep your code well-commented.
 - Add tests for new features.
 - Update the documentation if you're adding or changing features.
 - Small, focused pull requests are easier to review and merge.
