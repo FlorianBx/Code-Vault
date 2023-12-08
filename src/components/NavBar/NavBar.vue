@@ -31,8 +31,8 @@ const filteredMenuItems = computed(() => {
     <div class="relative">
       <button
         v-if="authStore.isLoggedIn"
-        @click="logout"
         class="absolute top-4 right-20 z-50 bg-vue hover:bg-teal-400 text-white font-bold py-2 px-4 rounded-full"
+        @click="logout"
       >
         logout
       </button>
