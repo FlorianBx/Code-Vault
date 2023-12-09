@@ -5,9 +5,11 @@ import useFilter from "../composables/useFilter";
 import SearchBar from "../components/SearchBar.vue";
 import CardSnippet from "../components/CardSnippet.vue";
 import LoadingCircle from "../components/LoadingCircle.vue";
+import { auth } from "../services/firebase/firebase.config";
 
 const { snippets, fetchSnippets, isLoading, error } = useGetSnippets();
 const { filteredSnippets } = useFilter(snippets);
+console.log(auth.currentUser);
 
 onMounted(async () => {
   await fetchSnippets();
