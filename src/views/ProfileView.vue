@@ -2,6 +2,7 @@
 import { UserCircleIcon } from "@heroicons/vue/24/solid";
 import InputForText from "../components/InputForText.vue";
 import InputForRichText from "../components/InputForRichText.vue";
+import ButtonCustom from "../components/ButtonCustom.vue";
 </script>
 
 <template>
@@ -83,7 +84,7 @@ import InputForRichText from "../components/InputForRichText.vue";
           <div class="sm:col-span-3">
             <label
               for="country"
-              class="block text-sm font-medium leading-6 text-gray-900"
+              class="block text-sm font-medium leading-6 text-primary"
               >Country</label
             >
             <div class="mt-2">
@@ -129,18 +130,8 @@ import InputForRichText from "../components/InputForRichText.vue";
     </div>
 
     <div class="mt-6 flex items-center justify-end gap-x-6">
-      <button
-        type="button"
-        class="text-sm font-semibold leading-6 text-gray-900"
-      >
-        Cancel
-      </button>
-      <button
-        type="submit"
-        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-      >
-        Save
-      </button>
+      <ButtonCustom type="button" btn-style="secondary">Cancel</ButtonCustom>
+      <ButtonCustom type="submit">Save</ButtonCustom>
     </div>
   </form>
 </template>
