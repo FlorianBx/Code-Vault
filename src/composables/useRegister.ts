@@ -6,10 +6,12 @@ import {
   createUserWithEmailAndPassword,
   GithubAuthProvider,
   signInWithPopup,
+  updateProfile,
 } from "firebase/auth";
 
-interface EmailAndPasswordUser {
+interface EmailUsernameAndPasswordUser {
   email: string;
+  username: string;
   password: string;
 }
 
@@ -18,17 +20,21 @@ export const useRegister = () => {
   const error = ref<string | null>(null);
 
   const registerWithEmailAndPassword = async (
-    user: EmailAndPasswordUser,
+    user: EmailUsernameAndPasswordUser,
   ): Promise<UserCredential | null> => {
     try {
+      console.log("username : ", user.username);
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         user.email,
         user.password,
       );
       error.value = null;
-
+      await updateProfile(userCredential.user, {
+        displayName: user.username,
+      });
       authStore.login(); // ou une autre action appropriée pour un nouvel utilisateur
+
       return userCredential;
     } catch (err: unknown) {
       error.value =
