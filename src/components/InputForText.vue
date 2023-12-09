@@ -28,7 +28,7 @@ function handleInput(event: Event): void {
 </script>
 
 <template>
-  <div>
+  <div class="w-full">
     <label
       :for="label.toLocaleLowerCase()"
       class="block text-sm font-medium leading-6 text-primary"

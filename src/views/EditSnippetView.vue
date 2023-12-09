@@ -103,6 +103,7 @@ onMounted(async () => {
             <InputForRichText
               v-model="snippetData.code"
               label="Code"
+              :preview="true"
               required
             />
           </div>

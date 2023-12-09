@@ -18,10 +18,13 @@
   "dependencies": {
     "@firebase/app": "^0.9.23",
     "@firebase/auth": "^1.4.0",
+    "@formkit/auto-animate": "^0.8.1",
     "@headlessui/vue": "^1.7.16",
     "@heroicons/vue": "^2.0.18",
     "@vueuse/core": "^10.6.1",
     "firebase": "^10.6.0",
+    "firebase-admin": "^11.11.1",
+    "firebase-functions": "^4.5.0",
     "pinia": "^2.1.7",
     "prismjs": "^1.29.0",
     "uuid": "^9.0.1",

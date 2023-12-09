@@ -95,7 +95,11 @@ watch(readMore, async (newValue) => {
           {{ tag }}
         </p>
       </div>
-      <div v-show="!readMore" class="flex justify-between gap-3 items-end pt-4">
+      <div
+        v-show="!readMore"
+        ref="dropdown"
+        class="flex justify-between gap-3 items-end pt-4"
+      >
         <div class="flex gap-4">
           <p class="flex gap-2 items-center text-sm">
             <span
@@ -123,51 +127,41 @@ watch(readMore, async (newValue) => {
         </button>
       </div>
     </section>
-    <section
-      v-if="readMore"
-      class="flex flex-col gap-2 transition duration-500 ease-in-out transform translate-y-0"
-      :class="{ '-translate-y-10 opacity-0': !readMore }"
+    <Transition
+      enter-active-class="transform transition duration-900 ease-in-out"
+      enter-class="-translate-y-1/2 scale-y-0 opacity-0"
+      enter-to-class="translate-y-0 scale-y-100 opacity-100"
+      leave-active-class="transform transition duration-600 ease-custom"
+      leave-class="translate-y-0 scale-y-100 opacity-100"
+      leave-to-class="-translate-y-1/2 scale-y-0 opacity-0"
     >
-      <div>
-        <h4 class="text-sm pt-2 font-semibold text-primary/70">
-          {{ description }}
-        </h4>
-      </div>
-      <div class="flex flex-wrap gap-1">
-        <p
-          v-for="(tag, index) in splitTags(tags)"
-          :key="index"
-          class="bg-vue py-0 px-1.5 rounded text-sm"
+      <section
+        v-if="readMore"
+        class="flex flex-col gap-2 translate-y-0"
+        :class="{ '-translate-y-10 opacity-0': !readMore }"
+      >
+        <div
+          v-show="!readMore"
+          class="flex justify-between gap-3 items-end pt-4"
         >
-          {{ tag }}
-        </p>
-      </div>
-      <div class="flex justify-between gap-3 items-end pt-4">
-        <div class="flex gap-4">
-          <p class="flex gap-2 items-center text-sm">
-            <span
-              v-if="language === 'vue'"
-              class="bg-vue w-4 h-2 rounded-full"
-            ></span>
-            <span
-              v-if="language === 'react'"
-              class="bg-react w-4 h-2 rounded-full"
-            ></span>
-            <span
-              v-if="language === 'angular'"
-              class="bg-angular w-4 h-2 rounded-full"
-            ></span>
-            {{ language }}
-          </p>
-          <p class="text-sm">Updated {{ elapsedTime }}</p>
-        </div>
-        <div class="flex items-center gap-4">
-          <button class="text-danger opacity-100" @click="deleteSnippet(id)">
-            <TrashIcon />
-          </button>
-          <button class="text-secondary opacity-60" @click="handleEdit(id)">
-            <PencilIcon />
-          </button>
+          <div class="flex gap-4">
+            <p class="flex gap-2 items-center text-sm">
+              <span
+                v-if="language === 'vue'"
+                class="bg-vue w-4 h-2 rounded-full"
+              ></span>
+              <span
+                v-if="language === 'react'"
+                class="bg-react w-4 h-2 rounded-full"
+              ></span>
+              <span
+                v-if="language === 'angular'"
+                class="bg-angular w-4 h-2 rounded-full"
+              ></span>
+              {{ language }}
+            </p>
+            <p class="text-sm">Updated {{ elapsedTime }}</p>
+          </div>
           <button
             class="text-center font-semibold text-sm transition-color duration-300 bg-btn hover:bg-secondary hover:text-darktext rounded py-0.5 px-4 text-primary"
             @click="readMore = !readMore"
@@ -176,26 +170,81 @@ watch(readMore, async (newValue) => {
             <span class="sr-only">, {{ title }}</span>
           </button>
         </div>
-      </div>
-      <div class="relative">
-        <button
-          type="button"
-          class="absolute top-6 right-8 text-white opacity-60"
-          @click="copy(code)"
-        >
-          <CopyIcon />
-        </button>
-        <div
-          v-show="copied"
-          class="absolute top-16 right-6 bg-vue px-4 py-1 rounded text-sm"
-        >
-          Copied
+        <div>
+          <h4 class="text-sm pt-2 font-semibold text-primary/70">
+            {{ description }}
+          </h4>
         </div>
-        <pre
-          class="p-4 text-sm block w-full bg-transparent focus:shadow-inner-neumorphic shadow-light-inner-neumorphic rounded-md border-0 py-3 text-primary ring-0 focus:ring-0 focus:ring-inset focus:ring-ring sm:text-sm sm:leading-6"
-        ><code class="language-javascript ">{{ code }}</code>
+        <div class="flex flex-wrap gap-1">
+          <p
+            v-for="(tag, index) in splitTags(tags)"
+            :key="index"
+            class="bg-vue py-0 px-1.5 rounded text-sm"
+          >
+            {{ tag }}
+          </p>
+        </div>
+        <div class="flex justify-between gap-3 items-end pt-4">
+          <div class="flex gap-4">
+            <p class="flex gap-2 items-center text-sm">
+              <span
+                v-if="language === 'vue'"
+                class="bg-vue w-4 h-2 rounded-full"
+              ></span>
+              <span
+                v-if="language === 'react'"
+                class="bg-react w-4 h-2 rounded-full"
+              ></span>
+              <span
+                v-if="language === 'angular'"
+                class="bg-angular w-4 h-2 rounded-full"
+              ></span>
+              {{ language }}
+            </p>
+            <p class="text-sm">Updated {{ elapsedTime }}</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <button class="text-danger opacity-100" @click="deleteSnippet(id)">
+              <TrashIcon />
+            </button>
+            <button class="text-secondary opacity-60" @click="handleEdit(id)">
+              <PencilIcon />
+            </button>
+            <button
+              class="text-center font-semibold text-sm transition-color duration-300 bg-btn hover:bg-secondary hover:text-darktext rounded py-0.5 px-4 text-primary"
+              @click="readMore = !readMore"
+            >
+              Read less...
+              <span class="sr-only">, {{ title }}</span>
+            </button>
+          </div>
+        </div>
+        <div class="relative">
+          <button
+            type="button"
+            class="absolute top-6 right-8 text-white opacity-60"
+            @click="copy(code)"
+          >
+            <CopyIcon />
+          </button>
+          <div
+            v-show="copied"
+            class="absolute top-16 right-6 bg-vue px-4 py-1 rounded text-sm"
+          >
+            Copied
+          </div>
+          <pre
+            class="p-4 text-sm block w-full bg-transparent focus:shadow-inner-neumorphic shadow-light-inner-neumorphic rounded-md border-0 py-3 text-primary ring-0 focus:ring-0 focus:ring-inset focus:ring-ring sm:text-sm sm:leading-6"
+          ><code class="language-javascript ">{{ code }}</code>
             </pre>
-      </div>
-    </section>
+        </div>
+      </section>
+    </Transition>
   </div>
 </template>
+
+<style scoped>
+.ease-custom {
+  transition-timing-function: cubic-bezier(0.61, -0.53, 0.43, 1.43);
+}
+</style>
