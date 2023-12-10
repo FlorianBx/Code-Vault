@@ -8,7 +8,7 @@ export const createProfile = functions.auth.user().onCreate((user) => {
   return admin.firestore().collection("profiles").doc(user.uid).set({
     avatar: "",
     email: user.email,
-    username: "",
+    username: user.displayName,
     isSubscribed: false,
     createdAt: admin.firestore.FieldValue.serverTimestamp(),
   });
