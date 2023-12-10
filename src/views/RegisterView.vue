@@ -9,6 +9,7 @@ import { useAuthStore } from "../store/authStore";
 
 const registerDatas = reactive({
   email: "",
+  userName: "",
   password: "",
   confirmPassword: "",
 });
@@ -21,6 +22,7 @@ const handleRegister = async (event: Event) => {
   event.preventDefault();
   await registerWithEmailAndPassword({
     email: formData.email,
+    username: formData.userName,
     password: formData.password,
   });
   if (authStore.isLoggedIn) {
@@ -60,18 +62,25 @@ const handleGitHubLogin = async () => {
               @update:data="(value: string) => handleUpdateData(value, 'email')"
             />
           </div>
-
           <div>
             <InputForText
-              v-model="formData.password"
-              label="Password"
-              type="password"
+              v-model="formData.userName"
+              label="Username"
               required
               @update:data="
-                (value: string) => handleUpdateData(value, 'password')
+                (value: string) => handleUpdateData(value, 'userName')
               "
             />
           </div>
+          <InputForText
+            v-model="formData.password"
+            label="Password"
+            type="password"
+            required
+            @update:data="
+              (value: string) => handleUpdateData(value, 'password')
+            "
+          />
           <div>
             <InputForText
               v-model="formData.confirmPassword"
