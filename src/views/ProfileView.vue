@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { UserCircleIcon } from "@heroicons/vue/24/solid";
 import InputForText from "../components/InputForText.vue";
 import InputForRichText from "../components/InputForRichText.vue";

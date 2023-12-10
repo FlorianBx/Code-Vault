@@ -69,6 +69,7 @@ const handleSubmit = (event: Event) => {
             <InputForRichText
               v-model="snippetData.code"
               label="Code"
+              :preview="true"
               required
             />
           </div>
