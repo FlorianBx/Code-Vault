@@ -1,6 +1,10 @@
 import { describe, it, expect, vi, beforeAll } from "vitest";
 import { useRegister } from "../useRegister";
-import { UserCredential, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  UserCredential,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { createPinia } from "pinia";
 import { setActivePinia } from "pinia";
 
@@ -24,12 +28,12 @@ vi.mock("../store/authStore", () => ({
 }));
 
 describe("useRegister", () => {
-  it("registers a user with email and password successfully", async () => {
+  it("registers a user with email and password successfully and update the username", async () => {
     // Configurer le mock pour simuler une réponse réussie
     const mockUserCredential = {
       user: {
-        email: "test@example.com",
-        displayName: "testuser",
+        email: "test2@example.com",
+        displayName: "testuser2",
         password: "password",
       },
     }; // Adaptez ceci selon vos besoins
@@ -39,13 +43,17 @@ describe("useRegister", () => {
 
     const { registerWithEmailAndPassword } = useRegister();
     const result = await registerWithEmailAndPassword({
-      email: "test@example.com",
-      username: "testuser",
+      email: "test2@example.com",
+      username: "testuser2",
       password: "password",
     });
-    console.log("the result " + result?.user?.displayName);
-    expect(result).toEqual(mockUserCredential);
+    expect(vi.mocked(updateProfile)).toHaveBeenCalledWith(
+      mockUserCredential.user,
+      { displayName: "testuser2" },
+    );
     expect(createUserWithEmailAndPassword).toHaveBeenCalled();
+    expect(updateProfile).toHaveBeenCalled();
+    expect(result?.user?.displayName).toBe("testuser2");
   });
 
   it("handles errors when registering a user with email and password", async () => {

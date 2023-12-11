@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import { auth } from "../services/firebase/firebase.config";
 import { useAuthStore } from "../store/authStore";
-
+import { updateProfile } from "firebase/auth";
 import {
   UserCredential,
   createUserWithEmailAndPassword,
@@ -28,9 +28,13 @@ export const useRegister = () => {
         user.email,
         user.password,
       );
+
       error.value = null;
 
       authStore.login(); // ou une autre action appropriée pour un nouvel utilisateur
+      await updateProfile(userCredential.user, {
+        displayName: user.username,
+      });
       return userCredential;
     } catch (err: unknown) {
       error.value =
