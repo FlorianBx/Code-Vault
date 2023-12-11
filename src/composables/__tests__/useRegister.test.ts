@@ -36,7 +36,7 @@ describe("useRegister", () => {
         displayName: "testuser2",
         password: "password",
       },
-    }; // Adaptez ceci selon vos besoins
+    };
     vi.mocked(createUserWithEmailAndPassword).mockResolvedValue(
       mockUserCredential as unknown as UserCredential,
     );
