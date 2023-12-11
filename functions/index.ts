@@ -13,3 +13,25 @@ export const createProfile = functions.auth.user().onCreate((user) => {
     createdAt: admin.firestore.FieldValue.serverTimestamp(),
   });
 });
+
+export const updateProfile = functions.https.onCall(async (data, context) => {
+  // Mettre à jour le profil utilisateur dans Firestore
+  if (!context.auth) {
+    throw new functions.https.HttpsError(
+      "failed-precondition",
+      "The function must be called while authenticated.",
+    );
+  }
+  const uid = context.auth.uid;
+  return admin
+    .firestore()
+    .collection("profiles")
+    .doc(uid)
+    .update(data)
+    .then(() => {
+      return { message: "Profile updated successfully" };
+    })
+    .catch((error) => {
+      throw new functions.https.HttpsError("internal", error);
+    });
+});

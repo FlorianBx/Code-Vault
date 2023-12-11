@@ -1,12 +1,12 @@
 import { ref } from "vue";
 import { auth } from "../services/firebase/firebase.config";
 import { useAuthStore } from "../store/authStore";
+
 import {
   UserCredential,
   createUserWithEmailAndPassword,
   GithubAuthProvider,
   signInWithPopup,
-  updateProfile,
 } from "firebase/auth";
 
 interface EmailUsernameAndPasswordUser {
@@ -23,18 +23,14 @@ export const useRegister = () => {
     user: EmailUsernameAndPasswordUser,
   ): Promise<UserCredential | null> => {
     try {
-      console.log("username : ", user.username);
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         user.email,
         user.password,
       );
       error.value = null;
-      await updateProfile(userCredential.user, {
-        displayName: user.username,
-      });
-      authStore.login(); // ou une autre action appropriée pour un nouvel utilisateur
 
+      authStore.login(); // ou une autre action appropriée pour un nouvel utilisateur
       return userCredential;
     } catch (err: unknown) {
       error.value =

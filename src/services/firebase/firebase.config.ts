@@ -1,8 +1,8 @@
 // Import the functions you need from the SDKs you need
-import { getAuth } from "firebase/auth";
-import { initializeApp } from "firebase/app";
+import { Auth, getAuth } from "firebase/auth";
+import { FirebaseApp, initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore";
+import { Firestore, getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,10 +18,23 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-getAnalytics(app);
+let app: FirebaseApp;
+let db: Firestore;
+let auth: Auth;
 
-export const db = getFirestore(app);
-export const auth = getAuth(app);
-export default app;
+if (process.env.NODE_ENV === "test") {
+  // Création de mocks pour les tests
+  // Notez que ces initialisations sont des exemples; vous devrez les adapter en fonction de vos besoins de test.
+  app = {} as FirebaseApp; // Mock de l'app Firebase, cast en tant que FirebaseApp
+  db = {} as Firestore; // Mock de Firestore, cast en tant que Firestore
+  auth = {} as Auth; // Mock de Auth, cast en tant que Auth
+} else {
+  // Initialisation normale
+  app = initializeApp(firebaseConfig);
+  getAnalytics(app);
+
+  db = getFirestore(app);
+  auth = getAuth(app);
+}
+
+export { app, db, auth };
