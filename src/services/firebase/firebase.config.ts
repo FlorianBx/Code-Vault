@@ -3,6 +3,12 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 import { getAuth, connectAuthEmulator } from "firebase/auth";
+import admin from "firebase-admin";
+import serviceAccount from "../../../serviceAccountKey.ts";
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
+});
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
