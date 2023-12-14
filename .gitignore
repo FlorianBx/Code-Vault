@@ -24,4 +24,5 @@ coverage
 *.njsproj
 *.sln
 *.sw?
-serviceAccountKey.ts
+serviceAccountKey.json
+.env
