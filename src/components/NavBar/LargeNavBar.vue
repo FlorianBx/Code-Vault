@@ -6,15 +6,15 @@ import { useLogin } from "../../composables/useLogin";
 // import TriangleDownIcon from "../../assets/icons/TriangleDownIcon.vue";
 
 interface MenuItem {
-  name: string;
-  link: string;
+	name: string;
+	link: string;
 }
 
 defineProps({
-  menuItems: {
-    type: Array as () => MenuItem[],
-    required: true,
-  },
+	menuItems: {
+		type: Array as () => MenuItem[],
+		required: true,
+	},
 });
 // const dropdownVisible = ref(false);
 
@@ -26,31 +26,32 @@ const authStore = useAuthStore();
 </script>
 
 <template>
-  <nav class="hidden md:block w-full fixed top-4 left-60 z-0">
-    <div class="flex">
-      <div
-        class="fixed top-0 right-0 left-0 h-20 w-full bg-background opacity-80 backdrop-blur-sm"
-      ></div>
+	<nav class="hidden md:block w-full fixed top-4 left-60 z-0">
+		<div class="flex">
+			<div
+				class="fixed top-0 right-0 left-0 h-20 w-full bg-background opacity-80 backdrop-blur-sm"
+			></div>
 
-      <ul class="flex w-full gap-4 font-bold text-lg">
-        <li
-          v-for="item in menuItems"
-          :key="item.name"
-          class="cursor-pointer hover:text-hover z-40"
-        >
-          <router-link :to="item.link" active-class="text-secondary">
-            <span
-              v-if="item.name === 'Logout'"
-              class="text-primary hover:text-hover cursor-pointer"
-              @click="logout"
-              >{{ item.name }}</span
-            >
-            <span v-else-if="item.name === 'Create' && authStore.isLoggedIn">{{
-              item.name
-            }}</span>
-          </router-link>
-        </li>
-        <!-- <div class="relative w-full" @click="toggleDropdown">
+			<ul class="flex w-full gap-4 font-bold text-lg">
+				<li
+					v-for="item in menuItems"
+					:key="item.name"
+					class="cursor-pointer hover:text-hover z-40"
+				>
+					<router-link :to="item.link" active-class="text-secondary">
+						<span
+							v-if="item.name === 'Logout'"
+							class="text-primary hover:text-hover cursor-pointer"
+							@click="logout"
+						>
+							{{ item.name }}
+						</span>
+						<span v-else-if="item.name === 'Create' && authStore.isLoggedIn">
+							{{ item.name }}
+						</span>
+					</router-link>
+				</li>
+				<!-- <div class="relative w-full" @click="toggleDropdown">
           <div class="flex items-center gap-24">
             <div class="flex gap-2">
               <TriangleDownIcon class="-ml-1" />
@@ -91,7 +92,7 @@ const authStore = useAuthStore();
             </ul>
           </div>
         </div> -->
-      </ul>
-    </div>
-  </nav>
+			</ul>
+		</div>
+	</nav>
 </template>

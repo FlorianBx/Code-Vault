@@ -12,55 +12,55 @@ import PersonnalSnippetsView from "../views/PersonalSnippetsView.vue";
 // import TestLayout from "../views/TestLayout.vue";
 
 const routes = [
-  { path: "/", component: HomeView },
-  { path: "/login", component: LoginView, meta: { requiresAuth: false } },
-  { path: "/register", component: RegisterView, meta: { requiresAuth: false } },
-  {
-    path: "/snippet/:id",
-    component: ShowSnippetView,
-    meta: { requiresAuth: false },
-  },
-  {
-    path: "/edit/:id",
-    component: EditSnippetView,
-    meta: { requiresAuth: true },
-  },
-  {
-    path: "/create-snippet",
-    component: CreateSnippetView,
-    meta: { requiresAuth: true },
-  },
-  {
-    path: "/profile",
-    component: ProfileView,
-    meta: { requiresAuth: true },
-  },
-  {
-    path: "/personal-snippets",
-    component: PersonnalSnippetsView,
-    meta: { requiresAuth: true },
-  },
-  {
-    path: "/settings",
-    component: ProfileView,
-    meta: { requiresAuth: true },
-  },
+	{ path: "/", component: HomeView },
+	{ path: "/login", component: LoginView, meta: { requiresAuth: false } },
+	{ path: "/register", component: RegisterView, meta: { requiresAuth: false } },
+	{
+		path: "/snippet/:id",
+		component: ShowSnippetView,
+		meta: { requiresAuth: false },
+	},
+	{
+		path: "/edit/:id",
+		component: EditSnippetView,
+		meta: { requiresAuth: true },
+	},
+	{
+		path: "/create-snippet",
+		component: CreateSnippetView,
+		meta: { requiresAuth: true },
+	},
+	{
+		path: "/profile",
+		component: ProfileView,
+		meta: { requiresAuth: true },
+	},
+	{
+		path: "/personal-snippets",
+		component: PersonnalSnippetsView,
+		meta: { requiresAuth: true },
+	},
+	{
+		path: "/settings",
+		component: ProfileView,
+		meta: { requiresAuth: true },
+	},
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
+	history: createWebHistory(),
+	routes,
 });
 
 router.beforeEach((to, _, next) => {
-  const authStore = useAuthStore();
-  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+	const authStore = useAuthStore();
+	const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
 
-  if (requiresAuth && !authStore.isLoggedIn) {
-    next({ path: "/login" });
-  } else {
-    next();
-  }
+	if (requiresAuth && !authStore.isLoggedIn) {
+		next({ path: "/login" });
+	} else {
+		next();
+	}
 });
 
 export default router;

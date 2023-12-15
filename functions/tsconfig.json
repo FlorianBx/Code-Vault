@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "moduleResolution": "node",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "outDir": "lib",
@@ -11,7 +10,6 @@
   },
   "compileOnSave": true,
   "include": [
-    "index.ts",
-    "src/**/*.ts"
+    "src"
   ]
 }

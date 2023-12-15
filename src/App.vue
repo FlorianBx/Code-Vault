@@ -6,18 +6,18 @@ import SideBar from "./components/NavBar/SideBar.vue";
 </script>
 
 <template>
-  <LayoutGlobalSlot>
-    <template #header>
-      <NavBar />
-    </template>
-    <template #aside>
-      <SideBar />
-    </template>
-    <router-view></router-view>
-    <template #footer>
-      <div class="flex items-end h-96">
-        <FooterComponent />
-      </div>
-    </template>
-  </LayoutGlobalSlot>
+	<LayoutGlobalSlot>
+		<template #header>
+			<NavBar />
+		</template>
+		<template #aside>
+			<SideBar />
+		</template>
+		<router-view></router-view>
+		<template #footer>
+			<div class="flex items-end h-96">
+				<FooterComponent />
+			</div>
+		</template>
+	</LayoutGlobalSlot>
 </template>

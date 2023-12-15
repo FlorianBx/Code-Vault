@@ -12,35 +12,35 @@ const { filteredSnippets } = useFilter(snippets);
 console.log(auth.currentUser);
 
 onMounted(async () => {
-  await fetchSnippets();
+	await fetchSnippets();
 });
 </script>
 
 <template>
-  <div v-show="error" class="text-red-300">{{ error }}</div>
-  <div class="w-full justify-center">
-    <SearchBar />
-    <Teleport to="#modal-and-loader">
-      <div v-show="isLoading" class="flex justify-center w-full blur-none">
-        <LoadingCircle />
-      </div>
-    </Teleport>
+	<div v-show="error" class="text-red-300">{{ error }}</div>
+	<div class="w-full justify-center">
+		<SearchBar />
+		<Teleport to="#modal-and-loader">
+			<div v-show="isLoading" class="flex justify-center w-full blur-none">
+				<LoadingCircle />
+			</div>
+		</Teleport>
 
-    <section class="space-y-8 px-2 divide-y divide-btn/25">
-      <div v-for="snippet in filteredSnippets" :key="snippet.id" class="w-full">
-        <div>
-          <CardSnippet
-            :id="snippet.id"
-            :title="snippet.title"
-            :description="snippet.description"
-            :code="snippet.code"
-            :tags="snippet.tags"
-            :language="snippet.language.toLocaleLowerCase()"
-            :created-at="snippet.createdAt"
-            :updated-at="snippet.updatedAt"
-          />
-        </div>
-      </div>
-    </section>
-  </div>
+		<section class="space-y-8 px-2 divide-y divide-btn/25">
+			<div v-for="snippet in filteredSnippets" :key="snippet.id" class="w-full">
+				<div>
+					<CardSnippet
+						:id="snippet.id"
+						:title="snippet.title"
+						:description="snippet.description"
+						:code="snippet.code"
+						:tags="snippet.tags"
+						:language="snippet.language.toLocaleLowerCase()"
+						:created-at="snippet.createdAt"
+						:updated-at="snippet.updatedAt"
+					/>
+				</div>
+			</div>
+		</section>
+	</div>
 </template>
