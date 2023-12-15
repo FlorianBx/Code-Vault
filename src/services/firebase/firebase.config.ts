@@ -21,7 +21,7 @@ if (process.env.NODE_ENV !== "test") {
 
 export const db = getFirestore(app);
 export const auth = getAuth(app);
-if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
+if (process.env.NODE_ENV === "test") {
 	connectAuthEmulator(auth, "http://localhost:9099");
 }
 export default app;
