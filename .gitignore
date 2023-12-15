@@ -27,5 +27,4 @@ package-lock.json
 *.njsproj
 *.sln
 *.sw?
-serviceAccountKey.json
 .env
