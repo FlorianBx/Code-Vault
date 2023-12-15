@@ -13,6 +13,9 @@ dist-ssr
 *.local
 coverage
 !coverage/coverage-final.json
+firestore.rules
+pnpm-lock.yaml
+package-lock.json
 
 # Editor directories and files
 .vscode/*

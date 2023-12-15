@@ -28,4 +28,4 @@ jobs:
         run: firebase emulators:exec --project fb-visuals 'npm run test'
         env:
           GCloud_Project: fb-visuals
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          FIREBASE_KEYS: ${{ secrets.FIREBASE_KEYS }}
