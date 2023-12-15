@@ -25,7 +25,7 @@ jobs:
 
       - name: Run all the tests
         working-directory: src/
-        run: firebase emulators:exec --project fb-visuals 'npm run test'
+        run: firebase emulators:exec --project code-vault-dd8d8 'npm run test'
         env:
           GCloud_Project: fb-visuals
           FIREBASE_KEYS: ${{ secrets.FIREBASE_KEYS }}
