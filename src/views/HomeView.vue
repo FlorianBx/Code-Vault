@@ -44,7 +44,7 @@ onMounted(async () => {
 						:language="snippet.language.toLocaleLowerCase()"
 						:created-at="snippet.createdAt"
 						:updated-at="snippet.updatedAt"
-						:onDelete="handleSnippetDelete"
+						:on-delete="handleSnippetDelete"
 					/>
 				</div>
 			</div>
