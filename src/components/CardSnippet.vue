@@ -43,6 +43,10 @@ const props = defineProps({
 		type: String,
 		default: "",
 	},
+	onDelete: {
+		type: Function,
+		default: () => {},
+	},
 });
 
 const authorId = "Florian";
@@ -61,6 +65,11 @@ const handleEdit = (id: string) => {
 };
 
 const { elapsedTime } = useElapsedTime(props.updatedAt);
+
+const handleDelete = async () => {
+	await deleteSnippet(props.id);
+	props.onDelete(props.id);
+};
 
 onMounted(async () => {
 	await nextTick();
@@ -204,7 +213,7 @@ watch(readMore, async (newValue) => {
 						<p class="text-sm">Updated {{ elapsedTime }}</p>
 					</div>
 					<div class="flex items-center gap-4">
-						<button class="text-danger opacity-100" @click="deleteSnippet(id)">
+						<button class="text-danger opacity-100" @click="handleDelete">
 							<TrashIcon />
 						</button>
 						<button class="text-secondary opacity-60" @click="handleEdit(id)">

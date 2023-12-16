@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Prism from "prismjs";
 import { useRouter } from "vue-router";
-import { onMounted, reactive, nextTick, watch } from "vue";
+import { onMounted, reactive, nextTick, watch, computed } from "vue";
 import { useAuthStore } from "../store/authStore";
 import { useGetSnippets } from "../composables/useGetSnippets";
 import { useDeleteSnippet } from "../composables/useDeleteSnippet";
@@ -27,7 +27,7 @@ const snippetData = reactive({
 	tags: "",
 	createdAt: date.toISOString(),
 	updatedAt: date.toISOString(),
-	authorId: authStore.idToken,
+	authorId: computed(() => authStore.getUserId()),
 	visibility: true,
 });
 
@@ -61,8 +61,9 @@ onMounted(async () => {
 });
 
 watch(isDeleting, (value) => {
+	console.log(value);
 	if (value) {
-		router.push("/");
+		fetchSnippetById(id.toString());
 	}
 });
 </script>
