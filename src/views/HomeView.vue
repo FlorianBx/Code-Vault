@@ -11,6 +11,12 @@ const { snippets, fetchSnippets, isLoading, error } = useGetSnippets();
 const { filteredSnippets } = useFilter(snippets);
 console.log(auth.currentUser);
 
+const handleSnippetDelete = (deletedSnippetId: string) => {
+	snippets.value = snippets.value.filter(
+		(snippet) => snippet.id !== deletedSnippetId,
+	);
+};
+
 onMounted(async () => {
 	await fetchSnippets();
 });
@@ -38,6 +44,7 @@ onMounted(async () => {
 						:language="snippet.language.toLocaleLowerCase()"
 						:created-at="snippet.createdAt"
 						:updated-at="snippet.updatedAt"
+						:onDelete="handleSnippetDelete"
 					/>
 				</div>
 			</div>

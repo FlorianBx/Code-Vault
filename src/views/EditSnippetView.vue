@@ -40,10 +40,11 @@ const fillSnippetData = () => {
 
 const { updateSnippet } = useUpdateSnippet();
 
-const handleSubmit = (event: Event) => {
+const handleSubmit = async (event: Event) => {
 	event.preventDefault();
 	updateSnippet(snippetData);
 	router.push(`/snippet/${id}`);
+	await fetchSnippetById(id.toString());
 };
 
 const pushBack = () => {
