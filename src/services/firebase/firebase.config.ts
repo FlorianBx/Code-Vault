@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore";
+import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
 import { getAuth, connectAuthEmulator } from "firebase/auth";
 
 const firebaseConfig = {
@@ -21,7 +21,8 @@ if (process.env.NODE_ENV !== "test") {
 
 export const db = getFirestore(app);
 export const auth = getAuth(app);
-if (process.env.NODE_ENV === "test") {
+if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development") {
 	connectAuthEmulator(auth, "http://localhost:9099");
+	connectFirestoreEmulator(db, "localhost", 8080);
 }
 export default app;

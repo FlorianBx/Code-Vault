@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
 import InputForText from "../components/InputForText.vue";
 import InputForRichText from "../components/InputForRichText.vue";
 import { useAuthStore } from "../store/authStore";
@@ -20,7 +20,7 @@ const snippetData = reactive({
 	tags: "",
 	createdAt: date.toISOString(),
 	updatedAt: date.toISOString(),
-	authorId: authStore.idToken,
+	authorId: computed(() => authStore.getUserId()),
 	visibility: true,
 });
 

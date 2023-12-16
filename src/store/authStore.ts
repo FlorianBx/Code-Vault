@@ -1,10 +1,11 @@
 import { defineStore } from "pinia";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "../services/firebase/firebase.config";
 
 export const useAuthStore = defineStore("auth", {
 	state: () => ({
 		isLoggedIn: false,
+		user: null as User | null,
 	}),
 
 	actions: {
@@ -14,11 +15,17 @@ export const useAuthStore = defineStore("auth", {
 			}
 		},
 
+		getUserId(): string | null {
+			return this.user ? this.user.uid : null;
+		},
+
 		listenToAuthChanges() {
 			onAuthStateChanged(auth, async (user) => {
 				if (user) {
+					this.user = user;
 					await this.login();
 				} else {
+					this.user = null;
 					this.logout();
 				}
 			});
@@ -26,8 +33,7 @@ export const useAuthStore = defineStore("auth", {
 
 		async login() {
 			try {
-				const idToken = await auth.currentUser?.getIdToken();
-				if (idToken) {
+				if (this.user) {
 					this.isLoggedIn = true;
 				} else {
 					this.isLoggedIn = false;

@@ -12,6 +12,11 @@ export function useElapsedTime(
 	const calculateElapsedTime = () => {
 		let date;
 
+		if (!input) {
+			elapsedTime.value = "No date provided";
+			return;
+		}
+
 		if (typeof input === "string") {
 			date = new Date(input);
 		} else {
