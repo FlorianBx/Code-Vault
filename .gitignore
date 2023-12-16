@@ -17,6 +17,9 @@ firestore.rules
 pnpm-lock.yaml
 package-lock.json
 
+# emulators
+.firebaserc
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

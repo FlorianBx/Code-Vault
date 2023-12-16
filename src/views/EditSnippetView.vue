@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, computed } from "vue";
 import InputForText from "../components/InputForText.vue";
 import InputForRichText from "../components/InputForRichText.vue";
 import { useAuthStore } from "../store/authStore";
@@ -23,7 +23,7 @@ const snippetData = reactive({
 	tags: "",
 	createdAt: date.toISOString(),
 	updatedAt: date.toISOString(),
-	authorId: authStore.idToken,
+	authorId: computed(() => authStore.getUserId()),
 	visibility: true,
 });
 
@@ -40,10 +40,11 @@ const fillSnippetData = () => {
 
 const { updateSnippet } = useUpdateSnippet();
 
-const handleSubmit = (event: Event) => {
+const handleSubmit = async (event: Event) => {
 	event.preventDefault();
 	updateSnippet(snippetData);
 	router.push(`/snippet/${id}`);
+	await fetchSnippetById(id.toString());
 };
 
 const pushBack = () => {
