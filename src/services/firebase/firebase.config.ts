@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
@@ -21,7 +20,7 @@ if (process.env.NODE_ENV !== "test") {
 
 export const db = getFirestore(app);
 export const auth = getAuth(app);
-if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "test") {
 	connectAuthEmulator(auth, "http://localhost:9099");
 	connectFirestoreEmulator(db, "localhost", 8080);
 }
