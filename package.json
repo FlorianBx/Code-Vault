@@ -8,6 +8,7 @@
 		"build": "vue-tsc && vite build",
 		"preview": "vite preview",
 		"test": "vitest run --environment jsdom --root src/",
+		"test:watch": "vitest",
 		"test:coverage": "vitest --coverage",
 		"test:fe": "firebase emulators:exec 'vitest run --environment jsdom --root src/'",
 		"test:ui": "vitest --environment jsdom --root src/ --coverage.enabled=true --ui",
