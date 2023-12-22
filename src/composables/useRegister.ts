@@ -33,7 +33,7 @@ export const useRegister = () => {
 			await updateProfile(userCredential.user, {
 				displayName: user.username,
 			});
-			authStore.login(); // ou une autre action appropriée pour un nouvel utilisateur
+			authStore.login();
 
 			return userCredential;
 		} catch (err: unknown) {
