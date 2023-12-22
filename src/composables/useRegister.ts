@@ -22,7 +22,6 @@ export const useRegister = () => {
 		user: EmailUsernameAndPasswordUser,
 	): Promise<UserCredential | null> => {
 		try {
-			console.log("username : ", user.username);
 			const userCredential = await createUserWithEmailAndPassword(
 				auth,
 				user.email,

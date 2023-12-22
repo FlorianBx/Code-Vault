@@ -24,7 +24,6 @@ describe("useRegister", () => {
 			username: "teest",
 			password: "paessword",
 		});
-		console.log("userCredential est il nul ? - > ", userCredential?.user);
 		expect(userCredential?.user).toBeTruthy();
 		expect(userCredential?.user?.displayName).toBe("teest");
 		expect(userCredential?.user?.email).toBe("teste@test.com");
