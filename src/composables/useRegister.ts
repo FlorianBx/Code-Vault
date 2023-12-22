@@ -8,8 +8,7 @@ import {
 	signInWithPopup,
 	updateProfile,
 } from "firebase/auth";
-
-interface EmailUsernameAndPasswordUser {
+export interface EmailUsernameAndPasswordUser {
 	email: string;
 	username: string;
 	password: string;

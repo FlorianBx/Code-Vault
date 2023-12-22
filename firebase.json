@@ -5,8 +5,8 @@
   },
   "functions": [
     {
-      "source": "functions",
-      "codebase": "default",
+      "source": "cloud-functions",
+      "codebase": "cloud-functions",
       "ignore": [
         "node_modules",
         ".git",
