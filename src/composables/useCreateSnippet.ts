@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { db } from "../services/firebase/firebase.config";
+import { db, auth } from "../services/firebase/firebase.config";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { Snippet } from "../utils/types/snippet";
 
@@ -8,10 +8,12 @@ export function useCreateSnippet() {
 	const isCreating = ref(false);
 
 	const createSnippet = async (snippetData: Snippet): Promise<void> => {
+		const authName = await auth.currentUser?.displayName;
 		try {
 			isCreating.value = true;
 			const fullSnippetData = {
 				...snippetData,
+				authorName: authName,
 				createdAt: serverTimestamp(),
 				updatedAt: serverTimestamp(),
 			};

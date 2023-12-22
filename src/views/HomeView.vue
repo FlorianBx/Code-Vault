@@ -5,11 +5,9 @@ import useFilter from "../composables/useFilter";
 import SearchBar from "../components/SearchBar.vue";
 import CardSnippet from "../components/CardSnippet.vue";
 import LoadingCircle from "../components/LoadingCircle.vue";
-import { auth } from "../services/firebase/firebase.config";
 
 const { snippets, fetchSnippets, isLoading, error } = useGetSnippets();
 const { filteredSnippets } = useFilter(snippets);
-console.log(auth.currentUser);
 
 const handleSnippetDelete = (deletedSnippetId: string) => {
 	snippets.value = snippets.value.filter(
@@ -38,6 +36,7 @@ onMounted(async () => {
 					<CardSnippet
 						:id="snippet.id"
 						:title="snippet.title"
+						:author-name="snippet.authorName"
 						:description="snippet.description"
 						:code="snippet.code"
 						:tags="snippet.tags"

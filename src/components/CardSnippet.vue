@@ -19,6 +19,10 @@ const props = defineProps({
 		type: String,
 		default: "",
 	},
+	authorName: {
+		type: String,
+		default: "Anonymous",
+	},
 	description: {
 		type: String,
 		default: "",
@@ -49,7 +53,6 @@ const props = defineProps({
 	},
 });
 
-const authorId = "Florian";
 const router = useRouter();
 const { copy, copied } = useClipboard();
 const { deleteSnippet } = useDeleteSnippet();
@@ -88,7 +91,7 @@ watch(readMore, async (newValue) => {
 	<div class="flex flex-col mt-8">
 		<section class="flex flex-col gap-2">
 			<h3 class="text-2xl font-bold text-primary/90">{{ title }}</h3>
-			<p class="text-sm font-semibold italic">@{{ authorId }}</p>
+			<p class="text-sm font-semibold italic">@{{ authorName }}</p>
 			<p
 				v-show="!readMore"
 				class="text-sm font-semibold line-clamp-3 text-primary/70"
