@@ -9,7 +9,7 @@
 		"eslint:recommended",
 		"plugin:vue/vue3-recommended",
 		"@vue/typescript/recommended",
-		"prettier"
+		"plugin:prettier/recommended"
 	],
 	"plugins": ["@typescript-eslint", "prettier"],
 	"rules": {

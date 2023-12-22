@@ -19,6 +19,8 @@ package-lock.json
 
 # emulators
 .firebaserc
+.firebase.json
+.firebase.indexes.json
 
 # Editor directories and files
 .vscode/*
