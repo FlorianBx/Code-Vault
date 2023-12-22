@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { createPinia, setActivePinia } from "pinia";
+import * as firebaseAuth from "firebase/auth";
 
 vi.mock("firebase/auth", async () => {
-	const actual = await vi.importActual("firebase/auth");
+	const actual = (await vi.importActual(
+		"firebase/auth",
+	)) as typeof firebaseAuth;
 	return {
 		...actual,
-		//get: vi.fn().mockResolvedValue({ user: { uid: "123" } }),
 	};
 });
 
