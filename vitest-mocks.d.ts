@@ -2,8 +2,8 @@
 import "vitest";
 
 declare module "vitest" {
-  interface ViFunction {
-    mockResolvedValue(value): ViFunction;
-    mockRejectedValue(value): ViFunction;
-  }
+	interface ViFunction {
+		mockResolvedValue(value): ViFunction;
+		mockRejectedValue(value): ViFunction;
+	}
 }
