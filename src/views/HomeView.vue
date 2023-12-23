@@ -1,18 +1,33 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 import { useGetSnippets } from "../composables/useGetSnippets.ts";
+import { useDeleteSnippet } from "../composables/useDeleteSnippet.ts";
 import useFilter from "../composables/useFilter";
 import SearchBar from "../components/SearchBar.vue";
-import CardSnippet from "../components/CardSnippet.vue";
+import CardSnippet from "@/components/CardSnippet/CardSnippet.vue";
 import LoadingCircle from "../components/LoadingCircle.vue";
+import { useClipboard } from "@vueuse/core";
+import { useRouter } from "vue-router";
 
 const { snippets, fetchSnippets, isLoading, error } = useGetSnippets();
 const { filteredSnippets } = useFilter(snippets);
+const { copy } = useClipboard();
+const router = useRouter();
 
-const handleSnippetDelete = (deletedSnippetId: string) => {
+const handleSnippetDelete = async (deletedSnippetId: string): Promise<void> => {
+	const { deleteSnippet } = useDeleteSnippet();
+	await deleteSnippet(deletedSnippetId);
 	snippets.value = snippets.value.filter(
 		(snippet) => snippet.id !== deletedSnippetId,
 	);
+};
+
+const handleSnippetCopy = (copiedSnippet: string): void => {
+	copy(copiedSnippet);
+};
+
+const handleSnippetEdit = (editedSnippetId: string): void => {
+	router.push(`/edit/${editedSnippetId}`);
 };
 
 onMounted(async () => {
@@ -34,16 +49,10 @@ onMounted(async () => {
 			<div v-for="snippet in filteredSnippets" :key="snippet.id" class="w-full">
 				<div>
 					<CardSnippet
-						:id="snippet.id"
-						:title="snippet.title"
-						:author-name="snippet.authorName"
-						:description="snippet.description"
-						:code="snippet.code"
-						:tags="snippet.tags"
-						:language="snippet.language.toLocaleLowerCase()"
-						:created-at="snippet.createdAt"
-						:updated-at="snippet.updatedAt"
-						:on-delete="handleSnippetDelete"
+						:snippet="snippet"
+						@delete-snippet="handleSnippetDelete"
+						@edit-snippet="handleSnippetEdit"
+						@copy-snippet="handleSnippetCopy"
 					/>
 				</div>
 			</div>
