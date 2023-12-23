@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import AvatarImage from "@/components/AvatarImage.vue";
+import { useElapsedTime } from "@/composables/useElapsedTime.ts";
 import CardSnippetIcons from "@/components/CardSnippet/CardSnippetIcons.vue";
 import CardSnippetBlocOfCode from "@/components/CardSnippet/CardSnippetBlocOfCode.vue";
-import { useElapsedTime } from "@/composables/useElapsedTime.ts";
+import CardSnippetTags from "@/components/CardSnippet/CardSnippetTags.vue";
 
 const props = defineProps({
 	snippet: {
@@ -21,7 +22,6 @@ const deleteSnippet = () => emit("delete-snippet", props.snippet.id);
 const editSnippet = () => emit("edit-snippet", props.snippet.id);
 const copySnippet = () => emit("copy-snippet", props.snippet.code);
 
-const splitTags = (tags: string) => tags.split(",");
 const toggleReadMore = () => {
 	readMore.value = !readMore.value;
 	console.log(readMore.value);
@@ -74,20 +74,14 @@ const toggleReadMore = () => {
 						{{ description }}
 					</h4>
 				</div>
-				<div class="flex flex-wrap gap-1">
-					<p
-						v-for="(tag, index) in splitTags(tags)"
-						:key="index"
-						class="bg-vue py-0 px-1.5 rounded text-sm"
-					>
-						{{ tag }}
-					</p>
+				<div class="flex justify-between items-center">
+					<CardSnippetTags :tags="tags" />
+					<CardSnippetIcons
+						@delete-snippet="deleteSnippet"
+						@edit-snippet="editSnippet"
+						@toggle-read-more="toggleReadMore"
+					/>
 				</div>
-				<CardSnippetIcons
-					@delete-snippet="deleteSnippet"
-					@edit-snippet="editSnippet"
-					@toggle-read-more="toggleReadMore"
-				/>
 				<CardSnippetBlocOfCode :code="code" @copy-snippet="copySnippet" />
 			</section>
 		</Transition>
