@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { watchEffect, ref } from "vue";
-import { useIcons } from "@/composables/useIcons.ts";
+import { ref } from "vue";
+import AvatarImage from "@/components/AvatarImage.vue";
+import CardSnippetIcons from "@/components/CardSnippet/CardSnippetIcons.vue";
+import CardSnippetBlocOfCode from "@/components/CardSnippet/CardSnippetBlocOfCode.vue";
 import { useElapsedTime } from "@/composables/useElapsedTime.ts";
-import Prism from "prismjs";
-import "@/assets/highlight-syntax.css";
 
 const props = defineProps({
 	snippet: {
@@ -11,6 +11,9 @@ const props = defineProps({
 		required: true,
 	},
 });
+const readMore = ref(false);
+const { title, description, tags, authorName, code } = props.snippet;
+const { elapsedTime } = useElapsedTime(props.snippet.updatedAt);
 
 const emit = defineEmits(["delete-snippet", "edit-snippet", "copy-snippet"]);
 
@@ -18,72 +21,39 @@ const deleteSnippet = () => emit("delete-snippet", props.snippet.id);
 const editSnippet = () => emit("edit-snippet", props.snippet.id);
 const copySnippet = () => emit("copy-snippet", props.snippet.code);
 
-const { TrashIcon, PencilIcon, CopyIcon } = useIcons();
-const { title, description, tags, language, authorName, code } = props.snippet;
-
-const readMore = ref(false);
-
-const splitTags = (tags: string) => {
-	return tags.split(",");
-}; // extract tags to useGetSnippets.ts
-
-const { elapsedTime } = useElapsedTime(props.snippet.updatedAt);
-
-watchEffect(() => {
-	Prism.highlightAll();
-});
+const splitTags = (tags: string) => tags.split(",");
+const toggleReadMore = () => {
+	readMore.value = !readMore.value;
+	console.log(readMore.value);
+};
 </script>
 
 <template>
 	<div class="flex flex-col mt-8">
-		<section class="flex flex-col gap-2">
-			<h3 class="text-2xl font-bold text-primary/90">{{ title }}</h3>
-			<p class="text-sm font-semibold italic">@{{ authorName }}</p>
-			<p
-				v-show="!readMore"
-				class="text-sm font-semibold line-clamp-3 text-primary/70"
-			>
-				{{ description }}
-			</p>
-			<div v-show="!readMore" class="flex flex-wrap gap-1">
-				<p
-					v-for="(tag, index) in splitTags(tags)"
-					:key="index"
-					class="bg-vue py-0 px-1.5 rounded text-sm"
-				>
-					{{ tag }}
-				</p>
-			</div>
-			<div
-				v-show="!readMore"
-				ref="dropdown"
-				class="flex justify-between gap-3 items-end pt-4"
-			>
-				<div class="flex gap-4">
-					<p class="flex gap-2 items-center text-sm">
-						<span
-							v-if="language === 'vue'"
-							class="bg-vue w-4 h-2 rounded-full"
-						></span>
-						<span
-							v-if="language === 'react'"
-							class="bg-react w-4 h-2 rounded-full"
-						></span>
-						<span
-							v-if="language === 'angular'"
-							class="bg-angular w-4 h-2 rounded-full"
-						></span>
-						{{ language }}
-					</p>
-					<p class="text-sm">Updated {{ elapsedTime }}</p>
+		<section class="relative flex flex-col gap-2">
+			<div class="flex gap-2">
+				<AvatarImage
+					width="w-14"
+					height="h-14"
+					src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+				/>
+				<div class="w-full">
+					<h3 class="text-xl font-bold text-primary/90">{{ title }}</h3>
+					<div class="flex justify-between gap-3 items-end h-8">
+						<div class="flex gap-1">
+							<p class="text-sm">Updated {{ elapsedTime }}</p>
+							<p class="text-sm font-bold italic">by @{{ authorName }}</p>
+						</div>
+						<button
+							v-show="!readMore"
+							class="text-center font-semibold text-sm transition-color duration-300 bg-btn hover:bg-secondary hover:text-darktext rounded py-0.5 px-4 text-primary"
+							@click="toggleReadMore"
+						>
+							Read more...
+							<span class="sr-only">, {{ title }}</span>
+						</button>
+					</div>
 				</div>
-				<button
-					class="text-center font-semibold text-sm transition-color duration-300 bg-btn hover:bg-secondary hover:text-darktext rounded py-0.5 px-4 text-primary"
-					@click="readMore = !readMore"
-				>
-					Read more...
-					<span class="sr-only">, {{ title }}</span>
-				</button>
 			</div>
 		</section>
 		<Transition
@@ -99,36 +69,6 @@ watchEffect(() => {
 				class="flex flex-col gap-2 translate-y-0"
 				:class="{ '-translate-y-10 opacity-0': !readMore }"
 			>
-				<div
-					v-show="!readMore"
-					class="flex justify-between gap-3 items-end pt-4"
-				>
-					<div class="flex gap-4">
-						<p class="flex gap-2 items-center text-sm">
-							<span
-								v-if="language === 'vue'"
-								class="bg-vue w-4 h-2 rounded-full"
-							></span>
-							<span
-								v-if="language === 'react'"
-								class="bg-react w-4 h-2 rounded-full"
-							></span>
-							<span
-								v-if="language === 'angular'"
-								class="bg-angular w-4 h-2 rounded-full"
-							></span>
-							{{ language }}
-						</p>
-						<p class="text-sm">Updated {{ elapsedTime }}</p>
-					</div>
-					<button
-						class="text-center font-semibold text-sm transition-color duration-300 bg-btn hover:bg-secondary hover:text-darktext rounded py-0.5 px-4 text-primary"
-						@click="readMore = !readMore"
-					>
-						Read less...
-						<span class="sr-only">, {{ title }}</span>
-					</button>
-				</div>
 				<div>
 					<h4 class="text-sm pt-2 font-semibold text-primary/70">
 						{{ description }}
@@ -143,54 +83,12 @@ watchEffect(() => {
 						{{ tag }}
 					</p>
 				</div>
-				<div class="flex justify-between gap-3 items-end pt-4">
-					<div class="flex gap-4">
-						<p class="flex gap-2 items-center text-sm">
-							<span
-								v-if="language === 'vue'"
-								class="bg-vue w-4 h-2 rounded-full"
-							></span>
-							<span
-								v-if="language === 'react'"
-								class="bg-react w-4 h-2 rounded-full"
-							></span>
-							<span
-								v-if="language === 'angular'"
-								class="bg-angular w-4 h-2 rounded-full"
-							></span>
-							{{ language }}
-						</p>
-						<p class="text-sm">Updated {{ elapsedTime }}</p>
-					</div>
-					<div class="flex items-center gap-4">
-						<button class="text-danger opacity-100" @click="deleteSnippet">
-							<TrashIcon />
-						</button>
-						<button class="text-secondary opacity-60" @click="editSnippet">
-							<PencilIcon />
-						</button>
-						<button
-							class="text-center font-semibold text-sm transition-color duration-300 bg-btn hover:bg-secondary hover:text-darktext rounded py-0.5 px-4 text-primary"
-							@click="readMore = !readMore"
-						>
-							Read less...
-							<span class="sr-only">, {{ title }}</span>
-						</button>
-					</div>
-				</div>
-				<div class="relative">
-					<button
-						type="button"
-						class="absolute top-6 right-8 text-white opacity-60"
-						@click="copySnippet"
-					>
-						<CopyIcon />
-					</button>
-					<pre
-						class="p-4 text-sm block w-full bg-transparent focus:shadow-inner-neumorphic shadow-light-inner-neumorphic rounded-md border-0 py-3 text-primary ring-0 focus:ring-0 focus:ring-inset focus:ring-ring sm:text-sm sm:leading-6"
-					><code class="language-javascript ">{{ code }}</code>
-            </pre>
-				</div>
+				<CardSnippetIcons
+					@delete-snippet="deleteSnippet"
+					@edit-snippet="editSnippet"
+					@toggle-read-more="toggleReadMore"
+				/>
+				<CardSnippetBlocOfCode :code="code" @copy-snippet="copySnippet" />
 			</section>
 		</Transition>
 	</div>

@@ -1,7 +1,21 @@
+<script setup lang="ts">
+const props = defineProps({
+	width: {
+		type: String,
+		default: "w-5",
+	},
+	height: {
+		type: String,
+		default: "h-5",
+	},
+});
+
+const { width, height } = props;
+</script>
+
 <template>
 	<svg
-		width="25"
-		height="25"
+		:class="[width, height]"
 		viewBox="0 0 15 15"
 		fill="none"
 		xmlns="http://www.w3.org/2000/svg"
