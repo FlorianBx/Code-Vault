@@ -1,89 +1,36 @@
 <script setup lang="ts">
-import { nextTick, watch, onMounted, ref } from "vue";
-import { useRouter } from "vue-router";
-import { useClipboard } from "@vueuse/core";
-import { useElapsedTime } from "../composables/useElapsedTime.ts";
-import { useDeleteSnippet } from "../composables/useDeleteSnippet.ts";
-import TrashIcon from "../assets/icons/TrashIcon.vue";
-import PencilIcon from "../assets/icons/PencilIcon.vue";
-import CopyIcon from "../assets/icons/CopyIcon.vue";
+import { watchEffect, ref } from "vue";
+import { useIcons } from "@/composables/useIcons.ts";
+import { useElapsedTime } from "@/composables/useElapsedTime.ts";
 import Prism from "prismjs";
-import "../assets/highlight-syntax.css";
+import "@/assets/highlight-syntax.css";
 
 const props = defineProps({
-	id: {
-		type: String,
-		default: "",
-	},
-	title: {
-		type: String,
-		default: "",
-	},
-	authorName: {
-		type: String,
-		default: "Anonymous",
-	},
-	description: {
-		type: String,
-		default: "",
-	},
-	code: {
-		type: String,
-		default: "",
-	},
-	language: {
-		type: String,
-		default: "",
-	},
-	tags: {
-		type: String,
-		default: "",
-	},
-	createdAt: {
-		type: String,
-		default: "",
-	},
-	updatedAt: {
-		type: String,
-		default: "",
-	},
-	onDelete: {
-		type: Function,
-		default: () => {},
+	snippet: {
+		type: Object,
+		required: true,
 	},
 });
 
-const router = useRouter();
-const { copy, copied } = useClipboard();
-const { deleteSnippet } = useDeleteSnippet();
+const emit = defineEmits(["delete-snippet", "edit-snippet", "copy-snippet"]);
+
+const deleteSnippet = () => emit("delete-snippet", props.snippet.id);
+const editSnippet = () => emit("edit-snippet", props.snippet.id);
+const copySnippet = () => emit("copy-snippet", props.snippet.code);
+
+const { TrashIcon, PencilIcon, CopyIcon } = useIcons();
+const { title, description, tags, language, authorName, code } = props.snippet;
 
 const readMore = ref(false);
 
 const splitTags = (tags: string) => {
 	return tags.split(",");
-};
+}; // extract tags to useGetSnippets.ts
 
-const handleEdit = (id: string) => {
-	router.push(`/edit/${id}`);
-};
+const { elapsedTime } = useElapsedTime(props.snippet.updatedAt);
 
-const { elapsedTime } = useElapsedTime(props.updatedAt);
-
-const handleDelete = async () => {
-	await deleteSnippet(props.id);
-	props.onDelete(props.id);
-};
-
-onMounted(async () => {
-	await nextTick();
+watchEffect(() => {
 	Prism.highlightAll();
-});
-
-watch(readMore, async (newValue) => {
-	if (newValue) {
-		await nextTick();
-		Prism.highlightAll();
-	}
 });
 </script>
 
@@ -216,10 +163,10 @@ watch(readMore, async (newValue) => {
 						<p class="text-sm">Updated {{ elapsedTime }}</p>
 					</div>
 					<div class="flex items-center gap-4">
-						<button class="text-danger opacity-100" @click="handleDelete">
+						<button class="text-danger opacity-100" @click="deleteSnippet">
 							<TrashIcon />
 						</button>
-						<button class="text-secondary opacity-60" @click="handleEdit(id)">
+						<button class="text-secondary opacity-60" @click="editSnippet">
 							<PencilIcon />
 						</button>
 						<button
@@ -235,16 +182,10 @@ watch(readMore, async (newValue) => {
 					<button
 						type="button"
 						class="absolute top-6 right-8 text-white opacity-60"
-						@click="copy(code)"
+						@click="copySnippet"
 					>
 						<CopyIcon />
 					</button>
-					<div
-						v-show="copied"
-						class="absolute top-16 right-6 bg-vue px-4 py-1 rounded text-sm"
-					>
-						Copied
-					</div>
 					<pre
 						class="p-4 text-sm block w-full bg-transparent focus:shadow-inner-neumorphic shadow-light-inner-neumorphic rounded-md border-0 py-3 text-primary ring-0 focus:ring-0 focus:ring-inset focus:ring-ring sm:text-sm sm:leading-6"
 					><code class="language-javascript ">{{ code }}</code>
