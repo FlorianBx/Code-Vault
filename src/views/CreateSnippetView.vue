@@ -2,7 +2,7 @@
 import { reactive, computed } from "vue";
 import InputForText from "../components/InputForText.vue";
 import InputForRichText from "../components/InputForRichText.vue";
-import { useAuthStore } from "../store/authStore";
+import { useAuthStore } from "../stores/authStore";
 import { useCreateSnippet } from "../composables/useCreateSnippet";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "vue-router";

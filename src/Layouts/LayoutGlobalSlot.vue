@@ -20,10 +20,12 @@ import NotificationToast from "../components/NotificationToast.vue";
 			</Teleport>
 			<div class="flex flex-col justify-between relative">
 				<div class="flex">
-					<div class="hidden md:block bg-black/30 border-black/20 border-r">
+					<div
+						class="w-64 h-screen md:block bg-black/30 border-black/20 border-r"
+					>
 						<slot name="aside"></slot>
 					</div>
-					<div class="w-full flex flex-col items-center justify-center px-4">
+					<div class="w-full flex flex-col items-center justify-start px-4">
 						<main class="lg:max-w-3xl w-full">
 							<slot></slot>
 						</main>

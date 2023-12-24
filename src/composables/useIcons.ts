@@ -5,6 +5,8 @@ import CrossIcon from "@/assets/icons/CrossIcon.vue";
 import TrashIcon from "@/assets/icons/TrashIcon.vue";
 import PencilIcon from "@/assets/icons/PencilIcon.vue";
 import CopyIcon from "@/assets/icons/CopyIcon.vue";
+import ScissorsIcon from "@/assets/icons/ScissorsIcon.vue";
+import DashboardIcon from "@/assets/icons/DashboardIcon.vue";
 
 export const useIcons = () => {
 	return {
@@ -15,5 +17,7 @@ export const useIcons = () => {
 		TrashIcon,
 		PencilIcon,
 		CopyIcon,
+		ScissorsIcon,
+		DashboardIcon,
 	};
 };

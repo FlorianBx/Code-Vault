@@ -2,7 +2,7 @@
 import { onMounted, reactive, computed } from "vue";
 import InputForText from "../components/InputForText.vue";
 import InputForRichText from "../components/InputForRichText.vue";
-import { useAuthStore } from "../store/authStore";
+import { useAuthStore } from "@/stores/authStore";
 import { useUpdateSnippet } from "../composables/useUpdateSnippet";
 import { useGetSnippets } from "../composables/useGetSnippets";
 import CrossIcon from "../assets/icons/CrossIcon.vue";

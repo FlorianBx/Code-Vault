@@ -1,5 +1,5 @@
 import { auth } from "../services/firebase/firebase.config";
-import { useAuthStore } from "../store/authStore";
+import { useAuthStore } from "../stores/authStore";
 import { ref } from "vue";
 
 export const useLogout = () => {

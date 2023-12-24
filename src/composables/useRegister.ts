@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { auth } from "../services/firebase/firebase.config";
-import { useAuthStore } from "../store/authStore";
+import { useAuthStore } from "../stores/authStore";
 import {
 	UserCredential,
 	createUserWithEmailAndPassword,

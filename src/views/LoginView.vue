@@ -2,7 +2,7 @@
 import { reactive } from "vue";
 import { useFormData } from "../composables/useFormData.ts";
 import { useLogin } from "../composables/useLogin.ts";
-import { useAuthStore } from "../store/authStore";
+import { useAuthStore } from "@/stores/authStore";
 import { useRouter } from "vue-router";
 import InputForText from "../components/InputForText.vue";
 import GithubButtonForSignIn from "../components/GithubButtonForSignIn.vue";
