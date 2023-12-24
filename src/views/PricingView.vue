@@ -191,11 +191,11 @@ const frequency = ref(pricing.frequencies[0]);
 					>
 						<RadioGroupLabel class="sr-only">Payment frequency</RadioGroupLabel>
 						<RadioGroupOption
-							as="template"
 							v-for="option in pricing.frequencies"
 							:key="option.value"
-							:value="option"
 							v-slot="{ checked }"
+							as="template"
+							:value="option"
 						>
 							<div
 								:class="[
@@ -462,9 +462,9 @@ const frequency = ref(pricing.frequencies[0]);
 						<form class="mt-6 sm:flex sm:max-w-md">
 							<label for="email-address" class="sr-only">Email address</label>
 							<input
+								id="email-address"
 								type="email"
 								name="email-address"
-								id="email-address"
 								autocomplete="email"
 								required=""
 								class="w-full min-w-0 appearance-none rounded-md border-0 bg-white/5 px-3 py-1.5 text-base text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:w-64 sm:text-sm sm:leading-6 xl:w-full"

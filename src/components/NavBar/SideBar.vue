@@ -22,7 +22,7 @@ interface NavigationItem {
 }
 
 const baseNavigation: Array<NavigationItem> = [
-	{ name: "Snippets", href: "/snippets", icon: ScissorsIcon },
+	{ name: "Snippets", href: "/", icon: ScissorsIcon },
 	{ name: "Dashboard", href: "/dashboard", icon: DashboardIcon },
 	{ name: "New Snippet", href: "/create-snippet", icon: AddIcon },
 	{ name: "Price", href: "/price", icon: FolderIcon },
