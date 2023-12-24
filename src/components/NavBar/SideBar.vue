@@ -6,7 +6,7 @@ import Logo from "../../assets/Code_Vault_logo.png";
 </script>
 
 <template>
-	<div class="hidden sm:block">
+	<div class="hidden">
 		<div
 			class="fixed top-0 bottom-0 w-12 flex flex-col items-center gap-y-5 overflow-y bg-background pb-4 ring-1 ring-white/10"
 		>

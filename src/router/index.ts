@@ -7,44 +7,54 @@ import RegisterView from "../views/RegisterView.vue";
 import EditSnippetView from "../views/EditSnippetView.vue";
 import ShowSnippetView from "../views/ShowSnippetView.vue";
 import CreateSnippetView from "../views/CreateSnippetView.vue";
-import PersonnalSnippetsView from "../views/PersonalSnippetsView.vue";
+// import MySnippetsView from "../views/MySnippetsView.vue
 
 // import TestLayout from "../views/TestLayout.vue";
 
 const routes = [
 	{ path: "/", component: HomeView },
-	{ path: "/login", component: LoginView, meta: { requiresAuth: false } },
-	{ path: "/register", component: RegisterView, meta: { requiresAuth: false } },
+	{
+		path: "/login",
+		name: "Login",
+		component: LoginView,
+		meta: { requiresAuth: false },
+	},
+	{
+		path: "/register",
+		name: "Register",
+		component: RegisterView,
+		meta: { requiresAuth: false },
+	},
 	{
 		path: "/snippet/:id",
+		name: "ShowSnippet",
 		component: ShowSnippetView,
 		meta: { requiresAuth: false },
 	},
 	{
 		path: "/edit/:id",
+		name: "EditSnippet",
 		component: EditSnippetView,
 		meta: { requiresAuth: true },
 	},
 	{
 		path: "/create-snippet",
+		name: "CreateSnippet",
 		component: CreateSnippetView,
 		meta: { requiresAuth: true },
 	},
 	{
 		path: "/profile",
+		name: "Profile",
 		component: ProfileView,
 		meta: { requiresAuth: true },
 	},
-	{
-		path: "/personal-snippets",
-		component: PersonnalSnippetsView,
-		meta: { requiresAuth: true },
-	},
-	{
-		path: "/settings",
-		component: ProfileView,
-		meta: { requiresAuth: true },
-	},
+	// {
+	// 	path: "/my-snippets",
+	// 	name: "MySnippets",
+	// 	component: MySnippetsView,
+	// 	meta: { requiresAuth: true },
+	// },
 ];
 
 const router = createRouter({

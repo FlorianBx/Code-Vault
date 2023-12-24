@@ -2,7 +2,7 @@
 import { reactive, computed } from "vue";
 import { useLogout } from "../../composables/useLogout.ts";
 import { useAuthStore } from "../../store/authStore.ts";
-// import LargeNavBar from "./LargeNavBar.vue";
+import BreadCrumb from "@/components/Navbar/BreadCrumb.vue";
 import MobileNavBar from "./MobileNavBar.vue";
 import BottomNavBar from "./BottomNavBar.vue";
 
@@ -27,6 +27,18 @@ const filteredMenuItems = computed(() => {
 </script>
 
 <template>
+	<div class="flex justify-between">
+		<BreadCrumb />
+		<div class="p-5">
+			<button
+				class="text-xs bg-vue py-1.5 px-2.5 rounded text-white font-bold hover:bg-teal-400"
+			>
+				<router-link :to="authStore.isLoggedIn ? '/create-snippet' : '/login'">
+					Add Snippet
+				</router-link>
+			</button>
+		</div>
+	</div>
 	<div class="pt-14">
 		<div class="relative">
 			<button
@@ -36,15 +48,14 @@ const filteredMenuItems = computed(() => {
 			>
 				logout
 			</button>
-			<a
+			<p
 				v-else
 				href="/login"
 				class="absolute top-4 right-20 z-50 bg-vue hover:bg-teal-400 text-white font-bold py-2 px-4 rounded-full"
 			>
 				login
-			</a>
+			</p>
 		</div>
-		<!-- <LargeNavBar :menu-items="filteredMenuItems" /> -->
 		<MobileNavBar :menu-items="filteredMenuItems" />
 		<BottomNavBar :menu-items="filteredMenuItems" />
 	</div>
