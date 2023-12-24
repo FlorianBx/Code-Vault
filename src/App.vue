@@ -15,7 +15,7 @@ import SideBar from "./components/NavBar/SideBar.vue";
 		</template>
 		<router-view></router-view>
 		<template #footer>
-			<div class="flex items-end h-96">
+			<div class="flex items-end h-20">
 				<FooterComponent />
 			</div>
 		</template>

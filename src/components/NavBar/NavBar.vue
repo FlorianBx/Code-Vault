@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { reactive, computed } from "vue";
-import { useLogout } from "../../composables/useLogout.ts";
 import { useAuthStore } from "@/stores/authStore.ts";
 import BreadCrumb from "@/components/Navbar/BreadCrumb.vue";
 import MobileNavBar from "./MobileNavBar.vue";
 import BottomNavBar from "./BottomNavBar.vue";
 
-const { logout } = useLogout();
 const authStore = useAuthStore();
 
 const menuItems = reactive([
@@ -40,22 +38,6 @@ const filteredMenuItems = computed(() => {
 		</div>
 	</div>
 	<div class="pt-1">
-		<div class="relative">
-			<button
-				v-if="authStore.isLoggedIn"
-				class="absolute top-4 right-20 z-50 bg-vue hover:bg-teal-400 text-white font-bold py-2 px-4 rounded"
-				@click="logout"
-			>
-				logout
-			</button>
-			<a
-				v-else
-				href="/login"
-				class="absolute top-4 right-20 z-50 bg-vue hover:bg-teal-400 text-white font-bold py-2 px-4 rounded-full"
-			>
-				login
-			</a>
-		</div>
 		<MobileNavBar :menu-items="filteredMenuItems" />
 		<BottomNavBar :menu-items="filteredMenuItems" />
 	</div>

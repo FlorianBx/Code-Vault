@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { toRefs, Ref, ref } from "vue";
+import { toRefs } from "vue";
 import { useLogout } from "@/composables/useLogout.ts";
 import { useRouter } from "vue-router";
 import { useIcons } from "@/composables/useIcons.ts";
@@ -9,26 +9,9 @@ import { FolderIcon } from "@heroicons/vue/24/outline";
 
 const router = useRouter();
 const { ScissorsIcon, DashboardIcon, PersonIcon } = useIcons();
-const { isLoggedIn } = useAuthStore();
 const { logout } = useLogout();
-const isHovered: Ref<boolean> = ref(false);
-let hoverTimeout: ReturnType<typeof setTimeout>;
+const { isLoggedIn } = toRefs(useAuthStore());
 const asideToggleStore = useAsideToggleStore();
-const { isAsideOpen } = toRefs(asideToggleStore);
-const { openAside, closeAside } = useAsideToggleStore();
-
-const onMouseEnter = (): void => {
-	clearTimeout(hoverTimeout);
-	isHovered.value = true;
-	openAside();
-};
-
-const onMouseLeave = (): void => {
-	if (!isHovered.value) return;
-	hoverTimeout = setTimeout(() => {
-		closeAside();
-	}, 1000);
-};
 
 const navigation = [
 	{ name: "Snippets", href: "#", icon: ScissorsIcon, current: true },
@@ -44,10 +27,10 @@ const navigation = [
 
 <template>
 	<div
-		v-show="isAsideOpen"
-		class="flex grow flex-col gap-y-5 w-full h-full overflow-y-auto bg-gray-900 px-6"
-		@mouseenter="onMouseEnter"
-		@mouseleave="onMouseLeave"
+		v-show="asideToggleStore.isAsideOpen"
+		class="flex grow flex-col gap-y-5 w-full h-full overflow-y-auto rounded px-6"
+		@mouseenter="asideToggleStore.setHovered(true)"
+		@mouseleave="asideToggleStore.setHovered(false)"
 	>
 		<nav class="flex flex-1 pt-8 flex-col">
 			<ul role="list" class="flex flex-1 flex-col gap-y-7">
@@ -58,8 +41,8 @@ const navigation = [
 								:href="item.href"
 								:class="[
 									item.current
-										? 'bg-gray-800 text-white'
-										: 'text-gray-400 hover:text-white hover:bg-gray-800',
+										? 'bg-vue/95 text-white'
+										: 'text-gray-400 hover:text-white hover:bg-vue/90',
 									'group flex gap-x-3 text-xs rounded-md p-2 text-sm leading-6 font-semibold',
 								]"
 							>
@@ -73,7 +56,7 @@ const navigation = [
 						</li>
 						<li>
 							<button
-								class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 w-full text-xs rounded-md p-2 text-sm leading-6 font-semibold"
+								class="text-gray-400 hover:text-white hover:bg-vue group flex gap-x-3 w-full text-xs rounded-md p-2 text-sm leading-6 font-semibold"
 								@click="isLoggedIn ? logout() : router.push('/login')"
 							>
 								<component
@@ -86,7 +69,7 @@ const navigation = [
 						</li>
 					</ul>
 				</li>
-				<li class="-mx-6 mt-auto">
+				<li v-show="isLoggedIn" class="-mx-6 mt-auto">
 					<a
 						href="#"
 						class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800"

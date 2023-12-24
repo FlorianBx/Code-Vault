@@ -2,30 +2,14 @@
 import { ref, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import { useAsideToggleStore } from "@/stores/asideToggle.ts";
-import type { Ref } from "vue";
 
-const { openAside, closeAside, toggleAside } = useAsideToggleStore();
-const isHovered: Ref<boolean> = ref(false);
-let hoverTimeout: ReturnType<typeof setTimeout>;
+const { setHovered, toggleAside } = useAsideToggleStore();
 
-const onMouseEnter = (): void => {
-	clearTimeout(hoverTimeout);
-	isHovered.value = true;
-	openAside();
-};
+const onMouseEnter = (): void => setHovered(true);
 
-const onMouseLeave = (): void => {
-	if (!isHovered.value) return;
-	hoverTimeout = setTimeout(() => {
-		closeAside();
-	}, 1000);
-};
+const onMouseLeave = (): void => setHovered(false);
 
-const onClick = (): void => {
-	clearTimeout(hoverTimeout);
-	isHovered.value = false;
-	toggleAside();
-};
+const onClick = (): void => toggleAside();
 
 interface Page {
 	name: string;
