@@ -8,6 +8,7 @@ import CopyIcon from "@/assets/icons/CopyIcon.vue";
 import ScissorsIcon from "@/assets/icons/ScissorsIcon.vue";
 import DashboardIcon from "@/assets/icons/DashboardIcon.vue";
 import PersonIcon from "@/assets/icons/PersonIcon.vue";
+import AddIcon from "@/assets/icons/AddIcon.vue";
 
 export const useIcons = () => {
 	return {
@@ -21,5 +22,6 @@ export const useIcons = () => {
 		ScissorsIcon,
 		DashboardIcon,
 		PersonIcon,
+		AddIcon,
 	};
 };

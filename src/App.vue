@@ -1,8 +1,15 @@
 <script setup lang="ts">
+import { onMounted } from "vue";
 import NavBar from "./components/NavBar/NavBar.vue";
 import LayoutGlobalSlot from "./Layouts/LayoutGlobalSlot.vue";
 import FooterComponent from "./components/FooterComponent.vue";
 import SideBar from "./components/NavBar/SideBar.vue";
+
+import { initFakeDatasForDev } from "@/fakeDatas/initFakeDatasForDev";
+
+onMounted(() => {
+	initFakeDatasForDev();
+});
 </script>
 
 <template>
@@ -13,7 +20,9 @@ import SideBar from "./components/NavBar/SideBar.vue";
 		<template #aside>
 			<SideBar />
 		</template>
-		<router-view></router-view>
+		<div class="pt-20">
+			<router-view></router-view>
+		</div>
 		<template #footer>
 			<div class="flex items-end h-20">
 				<FooterComponent />

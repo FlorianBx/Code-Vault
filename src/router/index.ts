@@ -7,6 +7,7 @@ import RegisterView from "../views/RegisterView.vue";
 import EditSnippetView from "../views/EditSnippetView.vue";
 import ShowSnippetView from "../views/ShowSnippetView.vue";
 import CreateSnippetView from "../views/CreateSnippetView.vue";
+import PricingView from "../views/PricingView.vue";
 // import MySnippetsView from "../views/MySnippetsView.vue
 
 // import TestLayout from "../views/TestLayout.vue";
@@ -42,6 +43,12 @@ const routes = [
 		name: "CreateSnippet",
 		component: CreateSnippetView,
 		meta: { requiresAuth: true },
+	},
+	{
+		path: "/price",
+		name: "Pricing",
+		component: PricingView,
+		meta: { requiresAuth: false },
 	},
 	{
 		path: "/profile",

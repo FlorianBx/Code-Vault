@@ -1,34 +1,47 @@
 <script setup lang="ts">
-import { toRefs } from "vue";
+import { toRefs, computed, DefineComponent } from "vue";
 import { useLogout } from "@/composables/useLogout.ts";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useIcons } from "@/composables/useIcons.ts";
 import { useAuthStore } from "@/stores/authStore.ts";
 import { useAsideToggleStore } from "@/stores/asideToggle.ts";
 import { FolderIcon } from "@heroicons/vue/24/outline";
 
+const route = useRoute();
 const router = useRouter();
-const { ScissorsIcon, DashboardIcon, PersonIcon } = useIcons();
+const { ScissorsIcon, DashboardIcon, PersonIcon, AddIcon } = useIcons();
 const { logout } = useLogout();
 const { isLoggedIn } = toRefs(useAuthStore());
 const asideToggleStore = useAsideToggleStore();
 
-const navigation = [
-	{ name: "Snippets", href: "#", icon: ScissorsIcon, current: true },
-	{ name: "Dashboard", href: "#", icon: DashboardIcon, current: false },
-	{
-		name: "Price",
-		href: "#",
-		icon: FolderIcon,
-		current: false,
-	},
+interface NavigationItem {
+	name: string;
+	href: string;
+	icon: DefineComponent;
+	current?: boolean;
+}
+
+const baseNavigation: Array<NavigationItem> = [
+	{ name: "Snippets", href: "/snippets", icon: ScissorsIcon },
+	{ name: "Dashboard", href: "/dashboard", icon: DashboardIcon },
+	{ name: "New Snippet", href: "/create-snippet", icon: AddIcon },
+	{ name: "Price", href: "/price", icon: FolderIcon },
 ];
+
+const navigation = computed(() =>
+	baseNavigation.map((item) => ({
+		...item,
+		current:
+			item.href === route.path ||
+			(route.path === "/" && item.href === "/snippets"),
+	})),
+);
 </script>
 
 <template>
 	<div
 		v-show="asideToggleStore.isAsideOpen"
-		class="flex grow flex-col gap-y-5 w-full h-full overflow-y-auto rounded px-6"
+		class="fixed top-20 sm:w-60 flex grow flex-col gap-y-5 w-full h-full backdrop-blur-sm z-50 overflow-y-auto rounded px-6"
 		@mouseenter="asideToggleStore.setHovered(true)"
 		@mouseleave="asideToggleStore.setHovered(false)"
 	>
@@ -37,8 +50,8 @@ const navigation = [
 				<li>
 					<ul role="list" class="-mx-2 space-y-1">
 						<li v-for="item in navigation" :key="item.name">
-							<a
-								:href="item.href"
+							<router-link
+								:to="item.href"
 								:class="[
 									item.current
 										? 'bg-vue/95 text-white'
@@ -52,7 +65,7 @@ const navigation = [
 									aria-hidden="true"
 								/>
 								{{ item.name }}
-							</a>
+							</router-link>
 						</li>
 						<li>
 							<button
@@ -69,7 +82,7 @@ const navigation = [
 						</li>
 					</ul>
 				</li>
-				<li v-show="isLoggedIn" class="-mx-6 mt-auto">
+				<li v-show="isLoggedIn" class="py-8 -mx-6 mt-auto">
 					<a
 						href="#"
 						class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800"

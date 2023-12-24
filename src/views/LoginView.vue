@@ -38,7 +38,7 @@ const handleGitHubLogin = async () => {
 
 <template>
 	<div
-		class="flex min-h-full flex-1 flex-col justify-center sm:py-12 sm:px-6 lg:px-8"
+		class="flex min-h-full flex-1 flex-col justify-center pb-20 sm:py-12 sm:px-6 lg:px-8"
 	>
 		<div class="mt-10 px-4 sm:px-0 sm:mx-auto sm:w-full sm:max-w-[480px]">
 			<div
