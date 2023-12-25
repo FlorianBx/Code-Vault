@@ -24,9 +24,7 @@ onMounted(() => {
 			<router-view></router-view>
 		</div>
 		<template #footer>
-			<div class="flex items-end h-20">
-				<FooterComponent />
-			</div>
+			<FooterComponent />
 		</template>
 	</LayoutGlobalSlot>
 </template>
