@@ -1,12 +1,5 @@
 <script setup lang="ts">
-// import { ref } from "vue";
 import NotificationToast from "../components/NotificationToast.vue";
-
-// const sidebarOpen = ref(false);
-
-// const toggleSidebar = () => {
-//   sidebarOpen.value = !sidebarOpen.value;
-// };
 </script>
 
 <template>
@@ -20,18 +13,16 @@ import NotificationToast from "../components/NotificationToast.vue";
 			</Teleport>
 			<div class="flex flex-col justify-between relative">
 				<div class="flex">
-					<div class="hidden md:block bg-black/30 border-black/20 border-r">
+					<div class="absolute top-0 bottom-0 left-0 w-64 md:block">
 						<slot name="aside"></slot>
 					</div>
-					<div class="w-full flex flex-col items-center justify-center px-4">
+					<div class="w-full flex flex-col items-center justify-start px-4">
 						<main class="lg:max-w-3xl w-full">
 							<slot></slot>
 						</main>
 					</div>
 				</div>
-				<div class="h-96">
-					<slot name="footer"></slot>
-				</div>
+				<slot name="footer"></slot>
 			</div>
 		</div>
 	</div>

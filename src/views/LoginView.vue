@@ -2,7 +2,7 @@
 import { reactive } from "vue";
 import { useFormData } from "../composables/useFormData.ts";
 import { useLogin } from "../composables/useLogin.ts";
-import { useAuthStore } from "../store/authStore";
+import { useAuthStore } from "@/stores/authStore";
 import { useRouter } from "vue-router";
 import InputForText from "../components/InputForText.vue";
 import GithubButtonForSignIn from "../components/GithubButtonForSignIn.vue";
@@ -38,7 +38,7 @@ const handleGitHubLogin = async () => {
 
 <template>
 	<div
-		class="flex min-h-full flex-1 flex-col justify-center sm:py-12 sm:px-6 lg:px-8"
+		class="flex min-h-full flex-1 flex-col justify-center pb-20 sm:py-12 sm:px-6 lg:px-8"
 	>
 		<div class="mt-10 px-4 sm:px-0 sm:mx-auto sm:w-full sm:max-w-[480px]">
 			<div

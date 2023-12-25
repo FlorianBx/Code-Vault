@@ -7,7 +7,7 @@ import {
 	AuthError,
 } from "firebase/auth";
 import { useLogin } from "../useLogin";
-import { useAuthStore } from "../../store/authStore";
+import { useAuthStore } from "../../stores/authStore";
 
 vi.mock("firebase/auth", async () => {
 	const actual = await vi.importActual("firebase/auth");

@@ -45,7 +45,7 @@ onMounted(async () => {
 			</div>
 		</Teleport>
 
-		<section class="space-y-8 px-2 divide-y divide-btn/25">
+		<section class="space-y-16 sm:space-y-8 px-2 divide-y divide-btn/25">
 			<div v-for="snippet in filteredSnippets" :key="snippet.id" class="w-full">
 				<div>
 					<CardSnippet

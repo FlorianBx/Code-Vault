@@ -2,7 +2,7 @@
 import { reactive, computed } from "vue";
 import InputForText from "../components/InputForText.vue";
 import InputForRichText from "../components/InputForRichText.vue";
-import { useAuthStore } from "../store/authStore";
+import { useAuthStore } from "../stores/authStore";
 import { useCreateSnippet } from "../composables/useCreateSnippet";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "vue-router";
@@ -36,7 +36,7 @@ const handleSubmit = (event: Event) => {
 <template>
 	<div class="flex min-h-full sm:max-w-3xl flex-col justify-center">
 		<div class="px-4 sm:px-0 sm:mx-auto sm:w-full">
-			<div class="bg-background px-6 py-12 sm:rounded-xl sm:px-12">
+			<div class="bg-background px-6 pb-8 sm:rounded-xl sm:px-12">
 				<div class="sm:mx-auto sm:w-full sm:max-w-md">
 					<h3
 						class="pb-11 text-center text-2xl font-bold leading-9 tracking-tight text-primary"

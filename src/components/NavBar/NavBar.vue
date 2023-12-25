@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { reactive, computed } from "vue";
-import { useLogout } from "../../composables/useLogout.ts";
-import { useAuthStore } from "../../store/authStore.ts";
-// import LargeNavBar from "./LargeNavBar.vue";
-import MobileNavBar from "./MobileNavBar.vue";
+import { useAuthStore } from "@/stores/authStore.ts";
+import BreadCrumb from "@/components/Navbar/BreadCrumb.vue";
+// import MobileNavBar from "./MobileNavBar.vue";
 import BottomNavBar from "./BottomNavBar.vue";
 
-const { logout } = useLogout();
 const authStore = useAuthStore();
 
 const menuItems = reactive([
@@ -27,25 +25,24 @@ const filteredMenuItems = computed(() => {
 </script>
 
 <template>
-	<div class="pt-14">
-		<div class="relative">
-			<button
-				v-if="authStore.isLoggedIn"
-				class="absolute top-4 right-20 z-50 bg-vue hover:bg-teal-400 text-white font-bold py-2 px-4 rounded-full"
-				@click="logout"
-			>
-				logout
-			</button>
-			<a
-				v-else
-				href="/login"
-				class="absolute top-4 right-20 z-50 bg-vue hover:bg-teal-400 text-white font-bold py-2 px-4 rounded-full"
-			>
-				login
-			</a>
+	<div class="fixed left-0 right-0 h-20 z-50">
+		<div class="flex justify-between">
+			<BreadCrumb />
+			<div class="p-5">
+				<button
+					class="text-xs bg-vue py-1.5 px-2.5 rounded text-white font-bold hover:bg-teal-400"
+				>
+					<router-link
+						:to="authStore.isLoggedIn ? '/create-snippet' : '/login'"
+					>
+						Add Snippet
+					</router-link>
+				</button>
+			</div>
 		</div>
-		<!-- <LargeNavBar :menu-items="filteredMenuItems" /> -->
-		<MobileNavBar :menu-items="filteredMenuItems" />
-		<BottomNavBar :menu-items="filteredMenuItems" />
+		<div class="pt-1">
+			<!-- <MobileNavBar :menu-items="filteredMenuItems" /> -->
+			<BottomNavBar :menu-items="filteredMenuItems" />
+		</div>
 	</div>
 </template>

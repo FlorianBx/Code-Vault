@@ -32,21 +32,29 @@ const toggleReadMore = () => {
 	<div class="flex flex-col mt-8">
 		<section class="relative flex flex-col gap-2">
 			<div class="flex gap-2">
-				<AvatarImage
-					width="w-14"
-					height="h-14"
-					src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-				/>
+				<div class="hidden sm:block">
+					<AvatarImage
+						width="w-14"
+						height="h-14"
+						src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+					/>
+				</div>
 				<div class="w-full">
-					<h3 class="text-xl font-bold text-primary/90">{{ title }}</h3>
-					<div class="flex justify-between gap-3 items-end h-8">
-						<div class="flex gap-1">
-							<p class="text-sm">Updated {{ elapsedTime }}</p>
-							<p class="text-sm font-bold italic">by @{{ authorName }}</p>
+					<h3 class="sm:text-xl font-bold text-primary/90 line-clamp-1">
+						{{ title }}
+					</h3>
+					<div
+						class="flex flex-col sm:flex-row justify-between gap-3 sm:items-end pt-2 sm:pt-0 h-8"
+					>
+						<div class="flex flex-col sm:flex-row gap-1">
+							<p class="text-xs sm:text-sm">Updated {{ elapsedTime }}</p>
+							<p class="text-xs sm:text-sm font-bold italic">
+								by @{{ authorName }}
+							</p>
 						</div>
 						<button
 							v-show="!readMore"
-							class="text-center font-semibold text-sm transition-color duration-300 bg-btn hover:bg-secondary hover:text-darktext rounded py-0.5 px-4 text-primary"
+							class="text-center font-semibold text-xs sm:text-sm transition-color duration-300 bg-btn hover:bg-secondary hover:text-darktext rounded py-0.5 px-4 text-primary w-40"
 							@click="toggleReadMore"
 						>
 							Read more...
@@ -66,7 +74,7 @@ const toggleReadMore = () => {
 		>
 			<section
 				v-if="readMore"
-				class="flex flex-col gap-2 translate-y-0"
+				class="flex flex-col gap-2 translate-y-0 py-4"
 				:class="{ '-translate-y-10 opacity-0': !readMore }"
 			>
 				<div>

@@ -5,7 +5,7 @@ import InputForText from "../components/InputForText.vue";
 import GithubButtonForSignIn from "../components/GithubButtonForSignIn.vue";
 import { useRegister } from "../composables/useRegister.ts";
 import { useRouter } from "vue-router";
-import { useAuthStore } from "../store/authStore";
+import { useAuthStore } from "@/stores/authStore";
 
 const registerDatas = reactive({
 	email: "",

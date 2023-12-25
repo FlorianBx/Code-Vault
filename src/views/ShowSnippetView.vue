@@ -2,7 +2,7 @@
 import Prism from "prismjs";
 import { useRouter } from "vue-router";
 import { onMounted, reactive, nextTick, watch, computed } from "vue";
-import { useAuthStore } from "../store/authStore";
+import { useAuthStore } from "../stores/authStore";
 import { useGetSnippets } from "../composables/useGetSnippets";
 import { useDeleteSnippet } from "../composables/useDeleteSnippet";
 import { useClipboard } from "@vueuse/core";

@@ -9,7 +9,7 @@ const { tags } = defineProps({
 const splitTags = (tags: string) => tags.split(",");
 </script>
 <template>
-	<div class="flex flex-wrap gap-1 h-5">
+	<div class="flex flex-wrap gap-1 h-5 line-clamp-1">
 		<p
 			v-for="(tag, index) in splitTags(tags)"
 			:key="index"
