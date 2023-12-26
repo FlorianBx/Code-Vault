@@ -1,34 +1,41 @@
 <script setup lang="ts">
+import { DefineComponent } from "vue";
 import { useIcons } from "@/composables/useIcons.ts";
+
+interface NavigationItem {
+	name: string;
+	href: string;
+	icon: DefineComponent;
+}
 
 const { FacebookIcon, InstagramIcon, TwitterIcon, GithubIcon, YoutubeIcon } =
 	useIcons();
 
-const navigation = [
+const navigation: NavigationItem[] = [
 	{
 		name: "Facebook",
 		href: "#",
-		icon: FacebookIcon,
+		icon: FacebookIcon as DefineComponent,
 	},
 	{
 		name: "Instagram",
 		href: "#",
-		icon: InstagramIcon,
+		icon: InstagramIcon as DefineComponent,
 	},
 	{
 		name: "Twitter",
 		href: "#",
-		icon: TwitterIcon,
+		icon: TwitterIcon as DefineComponent,
 	},
 	{
 		name: "GitHub",
 		href: "#",
-		icon: GithubIcon,
+		icon: GithubIcon as DefineComponent,
 	},
 	{
 		name: "YouTube",
 		href: "#",
-		icon: YoutubeIcon,
+		icon: YoutubeIcon as DefineComponent,
 	},
 ];
 </script>
@@ -36,7 +43,7 @@ const navigation = [
 <template>
 	<div class="w-full h-40">
 		<div
-			class="mx-auto max-w-7xl px-6 py-20 md:flex md:items-center md:justify-around lg:px-8"
+			class="mx-auto max-w-7xl px-6 pt-20 md:flex md:items-center md:justify-around lg:px-8"
 		>
 			<div class="flex justify-center space-x-6 md:order-2">
 				<a

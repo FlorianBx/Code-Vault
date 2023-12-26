@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const props = defineProps({
 	width: { type: String, default: "w-5" },
 	height: { type: String, default: "h-5" },
