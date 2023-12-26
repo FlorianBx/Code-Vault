@@ -12,6 +12,7 @@ import FacebookIcon from "@/assets/icons/FacebookIcon.vue";
 import GithubIcon from "@/assets/icons/GithubIcon.vue";
 import InstagramIcon from "@/assets/icons/InstagramIcon.vue";
 import YoutubeIcon from "@/assets/icons/YoutubeIcon.vue";
+import DisconnectIcon from "@/assets/icons/DisconnectIcon.vue";
 
 export const useIcons = () => {
 	return {
@@ -29,5 +30,6 @@ export const useIcons = () => {
 		InstagramIcon,
 		FacebookIcon,
 		YoutubeIcon,
+		DisconnectIcon,
 	};
 };

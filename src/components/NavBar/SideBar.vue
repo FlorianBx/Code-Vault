@@ -9,7 +9,8 @@ import { FolderIcon } from "@heroicons/vue/24/outline";
 
 const route = useRoute();
 const router = useRouter();
-const { ScissorsIcon, DashboardIcon, PersonIcon, AddIcon } = useIcons();
+const { ScissorsIcon, DashboardIcon, PersonIcon, AddIcon, DisconnectIcon } =
+	useIcons();
 const { logout } = useLogout();
 const { isLoggedIn } = toRefs(useAuthStore());
 const asideToggleStore = useAsideToggleStore();
@@ -21,11 +22,27 @@ interface NavigationItem {
 	current?: boolean;
 }
 
-const baseNavigation: Array<NavigationItem> = [
-	{ name: "Snippets", href: "/", icon: ScissorsIcon },
-	{ name: "Dashboard", href: "/dashboard", icon: DashboardIcon },
-	{ name: "New Snippet", href: "/create-snippet", icon: AddIcon },
-	{ name: "Price", href: "/price", icon: FolderIcon },
+const baseNavigation: NavigationItem[] = [
+	{
+		name: "Snippets",
+		href: "/",
+		icon: ScissorsIcon as unknown as DefineComponent,
+	},
+	{
+		name: "Dashboard",
+		href: "/profile",
+		icon: DashboardIcon as unknown as DefineComponent,
+	},
+	{
+		name: "New Snippet",
+		href: "/create-snippet",
+		icon: AddIcon as unknown as DefineComponent,
+	},
+	{
+		name: "Price",
+		href: "/price",
+		icon: FolderIcon as unknown as DefineComponent,
+	},
 ];
 
 const navigation = computed(() =>
@@ -41,12 +58,13 @@ const navigation = computed(() =>
 <template>
 	<div
 		v-show="asideToggleStore.isAsideOpen"
-		class="fixed top-20 sm:w-60 flex grow flex-col gap-y-5 w-full h-full backdrop-blur-sm z-50 overflow-y-auto rounded px-6"
+		class="fixed top-20 sm:w-60 flex grow flex-col gap-y-5 w-full backdrop-blur-sm z-50 overflow-y-auto rounded px-6"
+		style="height: calc(100vh - 8rem)"
 		@mouseenter="asideToggleStore.setHovered(true)"
 		@mouseleave="asideToggleStore.setHovered(false)"
 	>
 		<nav class="flex flex-1 pt-8 flex-col">
-			<ul role="list" class="flex flex-1 flex-col gap-y-7">
+			<ul role="list" class="flex flex-1 flex-col justify-start gap-y-7">
 				<li>
 					<ul role="list" class="-mx-2 space-y-1">
 						<li v-for="item in navigation" :key="item.name">
@@ -67,36 +85,30 @@ const navigation = computed(() =>
 								{{ item.name }}
 							</router-link>
 						</li>
-						<li>
-							<button
-								class="text-gray-400 hover:text-white hover:bg-vue group flex gap-x-3 w-full text-xs rounded-md p-2 text-sm leading-6 font-semibold"
-								@click="isLoggedIn ? logout() : router.push('/login')"
-							>
-								<component
-									:is="PersonIcon"
-									class="mt-1 h-4 w-4 shrink-0"
-									aria-hidden="true"
-								/>
-								{{ isLoggedIn ? "Logout" : "Login" }}
-							</button>
-						</li>
 					</ul>
 				</li>
-				<li v-show="isLoggedIn" class="py-8 -mx-6 mt-auto">
-					<a
-						href="#"
-						class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800"
-					>
-						<img
-							class="h-8 w-8 rounded-full bg-gray-800"
-							src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-							alt=""
-						/>
-						<span class="sr-only">Your profile</span>
-						<span aria-hidden="true">Tom Cook</span>
-					</a>
-				</li>
 			</ul>
+			<button
+				class="text-gray-400 hover:bg-vue group flex gap-x-3 w-full text-xs rounded-md p-2 text-sm leading-6 font-semibold"
+				@click="isLoggedIn ? logout() : router.push('/login')"
+			>
+				<component
+					:is="isLoggedIn ? DisconnectIcon : PersonIcon"
+					:class="[
+						'mt-1 h-5 w-5 shrink-0 group-hover:text-white',
+						isLoggedIn ? 'text-danger' : 'text-vue',
+					]"
+					aria-hidden="true"
+				/>
+				<p
+					:class="[
+						'group-hover:text-white',
+						isLoggedIn ? 'text-danger' : 'text-vue',
+					]"
+				>
+					{{ isLoggedIn ? "Disconnect" : "Login" }}
+				</p>
+			</button>
 		</nav>
 	</div>
 </template>
