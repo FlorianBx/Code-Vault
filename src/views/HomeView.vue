@@ -36,10 +36,10 @@ onMounted(async () => {
 </script>
 
 <template>
-	<div v-show="error" class="text-red-300">{{ error }}</div>
 	<div class="w-full justify-center">
 		<SearchBar />
 		<Teleport to="#modal-and-loader">
+			<div v-show="!error" class="text-red-300">{{ error }}</div>
 			<div v-show="isLoading" class="flex justify-center w-full blur-none">
 				<LoadingCircle />
 			</div>
