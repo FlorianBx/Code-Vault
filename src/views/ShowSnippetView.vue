@@ -61,9 +61,8 @@ onMounted(async () => {
 });
 
 watch(isDeleting, (value) => {
-	console.log(value);
 	if (value) {
-		fetchSnippetById(id.toString());
+		router.push("/");
 	}
 });
 </script>

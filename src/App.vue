@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+// import { onMounted } from "vue";
 import NavBar from "./components/NavBar/NavBar.vue";
 import LayoutGlobalSlot from "./Layouts/LayoutGlobalSlot.vue";
 import FooterComponent from "./components/FooterComponent.vue";
 import SideBar from "./components/NavBar/SideBar.vue";
 
-import { initFakeDatasForDev } from "@/fakeDatas/initFakeDatasForDev";
+// import { initFakeDatasForDev } from "@/fakeDatas/initFakeDatasForDev";
 
-onMounted(() => {
-	initFakeDatasForDev();
-});
+// onMounted(() => {
+// 	initFakeDatasForDev();
+// });
 </script>
 
 <template>

@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useAuthStore } from "@/stores/authStore.ts";
+import { useIcons } from "@/composables/useIcons";
 import AvatarImage from "@/components/AvatarImage.vue";
 import { useElapsedTime } from "@/composables/useElapsedTime.ts";
-import CardSnippetIcons from "@/components/CardSnippet/CardSnippetIcons.vue";
+import CardSnippetActions from "@/components/CardSnippet/CardSnippetActions.vue";
 import CardSnippetBlocOfCode from "@/components/CardSnippet/CardSnippetBlocOfCode.vue";
 import CardSnippetTags from "@/components/CardSnippet/CardSnippetTags.vue";
 
@@ -12,6 +14,14 @@ const props = defineProps({
 		required: true,
 	},
 });
+
+const isAuthor = computed(() => {
+	const userId = useAuthStore().getUserId();
+	return userId !== null && userId === props.snippet.authorId;
+});
+
+const { CrossIcon } = useIcons();
+
 const readMore = ref(false);
 const { title, description, tags, authorName, code } = props.snippet;
 const { elapsedTime } = useElapsedTime(props.snippet.updatedAt);
@@ -83,11 +93,16 @@ const toggleReadMore = () => {
 				</div>
 				<div class="flex justify-between items-center">
 					<CardSnippetTags :tags="tags" />
-					<CardSnippetIcons
-						@delete-snippet="deleteSnippet"
-						@edit-snippet="editSnippet"
-						@toggle-read-more="toggleReadMore"
-					/>
+					<div class="flex items-end gap-4">
+						<CardSnippetActions
+							v-if="isAuthor"
+							@delete-snippet="deleteSnippet"
+							@edit-snippet="editSnippet"
+						/>
+						<button class="text-secondary opacity-60" @click="toggleReadMore">
+							<CrossIcon width="w-4" height="h-4" />
+						</button>
+					</div>
 				</div>
 				<CardSnippetBlocOfCode :code="code" @copy-snippet="copySnippet" />
 			</section>
