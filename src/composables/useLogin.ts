@@ -29,6 +29,7 @@ export const useLogin = () => {
 			error.value = null;
 
 			if (auth.currentUser) {
+				localStorage.setItem("triggerLoginNotification", "true");
 				authStore.login();
 			}
 			return userCredential;
@@ -45,6 +46,7 @@ export const useLogin = () => {
 			const userCredential = await signInWithPopup(auth, provider);
 			error.value = null;
 
+			localStorage.setItem("triggerLoginNotification", "true");
 			authStore.login();
 			return userCredential;
 		} catch (err: unknown) {

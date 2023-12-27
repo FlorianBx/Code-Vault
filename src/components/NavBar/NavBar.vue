@@ -2,7 +2,6 @@
 import { reactive, computed } from "vue";
 import { useAuthStore } from "@/stores/authStore.ts";
 import BreadCrumb from "@/components/Navbar/BreadCrumb.vue";
-// import MobileNavBar from "./MobileNavBar.vue";
 import BottomNavBar from "./BottomNavBar.vue";
 
 const authStore = useAuthStore();
@@ -41,7 +40,6 @@ const filteredMenuItems = computed(() => {
 			</div>
 		</div>
 		<div class="pt-1">
-			<!-- <MobileNavBar :menu-items="filteredMenuItems" /> -->
 			<BottomNavBar :menu-items="filteredMenuItems" />
 		</div>
 	</div>

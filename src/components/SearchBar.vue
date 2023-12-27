@@ -3,7 +3,7 @@ import { searchQuery } from "../composables/useFilter.ts";
 </script>
 
 <template>
-	<div class="mb-4 w-64 sm:w-full">
+	<div class="mb-4 w-full">
 		<label
 			for="search"
 			class="block text-sm font-medium leading-6 ml-1 text-white"

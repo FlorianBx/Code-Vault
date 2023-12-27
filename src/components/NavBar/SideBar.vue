@@ -4,7 +4,7 @@ import { useLogout } from "@/composables/useLogout.ts";
 import { useRoute, useRouter } from "vue-router";
 import { useIcons } from "@/composables/useIcons.ts";
 import { useAuthStore } from "@/stores/authStore.ts";
-import { useAsideToggleStore } from "@/stores/asideToggle.ts";
+import { useAsideToggleStore } from "@/stores/asideToggleStore";
 import { FolderIcon } from "@heroicons/vue/24/outline";
 
 const route = useRoute();
@@ -58,7 +58,7 @@ const navigation = computed(() =>
 <template>
 	<div
 		v-show="asideToggleStore.isAsideOpen"
-		class="fixed top-20 sm:w-60 flex grow flex-col gap-y-5 w-full backdrop-blur-sm z-50 overflow-y-auto rounded px-6"
+		class="fixed top-20 sm:w-60 flex grow flex-col gap-y-5 w-full backdrop-blur-md sm:backdrop-blur-sm z-50 overflow-y-auto rounded px-6"
 		style="height: calc(100vh - 8rem)"
 		@mouseenter="asideToggleStore.setHovered(true)"
 		@mouseleave="asideToggleStore.setHovered(false)"

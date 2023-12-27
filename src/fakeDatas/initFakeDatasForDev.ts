@@ -13,7 +13,6 @@ export async function initFakeDatasForDev(): Promise<void> {
 	};
 
 	const snippetsExist = await checkIfSnippetsExist();
-	console.log("Users exist: ", snippetsExist);
 	if (!snippetsExist) {
 		const userCredential = await registerWithEmailAndPassword(userData);
 		if (!userCredential) {
@@ -25,7 +24,5 @@ export async function initFakeDatasForDev(): Promise<void> {
 		}
 	}
 }
-
-console.log("Initialization completed");
 
 initFakeDatasForDev();

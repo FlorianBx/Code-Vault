@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watchEffect } from "vue";
 import { useRoute } from "vue-router";
-import { useAsideToggleStore } from "@/stores/asideToggle.ts";
+import { useAsideToggleStore } from "@/stores/asideToggleStore.ts";
 
 const { setHovered, toggleAside } = useAsideToggleStore();
 
