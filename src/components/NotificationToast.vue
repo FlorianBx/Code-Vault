@@ -1,16 +1,11 @@
 <script setup lang="ts">
-import { ref, watch, onMounted } from "vue";
+import { ref, watch } from "vue";
 import { CheckCircleIcon } from "@heroicons/vue/24/outline";
 import CrossIcon from "../assets/icons/CrossIcon.vue";
 import { useAuthStore } from "@/stores/authStore.ts";
 
 const authStore = useAuthStore();
 const showToast = ref(authStore.showLoginNotification);
-onMounted(() => {
-	// authStore.showLoginNotification = false;
-	console.log(showToast.value);
-	console.log(authStore.showLoginNotification);
-});
 
 watch(
 	() => authStore.showLoginNotification,

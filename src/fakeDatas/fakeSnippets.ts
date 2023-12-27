@@ -1,4 +1,4 @@
-export const fakeSnippets: Array<Snippet> = [
+export const fakeSnippets: Snippet[] = [
 	{
 		id: "1",
 		title: "Basic Vue Component",
