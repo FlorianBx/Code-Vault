@@ -6,6 +6,8 @@ export const useAuthStore = defineStore("auth", {
 	state: () => ({
 		isLoggedIn: false,
 		user: null as User | null,
+		showLoginNotification: false,
+		triggerLoginNotification: false,
 	}),
 
 	actions: {
@@ -35,6 +37,13 @@ export const useAuthStore = defineStore("auth", {
 			try {
 				if (this.user) {
 					this.isLoggedIn = true;
+					if (localStorage.getItem("triggerLoginNotification")) {
+						this.showLoginNotification = true;
+						localStorage.removeItem("triggerLoginNotification");
+						setTimeout(() => {
+							this.showLoginNotification = false;
+						}, 3000);
+					}
 				} else {
 					this.isLoggedIn = false;
 				}
@@ -45,6 +54,7 @@ export const useAuthStore = defineStore("auth", {
 
 		logout() {
 			this.isLoggedIn = false;
+			this.triggerLoginNotification = false;
 		},
 	},
 });

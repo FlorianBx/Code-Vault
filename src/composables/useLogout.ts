@@ -17,8 +17,6 @@ export const useLogout = () => {
 		} catch (err: unknown) {
 			error.value =
 				err instanceof Error ? err.message : "Oops ! something went wrong";
-		} finally {
-			console.log("Logout composable : ", error.value);
 		}
 	};
 

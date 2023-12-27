@@ -24,7 +24,6 @@ const copySnippet = () => emit("copy-snippet", props.snippet.code);
 
 const toggleReadMore = () => {
 	readMore.value = !readMore.value;
-	console.log(readMore.value);
 };
 </script>
 

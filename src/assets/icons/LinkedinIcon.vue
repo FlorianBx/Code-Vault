@@ -3,14 +3,11 @@ const props = defineProps({
 	width: { type: String, default: "w-5" },
 	height: { type: String, default: "h-5" },
 });
+const { width, height } = props;
 </script>
 
 <template>
-	<svg
-		:class="[props.width, props.height]"
-		fill="currentColor"
-		viewBox="0 0 24 24"
-	>
+	<svg :class="[width, height]" fill="currentColor" viewBox="0 0 24 24">
 		<path
 			fill-rule="evenodd"
 			clip-rule="evenodd"

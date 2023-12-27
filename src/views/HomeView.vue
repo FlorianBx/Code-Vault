@@ -36,7 +36,7 @@ onMounted(async () => {
 </script>
 
 <template>
-	<div class="w-full justify-center">
+	<div class="w-full">
 		<SearchBar />
 		<Teleport to="#modal-and-loader">
 			<div v-show="!error" class="text-red-300">{{ error }}</div>
