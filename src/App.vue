@@ -1,15 +1,26 @@
 <script setup lang="ts">
-// import { onMounted } from "vue";
+import { onMounted, watch } from "vue";
+import { useAuthStore } from "@/stores/authStore.ts";
 import NavBar from "./components/NavBar/NavBar.vue";
 import LayoutGlobalSlot from "./Layouts/LayoutGlobalSlot.vue";
 import FooterComponent from "./components/FooterComponent.vue";
 import SideBar from "./components/NavBar/SideBar.vue";
 
-// import { initFakeDatasForDev } from "@/fakeDatas/initFakeDatasForDev";
+import { initFakeDatasForDev } from "@/fakeDatas/initFakeDatasForDev";
+const devGenerateFakeDatas = async () => await initFakeDatasForDev();
 
-// onMounted(() => {
-// 	initFakeDatasForDev();
-// });
+onMounted(() => {
+	const authStore = useAuthStore();
+	authStore.initializeAuth();
+	authStore.listenToAuthChanges();
+});
+
+watch(
+	() => devGenerateFakeDatas(),
+	() => {
+		console.log("fake datas generated");
+	},
+);
 </script>
 
 <template>

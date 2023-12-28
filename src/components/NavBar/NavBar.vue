@@ -28,15 +28,12 @@ const filteredMenuItems = computed(() => {
 		<div class="flex justify-between">
 			<BreadCrumb />
 			<div class="p-5">
-				<button
+				<router-link
 					class="text-xs bg-vue py-1.5 px-2.5 rounded text-white font-bold hover:bg-teal-400"
+					:to="authStore.isLoggedIn ? '/create-snippet' : '/login'"
 				>
-					<router-link
-						:to="authStore.isLoggedIn ? '/create-snippet' : '/login'"
-					>
-						Add Snippet
-					</router-link>
-				</button>
+					Add Snippet
+				</router-link>
 			</div>
 		</div>
 		<div class="pt-1">
