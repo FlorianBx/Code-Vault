@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const isLoggedIn = useSupabaseUser();
 const supabase = useSupabaseClient();
 
 const signInWithOAuth = async () => {
@@ -18,7 +19,9 @@ const signOut = async () => {
 </script>
 
 <template>
-  <div>
+  <section>
     <h1>Login</h1>
-  </div>
+    <CustomBtn @click="signInWithOAuth">Sign in with GitHub</CustomBtn>
+    <button v-if="isLoggedIn" @click="signOut">Sign out</button>
+  </section>
 </template>
