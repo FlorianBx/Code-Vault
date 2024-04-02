@@ -2,7 +2,7 @@
 const isLoggedIn = useSupabaseUser();
 const supabase = useSupabaseClient();
 
-const signInWithOAuth = async () => {
+const signInWithGithub = async () => {
   const { error } = await supabase.auth.signInWithOAuth({
     provider: "github",
     options: {
@@ -14,14 +14,20 @@ const signInWithOAuth = async () => {
 
 const signOut = async () => {
   const { error } = await supabase.auth.signOut();
-  if (error) console.log(error);
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  await navigateTo("/login");
 };
 </script>
 
 <template>
   <section>
     <h1>Login</h1>
-    <CustomBtn @click="signInWithOAuth">Sign in with GitHub</CustomBtn>
+    <CustomBtn @click="signInWithGithub">Sign in with GitHub</CustomBtn>
     <button v-if="isLoggedIn" @click="signOut">Sign out</button>
   </section>
 </template>
