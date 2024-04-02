@@ -1,75 +1,33 @@
-# Nuxt 3 Minimal Starter
+# Snippets Vault
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+![Under Construction](https://img.shields.io/badge/Under%20Construction-Yes-orange)
+![Not Usable](https://img.shields.io/badge/Usable-No-red)
 
-## Setup
+Welcome to the **Snippets Vault** – your ultimate tool to boost your development productivity! 🚀
 
-Make sure to install the dependencies:
+## About
 
-```bash
-# npm
-npm install
+The **Snippets Vault** is designed to make your development journey smoother and more efficient. It's the perfect companion for developers who want to avoid reinventing the wheel, save your most-used code pieces, access them easily, and even enhance them with AI-powered suggestions.
 
-# pnpm
-pnpm install
+- **Add Snippets**: Store your favorite code snippets for easy access whenever you need them.
+- **AI-Powered Enhancement**: Leverage artificial intelligence to improve your code snippets and make them even more effective.
 
-# yarn
-yarn install
+## Features
 
-# bun
-bun install
-```
+-[ ] **Snippet Management**: Organize and manage your code snippets effortlessly. -[ ] **Search and Filter**: Quickly find the snippet you need with powerful search and filtering options. -[ ] **AI Suggestions**: Get AI-driven suggestions to enhance your code snippets. -[ ] **Version History**: Keep track of changes and revisions. -[ ] **Collaboration**: Collaborate with your team on shared code snippets. -[ ] **Syntax Highlighting**: Enjoy syntax highlighting for various programming languages.
 
-## Development Server
+## Project Status
 
-Start the development server on `http://localhost:3000`:
+🚧 **Work in Progress** 🚧
 
-```bash
-# npm
-npm run dev
+Our journey began on September 20, 2023, and we're actively building the **Developer's Code Snippets Vault** with passion and dedication. The project is developed using React and TypeScript, following a Test-Driven Development (TDD) approach. We use pnpm as our package manager.
 
-# pnpm
-pnpm run dev
+## Getting Started
 
-# yarn
-yarn dev
+To get started with the **Snippets Vault**, follow these steps:
 
-# bun
-bun run dev
-```
+1. Clone the repository to your local machine.
+2. Install the required dependencies using `pnpm install`.
+3. Run the development server with `pnpm start`.
 
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Feel free to explore the codebase, contribute, and help us shape the future of developer productivity!
